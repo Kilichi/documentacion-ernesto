@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="es" id="exe-page-mugzh06c-90iwih9fs">
+<head>
+<meta charset="utf-8">
+<meta name="generator" content="eXeLearning v4.0.5">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="license" type="text/html" href="https://creativecommons.org/licenses/by-sa/4.0/">
+<title>2.2.4 · Network diagnostics. | LS 0 - Getting ready</title>
+<link rel="icon" type="image/x-icon" href="../libs/favicon.ico">
+<script>document.querySelector("html").classList.add("js");</script><script src="../libs/jquery/jquery.min.js"> </script><script src="../libs/common_i18n.js"> </script><script src="../libs/common.js"> </script><script src="../libs/exe_export.js"> </script><script src="../libs/bootstrap/bootstrap.bundle.min.js"> </script><link rel="stylesheet" href="../libs/bootstrap/bootstrap.min.css">
+<script src="../idevices/text/text.js"></script><link rel="stylesheet" href="../idevices/text/text.css">
+<link rel="stylesheet" href="../content/css/base.css"><script src="../theme/style.js"> </script><link rel="stylesheet" href="../theme/style.css">
+<script src="../libs/SCORM_API_wrapper.js"></script>
+<script src="../libs/SCOFunctions.js"></script>
+</head>
+<body class="exe-export exe-scorm exe-scorm12" onload="loadPage()">
+<script>document.body.className+=" js"</script>
+<div class="exe-content exe-export pre-js siteNav-hidden"><main id="page-mugzh06c-90iwih9fs" class="page"> 
+<header class="main-header">
+<div class="package-header"><p class="package-title">LS 0 - Getting ready</p></div>
+<div class="page-header"><h1 class="page-title">2.2.4 · Network diagnostics.</h1></div>
+</header><div id="page-content-page-mugzh06c-90iwih9fs" class="page-content">
+<article id="block-mumpjgbk-1f2q4kd4z" class="box no-header">
+<header class="box-head no-icon">
+<button class="box-toggle box-toggle-on" title="Toggle content">
+<span>Toggle content</span>
+</button></header>
+<div class="box-content">
+<div id="idevice-1790688234079-0cfjfgvdq" class="idevice_node text" data-idevice-path="../idevices/text/" data-idevice-type="text" data-idevice-component-type="json" data-idevice-json-data="{&quot;ideviceId&quot;:&quot;idevice-1790688234079-0cfjfgvdq&quot;}">
+<div class="exe-text-template">
+    <div style="max-width: 1050px; margin: auto; font-family: Arial,Helvetica,sans-serif; color: #243247; line-height: 1.65;"><!-- ====================================================== --> <!-- CABECERA                                               --> <!-- ====================================================== -->
+<div style="background: #17365d; color: white; padding: 18px 22px; border-radius: 10px;">
+<h2 style="color: white; margin: 0px; text-align: center;">🩺 2.2.4 · Network diagnostics</h2>
+<p style="margin: 6px 0px 0px; text-align: center;">Aprendemos a comprobar una comunicación y localizar dónde falla</p>
+</div>
+<!-- ====================================================== --> <!-- OBJETIVO                                               --> <!-- ====================================================== -->
+<div style="background: #eef5fb; border-left: 5px solid #2980b9; padding: 14px 18px; margin: 20px 0px; border-radius: 5px; text-align: justify;"><strong style="color: #17365d;"> 🎯 Objetivo </strong><br />Recuperar un procedimiento básico de diagnóstico de red que nos permita comprobar la configuración de una máquina, verificar su conectividad e identificar en qué punto puede encontrarse un problema de comunicación.</div>
+<!-- ====================================================== --> <!-- CONTINUIDAD                                            --> <!-- ====================================================== -->
+<div style="background: #eef5fb; border-left: 5px solid #3498db; padding: 15px 18px; margin: 20px 0; border-radius: 5px;"><strong style="color: #1769aa;"> 🔗 Continuamos desde 2.2.3 </strong>
+<p style="margin: 7px 0 0; text-align: justify;">Ya sabemos configurar una dirección IPv4 estática mediante Netplan y comprobar el resultado utilizando <code>ip addr</code> e <code>ip route</code>.</p>
+<p style="margin: 7px 0 0; text-align: justify;">Pero que una máquina tenga aparentemente una configuración correcta <strong>no demuestra que pueda comunicarse</strong> con el resto de equipos.</p>
+</div>
+<!-- ====================================================== --> <!-- PREGUNTA                                              --> <!-- ====================================================== -->
+<div style="background: #fff8e8; border-left: 5px solid #f0ad4e; padding: 15px 18px; margin: 20px 0; border-radius: 5px;"><strong style="color: #8a5a00;"> 🤔 Una situación muy habitual </strong>
+<p style="margin: 8px 0 0;">Has configurado el servidor Web, pero no consigue comunicarse con otra máquina de nuestra Red interna.</p>
+<p style="margin: 8px 0 0;"><strong>¿Por dónde empezarías a buscar el problema?</strong></p>
+</div>
+<!-- ====================================================== --> <!-- 1. DIAGNOSTICAR                                       --> <!-- ====================================================== -->
+<h3 style="color: #17365d; margin-top: 32px;">🧠 1 · Diagnose, don't guess</h3>
+<p style="text-align: justify;">Cuando una comunicación falla, modificar configuraciones al azar puede generar nuevos problemas y dificultar todavía más el diagnóstico.</p>
+<p style="text-align: justify;">Trabajaremos siguiendo un orden: comenzaremos comprobando nuestra propia máquina y avanzaremos progresivamente hacia el destino.</p>
+<div style="display: flex; align-items: center; justify-content: center; flex-wrap: wrap; gap: 8px; margin: 20px 0; text-align: center;">
+<div style="background: #eef5fb; padding: 11px 14px; border-radius: 7px;">🌐 <strong>Configuración</strong></div>
+<strong>→</strong>
+<div style="background: #eef5fb; padding: 11px 14px; border-radius: 7px;">🔌 <strong>Interfaz</strong></div>
+<strong>→</strong>
+<div style="background: #eef5fb; padding: 11px 14px; border-radius: 7px;">🗺️ <strong>Ruta</strong></div>
+<strong>→</strong>
+<div style="background: #eaf7ee; padding: 11px 14px; border-radius: 7px;">📡 <strong>Conectividad</strong></div>
+</div>
+<div style="background: #eaf7ee; border-left: 5px solid #4f8a62; padding: 14px 18px; margin: 18px 0; border-radius: 5px;"><strong style="color: #315f40;"> 💡 Importante:</strong>
+<p style="margin: 7px 0 0;">El objetivo no es ejecutar muchos comandos, sino utilizar <strong>cada comprobación para decidir cuál debe ser el siguiente paso</strong>.</p>
+</div>
+<!-- ====================================================== --> <!-- 2. IP LINK                                            --> <!-- ====================================================== -->
+<h3 style="color: #17365d; margin-top: 32px;">🔌 2 · Is the interface ready?</h3>
+<p style="text-align: justify;">Antes de investigar direcciones o rutas, podemos comprobar que la interfaz de red existe y está activa.</p>
+<div style="background: #1f2933; color: #f5f7fa; padding: 13px 18px; border-radius: 7px; margin: 15px 0; font-family: Consolas,monospace;">$ ip link</div>
+<p>También podemos consultar únicamente una interfaz:</p>
+<div style="background: #1f2933; color: #f5f7fa; padding: 13px 18px; border-radius: 7px; margin: 15px 0; font-family: Consolas,monospace;">$ ip link show enp0s3</div>
+<p style="text-align: justify;">Recuerda algunos elementos que ya vimos en <strong>2.2.1 · Network interfaces</strong>:</p>
+<table style="width: 100%; border-collapse: collapse; margin: 18px 0px; height: 178.8px;">
+<thead>
+<tr style="background: #17365d; color: white; height: 45.2px;">
+<th style="padding: 9px; border: 1px solid #ccd6df; height: 45.2px; text-align: center;">Información</th>
+<th style="padding: 9px; border: 1px solid #ccd6df; height: 45.2px;">¿Qué nos indica?</th>
+</tr>
+</thead>
+<tbody>
+<tr style="height: 45.2px;">
+<td style="padding: 9px; border: 1px solid #ccd6df; height: 45.2px; text-align: center;"><code>enp0s3</code></td>
+<td style="padding: 9px; border: 1px solid #ccd6df; height: 45.2px;">La interfaz que estamos comprobando.</td>
+</tr>
+<tr style="background: #f7f9fa; height: 43.2px;">
+<td style="padding: 9px; border: 1px solid #ccd6df; height: 43.2px; text-align: center;"><code>UP</code></td>
+<td style="padding: 9px; border: 1px solid #ccd6df; height: 43.2px;">La interfaz está habilitada administrativamente.</td>
+</tr>
+<tr style="height: 45.2px;">
+<td style="padding: 9px; border: 1px solid #ccd6df; height: 45.2px; text-align: center;"><code>LOWER_UP</code></td>
+<td style="padding: 9px; border: 1px solid #ccd6df; height: 45.2px;">Existe enlace en la capa inferior.</td>
+</tr>
+</tbody>
+</table>
+<!-- ====================================================== --> <!-- 3. IP ADDR                                            --> <!-- ====================================================== -->
+<h3 style="color: #17365d; margin-top: 32px;">🌐 3 · Is the IPv4 configuration correct?</h3>
+<p style="text-align: justify;">Si la interfaz está disponible, comprobamos que posee la dirección IPv4 y el prefijo que debería tener según nuestro plan de direccionamiento.</p>
+<div style="background: #1f2933; color: #f5f7fa; padding: 13px 18px; border-radius: 7px; margin: 15px 0; font-family: Consolas,monospace;">$ ip addr show enp0s3</div>
+<p>Para el servidor Web esperamos encontrar:</p>
+<div style="background: #1f2933; color: #f5f7fa; padding: 13px 18px; border-radius: 7px; margin: 15px 0; font-family: Consolas,monospace; text-align: center;">inet 192.168.X.154/24</div>
+<div style="background: #fff8e8; border-left: 5px solid #f0ad4e; padding: 14px 18px; margin: 18px 0; border-radius: 5px;"><strong style="color: #8a5a00;"> ⚠️ Si el valor no coincide </strong>
+<p style="margin: 7px 0 0; text-align: justify;">Antes de continuar buscando un problema de conectividad, revisa la configuración de Netplan. Si nuestra propia configuración es incorrecta, debemos corregirla primero.</p>
+</div>
+<!-- ====================================================== --> <!-- 4. IP ROUTE                                           --> <!-- ====================================================== -->
+<h3 style="color: #17365d; margin-top: 32px;">🗺️ 4 · Does the system know where to send the traffic?</h3>
+<p style="text-align: justify;">Una dirección correcta no es suficiente cuando queremos alcanzar destinos situados fuera de nuestra red. También debemos comprobar las rutas que conoce el sistema.</p>
+<div style="background: #1f2933; color: #f5f7fa; padding: 13px 18px; border-radius: 7px; margin: 15px 0; font-family: Consolas,monospace;">$ ip route</div>
+<p>Para nuestro servidor Web esperamos encontrar información similar a:</p>
+<div style="background: #1f2933; color: #f5f7fa; padding: 15px 18px; border-radius: 7px; margin: 15px 0; font-family: Consolas,monospace; line-height: 1.7; overflow-x: auto;">default via 192.168.X.253 dev enp0s3<br />192.168.X.0/24 dev enp0s3 proto kernel scope link src 192.168.X.154</div>
+<p style="text-align: justify;">Debemos comprobar que existe la ruta hacia nuestra <strong>Red interna</strong> y que la <strong>ruta predeterminada</strong> utiliza <code>192.168.X.253</code>.</p>
+<!-- ====================================================== --> <!-- 5. PING                                               --> <!-- ====================================================== -->
+<h3 style="color: #17365d; margin-top: 32px;">📡 5 · Can we reach another machine?</h3>
+<p style="text-align: justify;">Una vez comprobados la interfaz, la dirección y las rutas, podemos comenzar a realizar pruebas de conectividad.</p>
+<p style="text-align: justify;">Para ello utilizaremos <code>ping</code>, que nos permite enviar mensajes de prueba a otra dirección IP y observar si obtenemos respuesta.</p>
+<div style="background: #1f2933; color: #f5f7fa; padding: 13px 18px; border-radius: 7px; margin: 15px 0; font-family: Consolas,monospace;">$ ping DIRECCION_IP</div>
+<p>Podemos limitar el número de pruebas para evitar dejar el comando ejecutándose continuamente:</p>
+<div style="background: #1f2933; color: #f5f7fa; padding: 13px 18px; border-radius: 7px; margin: 15px 0; font-family: Consolas,monospace;">$ ping -c 4 DIRECCION_IP</div>
+<!-- ====================================================== --> <!-- ORDEN PING                                            --> <!-- ====================================================== -->
+<h3 style="color: #17365d; margin-top: 32px;">🪜 6 · Test step by step</h3>
+<p style="text-align: justify;">No probaremos destinos al azar. Comenzaremos cerca de nuestra máquina y ampliaremos progresivamente el alcance de las pruebas.</p>
+<!-- LOOPBACK -->
+<div style="background: #f7f9fa; border-left: 5px solid #7f8c8d; padding: 15px 18px; margin: 18px 0; border-radius: 5px;"><strong style="color: #566573; font-size: 17px;"> 1️⃣ Local system </strong>
+<div style="background: #1f2933; color: #f5f7fa; padding: 11px 14px; border-radius: 5px; margin-top: 10px; font-family: Consolas,monospace;">$ ping -c 4 127.0.0.1</div>
+<p style="margin: 10px 0 0; text-align: justify;">Comprobamos la comunicación con la interfaz de <strong>loopback</strong> de la propia máquina.</p>
+</div>
+<!-- PROPIA IP -->
+<div style="background: #eef5fb; border-left: 5px solid #3498db; padding: 15px 18px; margin: 18px 0; border-radius: 5px;"><strong style="color: #1769aa; font-size: 17px;"> 2️⃣ Own IPv4 address </strong>
+<div style="background: #1f2933; color: #f5f7fa; padding: 11px 14px; border-radius: 5px; margin-top: 10px; font-family: Consolas,monospace;">$ ping -c 4 192.168.X.154</div>
+<p style="margin: 10px 0 0;">Comprobamos nuestra propia dirección IPv4.</p>
+</div>
+<!-- GATEWAY -->
+<div style="background: #eef5fb; border-left: 5px solid #3498db; padding: 15px 18px; margin: 18px 0; border-radius: 5px;"><strong style="color: #1769aa; font-size: 17px;"> 3️⃣ Gateway </strong>
+<div style="background: #1f2933; color: #f5f7fa; padding: 11px 14px; border-radius: 5px; margin-top: 10px; font-family: Consolas,monospace;">$ ping -c 4 192.168.X.253</div>
+<p style="margin: 10px 0 0; text-align: justify;">Comprobamos si podemos alcanzar la interfaz interna de <strong>DNS-LDAP</strong>, que utilizarán nuestros equipos como puerta de enlace.</p>
+</div>
+<!-- OTRO HOST -->
+<div style="background: #eaf7ee; border-left: 5px solid #4f8a62; padding: 15px 18px; margin: 18px 0; border-radius: 5px;"><strong style="color: #315f40; font-size: 17px;"> 4️⃣ Another internal machine </strong>
+<p style="margin: 8px 0;">Finalmente, comprobamos la comunicación con otro equipo de nuestra Red interna.</p>
+<p style="margin: 8px 0;">Por ejemplo, desde Web hacia Git:</p>
+<div style="background: #1f2933; color: #f5f7fa; padding: 11px 14px; border-radius: 5px; margin-top: 10px; font-family: Consolas,monospace;">$ ping -c 4 192.168.X.104</div>
+</div>
+<!-- ====================================================== --> <!-- INTERPRETAR PING                                      --> <!-- ====================================================== -->
+<h3 style="color: #17365d; margin-top: 32px;">🧠 7 · Interpret the result</h3>
+<p style="text-align: justify;">Ejecutar <code>ping</code> no es suficiente. Debemos observar el resultado y utilizarlo para decidir qué investigar a continuación.</p>
+<table style="width: 100%; border-collapse: collapse; margin: 18px 0;">
+<thead>
+<tr style="background: #17365d; color: white;">
+<th style="padding: 9px; border: 1px solid #ccd6df; text-align: center;">Resultado</th>
+<th style="padding: 9px; border: 1px solid #ccd6df;">¿Qué podemos investigar?</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="padding: 9px; border: 1px solid #ccd6df; text-align: center;">La interfaz no tiene la IPv4 esperada</td>
+<td style="padding: 9px; border: 1px solid #ccd6df;">Revisar nuestra configuración de Netplan.</td>
+</tr>
+<tr style="background: #f7f9fa;">
+<td style="padding: 9px; border: 1px solid #ccd6df; text-align: center;">No aparece la ruta esperada</td>
+<td style="padding: 9px; border: 1px solid #ccd6df;">Revisar dirección, prefijo y rutas configuradas.</td>
+</tr>
+<tr>
+<td style="padding: 9px; border: 1px solid #ccd6df; text-align: center;">Responde nuestra máquina pero no otro equipo</td>
+<td style="padding: 9px; border: 1px solid #ccd6df;">Revisar la configuración de ambos extremos y su conexión a la Red interna.</td>
+</tr>
+<tr style="background: #f7f9fa;">
+<td style="padding: 9px; border: 1px solid #ccd6df; text-align: center;">Responde un equipo interno</td>
+<td style="padding: 9px; border: 1px solid #ccd6df;">Hemos obtenido evidencia de conectividad IP entre ambos equipos.</td>
+</tr>
+</tbody>
+</table>
+<div style="background: #fff8e8; border-left: 5px solid #f0ad4e; padding: 14px 18px; margin: 18px 0; border-radius: 5px;"><strong style="color: #8a5a00;"> ⚠️ Cuidado con las conclusiones </strong>
+<p style="margin: 7px 0 0; text-align: justify;">Que un <code>ping</code> no reciba respuesta no demuestra, por sí solo, que el equipo esté apagado o que toda la red haya fallado. El resultado es una <strong>pista dentro del proceso de diagnóstico</strong>.</p>
+</div>
+<!-- ====================================================== --> <!-- NO INTERNET TODAVÍA                                   --> <!-- ====================================================== -->
+<div style="background: #fff3e0; border-left: 5px solid #e67e22; padding: 15px 18px; margin: 24px 0; border-radius: 5px;"><strong style="color: #a64b00;"> ☁️ ¿Probamos Internet? </strong>
+<p style="margin: 8px 0 0; text-align: justify;">Todavía no esperamos que nuestros servidores internos puedan alcanzar Internet a través de DNS-LDAP.</p>
+<p style="margin: 8px 0 0; text-align: justify;">DNS-LDAP dispone de una interfaz en la Red interna y otra en la Red NAT, pero <strong>tener dos interfaces no convierte automáticamente una máquina en router</strong>.</p>
+<p style="margin: 8px 0 0;">Esa funcionalidad se configurará más adelante.</p>
+</div>
+<!-- ====================================================== --> <!-- PROCEDIMIENTO                                         --> <!-- ====================================================== -->
+<h3 style="color: #17365d; margin-top: 32px;">🧭 8 · Build your diagnostic procedure</h3>
+<p style="text-align: justify;">Cuando aparezca un problema de comunicación, utiliza un procedimiento ordenado antes de modificar la configuración.</p>
+<div style="background: #eef5fb; border: 1px solid #c7dceb; border-radius: 8px; padding: 18px; margin: 18px 0;">
+<div style="margin-bottom: 12px;"><strong>1.</strong> 🔌 Comprueba la interfaz con <code>ip link</code>.</div>
+<div style="margin-bottom: 12px;"><strong>2.</strong> 🌐 Comprueba la dirección y el prefijo con <code>ip addr</code>.</div>
+<div style="margin-bottom: 12px;"><strong>3.</strong> 🗺️ Comprueba las rutas con <code>ip route</code>.</div>
+<div style="margin-bottom: 12px;"><strong>4.</strong> 📡 Realiza pruebas de conectividad progresivas con <code>ping</code>.</div>
+<div><strong>5.</strong> 🧠 Utiliza cada resultado para decidir qué elemento debes investigar a continuación.</div>
+</div>
+<!-- ====================================================== --> <!-- MINI CHALLENGE                                        --> <!-- ====================================================== -->
+<h3 style="color: #17365d; margin-top: 32px;">🧩 Mini challenge · Where is the problem?</h3>
+<div style="background: #f7f9fa; border-left: 5px solid #7f8c8d; padding: 16px 18px; margin: 18px 0; border-radius: 5px;"><strong style="color: #566573;"> Situación </strong>
+<p style="margin: 8px 0 0; text-align: justify;">Has configurado el servidor <strong>Web</strong> con la dirección correspondiente a tu rango, pero necesitas demostrar que su configuración de red es correcta y que puede comunicarse con otros equipos de la Red interna.</p>
+</div>
+<p>Realiza un diagnóstico ordenado y demuestra:</p>
+<ol>
+<li>¿Qué interfaz de red estás utilizando?</li>
+<li>¿Cuál es su estado?</li>
+<li>¿Qué dirección IPv4 y prefijo tiene configurados?</li>
+<li>¿Qué rutas conoce el sistema?</li>
+<li>¿Qué puerta de enlace aparece configurada?</li>
+<li>¿Puedes alcanzar la interfaz interna de DNS-LDAP?</li>
+<li>¿Puedes alcanzar al menos otro servidor de la Red interna?</li>
+</ol>
+<div style="background: #eaf7ee; border-left: 5px solid #4f8a62; padding: 15px 18px; margin: 20px 0; border-radius: 5px;"><strong style="color: #315f40;"> 🔍 Antes de terminar </strong>
+<p style="margin: 8px 0;">No presentes únicamente los comandos ejecutados. Para cada comprobación indica:</p>
+<ul style="margin-bottom: 0;">
+<li><strong>¿Qué querías comprobar?</strong></li>
+<li><strong>¿Qué resultado has obtenido?</strong></li>
+<li><strong>¿Qué conclusión puedes extraer?</strong></li>
+<li>y, si existe un problema, <strong>¿Cuál sería tu siguiente comprobación?</strong></li>
+</ul>
+</div>
+<!-- ====================================================== --> <!-- RESUMEN                                               --> <!-- ====================================================== -->
+<div style="background: #17365d; color: white; padding: 18px 22px; border-radius: 8px; margin-top: 28px;"><strong style="font-size: 17px;"> 🩺 What should you remember? </strong>
+<p style="margin: 10px 0 0;">Diagnosticar una red no consiste en probar comandos al azar. Empieza por tu propia máquina, comprueba <strong>interfaz → dirección → rutas → conectividad</strong> y utiliza cada resultado para decidir el siguiente paso.</p>
+</div>
+<!-- ====================================================== --> <!-- TRANSICIÓN                                            --> <!-- ====================================================== -->
+<div style="text-align: center; margin: 30px 0 10px;"><strong style="color: #17365d; font-size: 17px;"> Ya tenemos las herramientas necesarias para configurar y comprobar nuestra red. </strong>
+<p style="margin: 6px 0;">↓</p>
+<strong style="color: #1769aa;"> 🧩 2.2.5 · Network essentials challenge </strong></div>
+</div>
+</div>
+</div>
+</div>
+</article>
+</div></main>
+<footer id="siteFooter"><div id="siteFooterContent"> <div id="packageLicense" class="cc cc-by-sa"> <p> <span class="license-label">Licencia: </span><a href="https://creativecommons.org/licenses/by-sa/4.0/" class="license">Creative Commons: Reconocimiento - compartir igual 4.0</a></p>
+</div>
+</div></footer>
+</div>
+<p id="made-with-eXe"> <a href="https://exelearning.net/" target="_blank" rel="noopener"> <span>Creado con eXeLearning <span>(Ventana nueva)</span></span></a></p>
+</body>
+</html>

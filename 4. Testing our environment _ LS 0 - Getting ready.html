@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="es" id="exe-page-mugzmhrh-1n7l8fhq7">
+<head>
+<meta charset="utf-8">
+<meta name="generator" content="eXeLearning v4.0.5">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="license" type="text/html" href="https://creativecommons.org/licenses/by-sa/4.0/">
+<title>4. Testing our environment | LS 0 - Getting ready</title>
+<link rel="icon" type="image/x-icon" href="../libs/favicon.ico">
+<script>document.querySelector("html").classList.add("js");</script><script src="../libs/jquery/jquery.min.js"> </script><script src="../libs/common_i18n.js"> </script><script src="../libs/common.js"> </script><script src="../libs/exe_export.js"> </script><script src="../libs/bootstrap/bootstrap.bundle.min.js"> </script><link rel="stylesheet" href="../libs/bootstrap/bootstrap.min.css">
+<script src="../idevices/text/text.js"></script><link rel="stylesheet" href="../idevices/text/text.css">
+<link rel="stylesheet" href="../content/css/base.css"><script src="../theme/style.js"> </script><link rel="stylesheet" href="../theme/style.css">
+<script src="../libs/SCORM_API_wrapper.js"></script>
+<script src="../libs/SCOFunctions.js"></script>
+</head>
+<body class="exe-export exe-scorm exe-scorm12" onload="loadPage()">
+<script>document.body.className+=" js"</script>
+<div class="exe-content exe-export pre-js siteNav-hidden"><main id="page-mugzmhrh-1n7l8fhq7" class="page"> 
+<header class="main-header">
+<div class="package-header"><p class="package-title">LS 0 - Getting ready</p></div>
+<div class="page-header"><h1 class="page-title">4. Testing our environment</h1></div>
+</header><div id="page-content-page-mugzmhrh-1n7l8fhq7" class="page-content">
+<article id="block-mumq2vnt-czvvljail" class="box">
+<header class="box-head no-icon">
+<h1 class="box-title">Texto</h1>
+<button class="box-toggle box-toggle-on" title="Toggle content">
+<span>Toggle content</span>
+</button></header>
+<div class="box-content">
+<div id="idevice-1790689140424-tvo2z7yfo" class="idevice_node text" data-idevice-path="../idevices/text/" data-idevice-type="text" data-idevice-component-type="json" data-idevice-json-data="{&quot;ideviceId&quot;:&quot;idevice-1790689140424-tvo2z7yfo&quot;}">
+<div class="exe-text-template">
+    <div style="max-width: 1050px; margin: auto; font-family: Arial,Helvetica,sans-serif; color: #243247; line-height: 1.65;"><!-- CABECERA -->
+<div style="background: #17365d; color: white; padding: 18px 22px; border-radius: 10px;">
+<h2 style="color: white; margin: 0px; text-align: center;">🧪 4 · Testing our environment</h2>
+<p style="margin: 6px 0px 0px; text-align: center;">Prove that your infrastructure works</p>
+</div>
+<!-- OBJETIVO -->
+<div style="background: #eef5fb; border-left: 5px solid #2980b9; padding: 14px 18px; margin: 20px 0; border-radius: 5px;"><strong style="color: #17365d;">🎯 Objetivo</strong>
+<p style="margin: 7px 0 0; text-align: justify;">Diseñar y ejecutar las pruebas necesarias para <strong>demostrar que el entorno construido cumple las especificaciones establecidas</strong>, interpretando los resultados y diagnosticando y corrigiendo las incidencias detectadas.</p>
+</div>
+<!-- CONTEXTO -->
+<div style="background: #eef5fb; border-left: 5px solid #3498db; padding: 15px 18px; margin: 20px 0; border-radius: 5px;"><strong style="color: #1769aa; font-size: 17px;"> 🔗 From building to testing </strong>
+<p style="margin: 8px 0 0; text-align: justify;">En <strong>3 · Setting up our deployment environment</strong> has construido la infraestructura.</p>
+<p style="margin: 8px 0 0; text-align: justify;">Ahora debes adoptar otro papel: <strong>comprobar que el resultado cumple realmente los requisitos</strong>.</p>
+</div>
+<!-- RETO -->
+<h3 style="color: #17365d; margin-top: 32px;">🧪 The challenge</h3>
+<p style="text-align: justify;">Diseña una estrategia de pruebas que te permita demostrar que el entorno de despliegue que has construido <strong>funciona de acuerdo con el diseño</strong>.</p>
+<p style="text-align: justify;">No se proporciona una secuencia de pruebas ni una lista de comandos. Debes decidir:</p>
+<div style="display: flex; align-items: center; justify-content: center; flex-wrap: wrap; gap: 8px; margin: 20px 0; text-align: center;">
+<div style="background: #eef5fb; padding: 11px 14px; border-radius: 7px;">❓ <strong>Qué comprobar</strong></div>
+<strong>→</strong>
+<div style="background: #eef5fb; padding: 11px 14px; border-radius: 7px;">🧪 <strong>Cómo comprobarlo</strong></div>
+<strong>→</strong>
+<div style="background: #eef5fb; padding: 11px 14px; border-radius: 7px;">🔍 <strong>Qué resultado esperar</strong></div>
+<strong>→</strong>
+<div style="background: #eaf7ee; padding: 11px 14px; border-radius: 7px;">🧠 <strong>Qué puedes concluir</strong></div>
+</div>
+<!-- QUÉ HAY QUE DEMOSTRAR -->
+<h3 style="color: #17365d; margin-top: 32px;">🎯 What must you prove?</h3>
+<p style="text-align: justify;">Tu estrategia de pruebas debe proporcionar evidencias suficientes para demostrar, al menos, que:</p>
+<ul>
+<li>Las máquinas utilizan la <strong>configuración de red prevista</strong>.</li>
+<li>Las interfaces necesarias están disponibles y correctamente asociadas.</li>
+<li>Las rutas configuradas son coherentes con la arquitectura diseñada.</li>
+<li>No existen conflictos de direccionamiento.</li>
+<li>Las máquinas de <code>192.168.X.0/24</code> pueden <strong>comunicarse dentro de la Red interna</strong>.</li>
+<li>DNS-LDAP es alcanzable desde los equipos de la Red interna.</li>
+</ul>
+<!-- NO INTERNET -->
+<div style="background: #fff3e0; border-left: 5px solid #e67e22; padding: 15px 18px; margin: 22px 0; border-radius: 5px;"><strong style="color: #a64b00;"> ☁️ Scope of the test </strong>
+<p style="margin: 8px 0 0; text-align: justify;">En este momento estamos validando principalmente nuestra <strong>infraestructura interna</strong>.</p>
+<p style="margin: 8px 0 0; text-align: justify;">Que DNS-LDAP disponga de una interfaz en la Red NAT / NAT y otra en la Red interna <strong>no implica que los demás servidores puedan utilizarla automáticamente para acceder a Internet</strong>.</p>
+</div>
+<!-- PLAN DE PRUEBAS -->
+<h3 style="color: #17365d; margin-top: 32px;">📋 Design your test plan</h3>
+<p style="text-align: justify;">Antes de comenzar a ejecutar pruebas, decide qué necesitas demostrar y qué resultado considerarías correcto.</p>
+<p style="text-align: justify;">Puedes organizar tu estrategia utilizando una matriz de pruebas como la siguiente:</p>
+<table style="width: 100%; border-collapse: collapse; margin: 18px 0;">
+<thead>
+<tr style="background: #17365d; color: white;">
+<th style="padding: 9px; border: 1px solid #ccd6df; text-align: center;">Test</th>
+<th style="padding: 9px; border: 1px solid #ccd6df; text-align: center;">What do I want to prove?</th>
+<th style="padding: 9px; border: 1px solid #ccd6df; text-align: center;">Expected result</th>
+<th style="padding: 9px; border: 1px solid #ccd6df; text-align: center;">Result</th>
+<th style="padding: 9px; border: 1px solid #ccd6df; text-align: center;">Status</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="height: 42px; border: 1px solid #ccd6df;"></td>
+<td style="border: 1px solid #ccd6df;"></td>
+<td style="border: 1px solid #ccd6df;"></td>
+<td style="border: 1px solid #ccd6df;"></td>
+<td style="border: 1px solid #ccd6df; text-align: center;">⬜</td>
+</tr>
+<tr style="background: #f7f9fa;">
+<td style="height: 42px; border: 1px solid #ccd6df;"></td>
+<td style="border: 1px solid #ccd6df;"></td>
+<td style="border: 1px solid #ccd6df;"></td>
+<td style="border: 1px solid #ccd6df;"></td>
+<td style="border: 1px solid #ccd6df; text-align: center;">⬜</td>
+</tr>
+<tr>
+<td style="height: 42px; border: 1px solid #ccd6df;"></td>
+<td style="border: 1px solid #ccd6df;"></td>
+<td style="border: 1px solid #ccd6df;"></td>
+<td style="border: 1px solid #ccd6df;"></td>
+<td style="border: 1px solid #ccd6df; text-align: center;">⬜</td>
+</tr>
+<tr style="background: #f7f9fa;">
+<td style="height: 42px; border: 1px solid #ccd6df;"></td>
+<td style="border: 1px solid #ccd6df;"></td>
+<td style="border: 1px solid #ccd6df;"></td>
+<td style="border: 1px solid #ccd6df;"></td>
+<td style="border: 1px solid #ccd6df; text-align: center;">⬜</td>
+</tr>
+</tbody>
+</table>
+<div style="background: #fff8e8; border-left: 5px solid #f0ad4e; padding: 14px 18px; margin: 20px 0; border-radius: 5px;"><strong style="color: #8a5a00;"> ⚠️ La tabla no es una lista de pruebas </strong>
+<p style="margin: 7px 0 0; text-align: justify;">Tú debes decidir cuántas pruebas necesitas y cuáles son relevantes. El objetivo no es completar filas, sino <strong>demostrar que la infraestructura cumple los requisitos</strong>.</p>
+</div>
+<!-- SI FALLA -->
+<h3 style="color: #17365d; margin-top: 32px;">🩺 When a test fails</h3>
+<p style="text-align: justify;">Un resultado inesperado no significa que el reto haya terminado. Forma parte del proceso de administración de sistemas.</p>
+<p style="text-align: justify;">Utiliza los procedimientos recuperados en <strong>2.2.4 · Network diagnostics</strong> para investigar el problema.</p>
+<div style="background: #eef5fb; padding: 15px 18px; border-radius: 7px; text-align: center; margin: 18px 0;"><strong> ❌ Detectar → 🔍 Investigar → 🧠 Interpretar → 🛠️ Corregir → 🧪 Repetir la prueba </strong></div>
+<!-- EVIDENCIA -->
+<h3 style="color: #17365d; margin-top: 32px;">🔎 Evidence matters</h3>
+<p style="text-align: justify;">Cada prueba debe producir una evidencia que permita justificar una conclusión.</p>
+<div style="background: #eaf7ee; border-left: 5px solid #4f8a62; padding: 15px 18px; margin: 18px 0; border-radius: 5px;"><strong style="color: #315f40;"> Una buena evidencia responde a tres preguntas </strong>
+<ol style="margin-bottom: 0;">
+<li><strong>¿Qué estoy comprobando?</strong></li>
+<li><strong>¿Qué resultado he obtenido?</strong></li>
+<li><strong>¿Qué demuestra ese resultado?</strong></li>
+</ol>
+</div>
+<div style="background: #fff8e8; border-left: 5px solid #f0ad4e; padding: 14px 18px; margin: 18px 0; border-radius: 5px;"><strong style="color: #8a5a00;"> 📸 Una captura por sí sola no es una conclusión </strong>
+<p style="margin: 7px 0 0;">Debes ser capaz de interpretar la información que aparece en ella y relacionarla con el requisito que estás validando.</p>
+</div>
+<!-- DEFINITION OF DONE -->
+<h3 style="color: #17365d; margin-top: 32px;">✅ Definition of Done</h3>
+<div style="background: #eaf7ee; border-left: 5px solid #4f8a62; padding: 16px 18px; margin: 18px 0; border-radius: 5px;"><strong style="color: #315f40; font-size: 17px;"> Tu entorno estará validado cuando... </strong>
+<p style="margin: 9px 0 0; text-align: justify;">puedas aportar <strong>evidencias suficientes para demostrar</strong> que la infraestructura cumple los requisitos establecidos, justificar los resultados obtenidos y explicar cómo has actuado ante cualquier incidencia detectada.</p>
+</div>
+<!-- CIERRE -->
+<div style="background: #17365d; color: white; padding: 18px 22px; border-radius: 8px; margin-top: 28px;"><strong style="font-size: 17px;"> 🧪 Don't assume it works. Prove it. </strong>
+<p style="margin: 8px 0 0;">Una infraestructura no está terminada cuando deja de mostrar errores. Está preparada cuando puedes <strong>demostrar que cumple los requisitos para los que fue diseñada</strong>.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</article>
+</div></main>
+<footer id="siteFooter"><div id="siteFooterContent"> <div id="packageLicense" class="cc cc-by-sa"> <p> <span class="license-label">Licencia: </span><a href="https://creativecommons.org/licenses/by-sa/4.0/" class="license">Creative Commons: Reconocimiento - compartir igual 4.0</a></p>
+</div>
+</div></footer>
+</div>
+<p id="made-with-eXe"> <a href="https://exelearning.net/" target="_blank" rel="noopener"> <span>Creado con eXeLearning <span>(Ventana nueva)</span></span></a></p>
+</body>
+</html>

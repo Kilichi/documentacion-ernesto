@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html lang="es" id="exe-page-mugzgsxp-mowuf8o7p">
+<head>
+<meta charset="utf-8">
+<meta name="generator" content="eXeLearning v4.0.5">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="license" type="text/html" href="https://creativecommons.org/licenses/by-sa/4.0/">
+<title>2.2.3 Network configuration with Netplan | LS 0 - Getting ready</title>
+<link rel="icon" type="image/x-icon" href="../libs/favicon.ico">
+<script>document.querySelector("html").classList.add("js");</script><script src="../libs/jquery/jquery.min.js"> </script><script src="../libs/common_i18n.js"> </script><script src="../libs/common.js"> </script><script src="../libs/exe_export.js"> </script><script src="../libs/bootstrap/bootstrap.bundle.min.js"> </script><link rel="stylesheet" href="../libs/bootstrap/bootstrap.min.css">
+<script src="../idevices/text/text.js"></script><link rel="stylesheet" href="../idevices/text/text.css">
+<link rel="stylesheet" href="../content/css/base.css"><script src="../theme/style.js"> </script><link rel="stylesheet" href="../theme/style.css">
+<script src="../libs/SCORM_API_wrapper.js"></script>
+<script src="../libs/SCOFunctions.js"></script>
+</head>
+<body class="exe-export exe-scorm exe-scorm12" onload="loadPage()">
+<script>document.body.className+=" js"</script>
+<div class="exe-content exe-export pre-js siteNav-hidden"><main id="page-mugzgsxp-mowuf8o7p" class="page"> 
+<header class="main-header">
+<div class="package-header"><p class="package-title">LS 0 - Getting ready</p></div>
+<div class="page-header"><h1 class="page-title">2.2.3 Network configuration with Netplan</h1></div>
+</header><div id="page-content-page-mugzgsxp-mowuf8o7p" class="page-content">
+<article id="block-mumotl8q-wz2550nle" class="box no-header">
+<header class="box-head no-icon">
+<button class="box-toggle box-toggle-on" title="Toggle content">
+<span>Toggle content</span>
+</button></header>
+<div class="box-content">
+<div id="idevice-1790687027400-fozsf8e6z" class="idevice_node text" data-idevice-path="../idevices/text/" data-idevice-type="text" data-idevice-component-type="json" data-idevice-json-data="{&quot;ideviceId&quot;:&quot;idevice-1790687027400-fozsf8e6z&quot;}">
+<div class="exe-text-template">
+    <div style="max-width: 1050px; margin: auto; font-family: Arial,Helvetica,sans-serif; color: #243247; line-height: 1.65;"><!-- ====================================================== --> <!-- CABECERA                                               --> <!-- ====================================================== -->
+<div style="background: #17365d; color: white; padding: 18px 22px; border-radius: 10px;">
+<h2 style="color: white; margin: 0px; text-align: center;">⚙️ 2.2.3 · Network configuration with Netplan</h2>
+<p style="margin: 6px 0px 0px; text-align: center;">Llevamos nuestro plan de direccionamiento a Ubuntu Server</p>
+</div>
+<!-- ====================================================== --> <!-- OBJETIVO                                               --> <!-- ====================================================== -->
+<div style="background: #eef5fb; border-left: 5px solid #2980b9; padding: 14px 18px; margin: 20px 0px; border-radius: 5px; text-align: justify;"><strong style="color: #17365d;"> 🎯 Objetivo </strong><br />Recuperar el procedimiento para configurar una <strong>dirección IPv4 estática en Ubuntu Server mediante Netplan</strong>, interpretar la estructura básica de sus archivos YAML, aplicar los cambios y comprobar que la configuración obtenida coincide con nuestro plan de direccionamiento.</div>
+<!-- ====================================================== --> <!-- CONTINUIDAD                                            --> <!-- ====================================================== -->
+<div style="background: #eef5fb; border-left: 5px solid #3498db; padding: 15px 18px; margin: 20px 0; border-radius: 5px;"><strong style="color: #1769aa;"> 🔗 Continuamos desde 2.2.2 </strong>
+<p style="margin: 7px 0 0; text-align: justify;">Ya has preparado tu propio plan de direccionamiento. Conoces la red <code>192.168.X.0/24</code>, la dirección correspondiente a cada máquina y la puerta de enlace que utilizarán nuestros servidores internos.</p>
+<p style="margin: 7px 0 0;">Ahora necesitamos convertir ese diseño en una <strong>configuración real de Ubuntu Server</strong>.</p>
+</div>
+<!-- ====================================================== --> <!-- 1. NETPLAN                                             --> <!-- ====================================================== -->
+<h3 style="color: #17365d; margin-top: 32px;">🗂️ 1 · Meet Netplan</h3>
+<p style="text-align: justify;">Ubuntu Server utiliza <strong>Netplan</strong> para describir la configuración de sus interfaces de red.</p>
+<p style="text-align: justify;">Esta configuración se almacena en archivos de texto con extensión <code>.yaml</code> dentro del directorio:</p>
+<div style="background: #1f2933; color: #f5f7fa; padding: 13px 18px; border-radius: 7px; margin: 15px 0; font-family: Consolas,monospace; text-align: center;">/etc/netplan/</div>
+<p style="text-align: justify;">El nombre concreto del archivo puede variar según la instalación. Por eso, antes de modificar nada, debemos <strong>comprobar qué archivo existe realmente en nuestra máquina</strong>.</p>
+<!-- ====================================================== --> <!-- 2. LOCALIZAR                                           --> <!-- ====================================================== -->
+<h3 style="color: #17365d; margin-top: 32px;">🔍 2 · Find your configuration</h3>
+<p>Comienza observando el contenido del directorio:</p>
+<div style="background: #1f2933; color: #f5f7fa; padding: 13px 18px; border-radius: 7px; margin: 15px 0; font-family: Consolas,monospace;">$ ls /etc/netplan/</div>
+<p style="text-align: justify;">Podrías encontrar, por ejemplo, un archivo como:</p>
+<div style="background: #1f2933; color: #f5f7fa; padding: 13px 18px; border-radius: 7px; margin: 15px 0; font-family: Consolas,monospace;">50-cloud-init.yaml</div>
+<div style="background: #fff8e8; border-left: 5px solid #f0ad4e; padding: 14px 18px; margin: 18px 0; border-radius: 5px;"><strong style="color: #8a5a00;"> ⚠️ No memorices el nombre </strong>
+<p style="margin: 7px 0 0; text-align: justify;">No debes asumir que el archivo siempre se llama <code>50-cloud-init.yaml</code>. <strong>Comprueba primero el contenido de <code>/etc/netplan/</code></strong> y trabaja con el archivo existente en tu sistema.</p>
+</div>
+<!-- ====================================================== --> <!-- 3. CONSULTAR                                           --> <!-- ====================================================== -->
+<h3 style="color: #17365d; margin-top: 32px;">👀 3 · Inspect before changing</h3>
+<p style="text-align: justify;">Antes de editar una configuración debemos conocer su estado actual.</p>
+<p>Si tu archivo es <code>50-cloud-init.yaml</code>, puedes consultar su contenido mediante:</p>
+<div style="background: #1f2933; color: #f5f7fa; padding: 13px 18px; border-radius: 7px; margin: 15px 0; font-family: Consolas,monospace;">$ sudo cat /etc/netplan/50-cloud-init.yaml</div>
+<p>Una configuración inicial podría presentar una estructura similar a:</p>
+<div style="background: #1f2933; color: #f5f7fa; padding: 15px 18px; border-radius: 7px; margin: 15px 0; font-family: Consolas,monospace; line-height: 1.7; overflow-x: auto;">network:<br />  ethernets:<br />    enp0s3:<br />      dhcp4: true<br />  version: 2</div>
+<p style="text-align: justify;">En este ejemplo estamos definiendo la interfaz <code>enp0s3</code> y permitiendo que obtenga su configuración IPv4 mediante <strong>DHCP</strong>.</p>
+<!-- ====================================================== --> <!-- 4. YAML                                                --> <!-- ====================================================== -->
+<h3 style="color: #17365d; margin-top: 32px;">🧱 4 · Understanding YAML</h3>
+<p style="text-align: justify;">Los archivos de Netplan utilizan <strong>YAML</strong>. Su estructura depende de la <strong>indentación</strong>: los espacios indican qué elementos se encuentran dentro de otros.</p>
+<div style="background: #fff8e8; border-left: 5px solid #f0ad4e; padding: 15px 18px; margin: 20px 0; border-radius: 5px;"><strong style="color: #8a5a00;"> ⚠️ El espaciado importa </strong>
+<p style="margin: 7px 0 0; text-align: justify;">Una configuración puede contener los valores correctos y, aun así, no ser válida si su estructura YAML está mal el espaciado.</p>
+<p style="margin: 7px 0 0;">Mantén un espaciado coherente utilizando <strong>espacios</strong>.</p>
+</div>
+<!-- 5. EDITAR                                              --> <!-- ====================================================== -->
+<h3 style="color: #17365d; margin-top: 32px;">✏️ 5 · Edit the configuration</h3>
+<p style="text-align: justify;">Una vez localizado el archivo de Netplan, necesitamos editarlo para sustituir la configuración automática por nuestro direccionamiento estático.</p>
+<p style="text-align: justify;">Como se trata de un archivo de configuración del sistema situado en <code>/etc</code>, necesitaremos <strong>privilegios administrativos</strong> para modificarlo.</p>
+<!-- VIM -->
+<div style="background: #eef5fb; border-left: 5px solid #3498db; padding: 15px 18px; margin: 18px 0; border-radius: 5px;"><strong style="color: #1769aa; font-size: 17px;"> ⌨️ Option 1 · vim </strong>
+<p style="margin: 8px 0;">Podemos editar el archivo utilizando <code>vim</code>:</p>
+<div style="background: #1f2933; color: #f5f7fa; padding: 13px 18px; border-radius: 7px; font-family: Consolas,monospace; overflow-x: auto;">$ sudo vi /etc/netplan/50-cloud-init.yaml</div>
+<p style="margin: 10px 0 5px;">Recuerda algunas operaciones básicas:</p>
+<table style="width: 100%; border-collapse: collapse; margin-top: 10px; height: 216px;">
+<thead>
+<tr style="background: #17365d; color: white; height: 43.2px;">
+<th style="padding: 8px; border: 1px solid #ccd6df; text-align: center; height: 43.2px;">Acción</th>
+<th style="padding: 8px; border: 1px solid #ccd6df; text-align: center; height: 43.2px;">vim</th>
+</tr>
+</thead>
+<tbody>
+<tr style="height: 43.2px;">
+<td style="padding: 8px; border: 1px solid #ccd6df; text-align: center; height: 43.2px;">Comenzar a editar</td>
+<td style="padding: 8px; border: 1px solid #ccd6df; text-align: center; height: 43.2px;"><code>i</code></td>
+</tr>
+<tr style="background: #f7f9fa; height: 43.2px;">
+<td style="padding: 8px; border: 1px solid #ccd6df; text-align: center; height: 43.2px;">Salir del modo de inserción</td>
+<td style="padding: 8px; border: 1px solid #ccd6df; text-align: center; height: 43.2px;"><code>Esc</code></td>
+</tr>
+<tr style="height: 43.2px;">
+<td style="padding: 8px; border: 1px solid #ccd6df; text-align: center; height: 43.2px;">Guardar y salir</td>
+<td style="padding: 8px; border: 1px solid #ccd6df; text-align: center; height: 43.2px;"><code>:wq</code> + Enter</td>
+</tr>
+<tr style="background: #f7f9fa; height: 43.2px;">
+<td style="padding: 8px; border: 1px solid #ccd6df; text-align: center; height: 43.2px;">Salir sin guardar</td>
+<td style="padding: 8px; border: 1px solid #ccd6df; text-align: center; height: 43.2px;"><code>:q!</code> + Enter</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- NANO -->
+<div style="background: #f7f9fa; border-left: 5px solid #7f8c8d; padding: 15px 18px; margin: 18px 0; border-radius: 5px;"><strong style="color: #566573; font-size: 17px;"> 📝 Option 2 · nano </strong>
+<p style="margin: 8px 0;">También podemos utilizar el editor <code>nano</code>:</p>
+<div style="background: #1f2933; color: #f5f7fa; padding: 13px 18px; border-radius: 7px; font-family: Consolas,monospace; overflow-x: auto;">$ sudo nano /etc/netplan/50-cloud-init.yaml</div>
+<p style="margin: 10px 0 5px;">Algunas operaciones básicas:</p>
+<table style="width: 100%; border-collapse: collapse; margin-top: 10px;">
+<thead>
+<tr style="background: #17365d; color: white;">
+<th style="padding: 8px; border: 1px solid #ccd6df; text-align: center;">Acción</th>
+<th style="padding: 8px; border: 1px solid #ccd6df; text-align: center;">nano</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="padding: 8px; border: 1px solid #ccd6df; text-align: center;">Editar</td>
+<td style="padding: 8px; border: 1px solid #ccd6df; text-align: center;">Escribir directamente</td>
+</tr>
+<tr style="background: #f7f9fa;">
+<td style="padding: 8px; border: 1px solid #ccd6df; text-align: center;">Guardar</td>
+<td style="padding: 8px; border: 1px solid #ccd6df; text-align: center;"><code>Ctrl + O</code> y Enter</td>
+</tr>
+<tr>
+<td style="padding: 8px; border: 1px solid #ccd6df; text-align: center;">Salir</td>
+<td style="padding: 8px; border: 1px solid #ccd6df; text-align: center;"><code>Ctrl + X</code></td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- PRIVILEGIOS -->
+<div style="background: #eef5fb; border-left: 5px solid #3498db; padding: 14px 18px; margin: 18px 0; border-radius: 5px;"><strong style="color: #1769aa;"> 🛡️ ¿Por qué utilizamos sudo? </strong>
+<p style="margin: 7px 0 0; text-align: justify;">Tanto si utilizamos <code>vim</code> como <code>nano</code>, estamos modificando un archivo de configuración del sistema ubicado en <code>/etc</code>. Es una tarea administrativa, por lo que necesitamos los privilegios adecuados.</p>
+</div>
+<!-- ELECCIÓN DEL EDITOR -->
+<div style="background: #eaf7ee; border-left: 5px solid #4f8a62; padding: 14px 18px; margin: 18px 0; border-radius: 5px;"><strong style="color: #315f40;"> 💡 Elige tu herramienta </strong>
+<p style="margin: 7px 0 0; text-align: justify;"><code>vim</code> y <code>nano</code> son dos editores diferentes. <strong>El resultado de la configuración no depende del editor utilizado</strong>, sino de que el contenido del archivo YAML sea correcto.</p>
+</div>
+<!-- ====================================================== --> <!-- 6. IP ESTÁTICA                                         --> <!-- ====================================================== -->
+<h3 style="color: #17365d; margin-top: 32px;">📌 6 · Configure a static IPv4 address</h3>
+<p style="text-align: justify;">Nuestros servidores deben conservar las direcciones definidas en el plan de direccionamiento. Por ello utilizaremos <strong>direcciones IPv4 estáticas</strong>.</p>
+<p>Supongamos que estamos configurando el servidor <strong>Web</strong> de un alumno cuyo rango es <strong>X = 200</strong>.</p>
+<div style="background: #f7f9fa; border: 1px solid #d5dde5; border-radius: 8px; padding: 16px 18px; margin: 18px 0;"><strong style="color: #17365d;"> Web </strong>
+<div style="margin-top: 8px;">Interfaz: <code>enp0s3</code><br />IPv4: <code>192.168.200.154/24</code><br />Gateway: <code>192.168.200.253</code></div>
+</div>
+<p>Una configuración básica sería:</p>
+<div style="background: #1f2933; color: #f5f7fa; padding: 15px 18px; border-radius: 7px; margin: 15px 0; font-family: Consolas,monospace; line-height: 1.7; overflow-x: auto;">network:<br />  version: 2<br />  ethernets:<br />    enp0s3:<br />      dhcp4: false<br />      addresses:<br />        - 192.168.200.154/24<br />      routes:<br />        - to: default<br />          via: 192.168.200.253</div>
+<!-- ====================================================== --> <!-- 7. INTERPRETAR                                         --> <!-- ====================================================== -->
+<h3 style="color: #17365d; margin-top: 32px;">🧠 7 · Read the configuration</h3>
+<p>No queremos copiar una configuración sin entenderla. Vamos a interpretar sus elementos.</p>
+<table style="width: 100%; border-collapse: collapse; margin: 18px 0;">
+<thead>
+<tr style="background: #17365d; color: white;">
+<th style="padding: 9px; border: 1px solid #ccd6df; text-align: center;">Elemento</th>
+<th style="padding: 9px; border: 1px solid #ccd6df; text-align: left;">Función</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="padding: 9px; border: 1px solid #ccd6df; text-align: center;"><code>version: 2</code></td>
+<td style="padding: 9px; border: 1px solid #ccd6df; text-align: left;">Indica la versión del formato de configuración de Netplan.</td>
+</tr>
+<tr style="background: #f7f9fa;">
+<td style="padding: 9px; border: 1px solid #ccd6df; text-align: center;"><code>ethernets</code></td>
+<td style="padding: 9px; border: 1px solid #ccd6df; text-align: left;">Agrupa las interfaces Ethernet que vamos a configurar.</td>
+</tr>
+<tr>
+<td style="padding: 9px; border: 1px solid #ccd6df; text-align: center;"><code>enp0s3</code></td>
+<td style="padding: 9px; border: 1px solid #ccd6df; text-align: left;">Es la interfaz sobre la que aplicamos la configuración.</td>
+</tr>
+<tr style="background: #f7f9fa;">
+<td style="padding: 9px; border: 1px solid #ccd6df; text-align: center;"><code>dhcp4: false</code></td>
+<td style="padding: 9px; border: 1px solid #ccd6df; text-align: left;">Evita obtener automáticamente la configuración IPv4 mediante DHCP.</td>
+</tr>
+<tr>
+<td style="padding: 9px; border: 1px solid #ccd6df; text-align: center;"><code>addresses</code></td>
+<td style="padding: 9px; border: 1px solid #ccd6df; text-align: left;">Define la dirección IPv4 y su prefijo.</td>
+</tr>
+<tr style="background: #f7f9fa;">
+<td style="padding: 9px; border: 1px solid #ccd6df; text-align: center;"><code>routes</code></td>
+<td style="padding: 9px; border: 1px solid #ccd6df; text-align: left;">Define las rutas que utilizará el sistema.</td>
+</tr>
+<tr>
+<td style="padding: 9px; border: 1px solid #ccd6df; text-align: center;"><code>to: default</code></td>
+<td style="padding: 9px; border: 1px solid #ccd6df; text-align: left;">Define la ruta utilizada cuando el destino no pertenece a una ruta más específica.</td>
+</tr>
+<tr style="background: #f7f9fa;">
+<td style="padding: 9px; border: 1px solid #ccd6df; text-align: center;"><code>via: 192.168.35.253</code></td>
+<td style="padding: 9px; border: 1px solid #ccd6df; text-align: left;">Indica la puerta de enlace por la que se enviará ese tráfico.</td>
+</tr>
+</tbody>
+</table>
+<!-- ====================================================== --> <!-- GATEWAY4                                               --> <!-- ====================================================== -->
+<div style="background: #eef5fb; border-left: 5px solid #3498db; padding: 15px 18px; margin: 20px 0; border-radius: 5px;"><strong style="color: #1769aa;"> 💡 ¿Y gateway4? </strong>
+<p style="margin: 7px 0 0; text-align: justify;">En configuraciones antiguas puedes encontrar <code>gateway4</code>. En nuestro entorno utilizaremos <strong>routes</strong> para definir la ruta predeterminada.</p>
+<div style="background: #1f2933; color: #f5f7fa; padding: 11px 14px; border-radius: 5px; margin-top: 10px; font-family: Consolas,monospace;">routes:<br />  - to: default<br />    via: 192.168.35.253</div>
+</div>
+<!-- ====================================================== --> <!-- DNS TODAVÍA NO                                         --> <!-- ====================================================== -->
+<div style="background: #fff8e8; border-left: 5px solid #f0ad4e; padding: 15px 18px; margin: 20px 0; border-radius: 5px;"><strong style="color: #8a5a00;"> ⏳ What about DNS? </strong>
+<p style="margin: 7px 0 0; text-align: justify;">Netplan también permite definir servidores DNS mediante <code>nameservers</code>.</p>
+<p style="margin: 7px 0 0;"><strong>Todavía no vamos a configurarlos.</strong> Nuestra máquina DNS-LDAP aún no presta ese servicio. Lo incorporaremos cuando corresponda dentro de nuestro entorno de despliegue.</p>
+</div>
+<!-- ====================================================== --> <!-- 8. VALIDAR Y APLICAR                                   --> <!-- ====================================================== -->
+<h3 style="color: #17365d; margin-top: 32px;">🧪 8 · Validate and apply the configuration</h3>
+<p style="text-align: justify;">Una vez editado y guardado el archivo de Netplan, <strong>no debemos aplicar inmediatamente los cambios</strong>. Primero comprobaremos que Netplan puede procesar correctamente la configuración que hemos escrito.</p>
+<!-- ====================================================== --> <!-- 8.1 GENERATE                                           --> <!-- ====================================================== -->
+<h4 style="color: #17365d; margin-top: 25px;">🧪 8.1 · Check the configuration</h4>
+<p style="text-align: justify;">Antes de aplicar la nueva configuración ejecutamos:</p>
+<div style="background: #1f2933; color: #f5f7fa; padding: 13px 18px; border-radius: 7px; margin: 15px 0; font-family: Consolas,monospace;">$ sudo netplan generate</div>
+<p style="text-align: justify;">Este comando procesa los archivos YAML de Netplan y genera la configuración que utilizará posteriormente el sistema. Si detecta determinados errores en el archivo, mostrará información que nos permitirá localizar el problema.</p>
+<!-- SIN ERRORES -->
+<div style="background: #eaf7ee; border-left: 5px solid #4f8a62; padding: 14px 18px; margin: 18px 0; border-radius: 5px;"><strong style="color: #315f40;"> ✅ No aparecen errores </strong>
+<p style="margin: 7px 0 0;">Si <code>netplan generate</code> finaliza sin mostrar errores, podemos continuar y aplicar la configuración.</p>
+</div>
+<!-- CON ERRORES -->
+<div style="background: #fff8e8; border-left: 5px solid #f0ad4e; padding: 14px 18px; margin: 18px 0; border-radius: 5px;"><strong style="color: #8a5a00;"> ⚠️ Aparece un error </strong>
+<p style="margin: 7px 0 0; text-align: justify;"><strong>No continúes con <code>netplan apply</code>.</strong> Lee el mensaje mostrado por Netplan, vuelve al archivo YAML y localiza el problema.</p>
+<p style="margin: 7px 0 0;">Corrige la configuración utilizando <code>vim</code> o <code>nano</code>, guarda los cambios y vuelve a ejecutar:</p>
+<div style="background: #1f2933; color: #f5f7fa; padding: 11px 14px; border-radius: 5px; margin-top: 10px; font-family: Consolas,monospace;">$ sudo netplan generate</div>
+<p style="margin: 10px 0 0;">Repite el proceso hasta que la configuración pueda procesarse correctamente.</p>
+</div>
+<!-- ====================================================== --> <!-- 8.2 APPLY                                              --> <!-- ====================================================== -->
+<h4 style="color: #17365d; margin-top: 28px;">▶️ 8.2 · Apply the configuration</h4>
+<p style="text-align: justify;">Cuando la comprobación anterior ha finalizado correctamente, podemos aplicar la nueva configuración de red.</p>
+<div style="background: #1f2933; color: #f5f7fa; padding: 13px 18px; border-radius: 7px; margin: 15px 0; font-family: Consolas,monospace;">$ sudo netplan apply</div>
+<p style="text-align: justify;">Netplan aplicará la configuración definida en nuestros archivos YAML a las interfaces correspondientes.</p>
+<!-- IMPORTANTE -->
+<div style="background: #fff8e8; border-left: 5px solid #f0ad4e; padding: 14px 18px; margin: 18px 0; border-radius: 5px;"><strong style="color: #8a5a00;"> ⚠️ Aplicar no significa verificar </strong>
+<p style="margin: 7px 0 0; text-align: justify;">Que <code>netplan apply</code> termine sin mostrar errores no demuestra que hayamos introducido los valores que realmente necesita nuestra máquina.</p>
+<p style="margin: 7px 0 0;">El siguiente paso será comprobar la <strong>configuración real del sistema</strong>.</p>
+</div>
+<!-- PROCEDIMIENTO -->
+<div style="background: #eef5fb; border-left: 5px solid #3498db; padding: 15px 18px; margin: 20px 0; border-radius: 5px;"><strong style="color: #1769aa;"> 🧭 Recuerda el procedimiento </strong>
+<div style="display: flex; align-items: center; justify-content: center; flex-wrap: wrap; gap: 8px; margin: 15px 0 5px; text-align: center;">
+<div style="background: white; padding: 10px 13px; border-radius: 6px;">✏️ <strong>Editar</strong></div>
+<strong>→</strong>
+<div style="background: #fff8e8; padding: 10px 13px; border-radius: 6px;">🧪 <strong>Generate</strong></div>
+<strong>→</strong>
+<div style="background: white; padding: 10px 13px; border-radius: 6px;">▶️ <strong>Apply</strong></div>
+<strong>→</strong>
+<div style="background: #eaf7ee; padding: 10px 13px; border-radius: 6px;">🔍 <strong>Verify</strong></div>
+</div>
+</div>
+<!-- ====================================================== --> <!-- 9. VERIFICAR                                           --> <!-- ====================================================== -->
+<h3 style="color: #17365d; margin-top: 32px;">🔍 9 · Verify the configuration</h3>
+<p style="text-align: justify;">Ya hemos validado nuestro archivo con <code>netplan generate</code> y aplicado los cambios mediante <code>netplan apply</code>. Ahora debemos comprobar que la <strong>configuración real del sistema coincide con nuestro plan de direccionamiento</strong>.</p>
+<div style="background: #eef5fb; border-left: 5px solid #3498db; padding: 14px 18px; margin: 18px 0; border-radius: 5px;"><strong style="color: #1769aa;"> 💡 Aplicar no es verificar </strong>
+<p style="margin: 7px 0 0; text-align: justify;">Que Netplan haya aplicado la configuración sin mostrar errores no significa necesariamente que hayamos introducido los valores correctos. Debemos comprobar qué configuración está utilizando realmente el sistema.</p>
+</div>
+<!-- ====================================================== --> <!-- 9.1 IP ADDR                                            --> <!-- ====================================================== -->
+<h4 style="color: #17365d; margin-top: 28px;">🌐 9.1 · Check the interface configuration</h4>
+<p style="text-align: justify;">Comenzaremos comprobando la configuración IPv4 de la interfaz que acabamos de modificar.</p>
+<p>Podemos consultar todas las interfaces mediante:</p>
+<div style="background: #1f2933; color: #f5f7fa; padding: 13px 18px; border-radius: 7px; margin: 15px 0; font-family: Consolas,monospace;">$ ip addr</div>
+<p>O consultar directamente la interfaz que nos interesa:</p>
+<div style="background: #1f2933; color: #f5f7fa; padding: 13px 18px; border-radius: 7px; margin: 15px 0; font-family: Consolas,monospace;">$ ip addr show enp0s3</div>
+<p style="text-align: justify;">Si estamos configurando el servidor <strong>Web</strong>, debemos localizar su dirección IPv4 y comprobar que coincide con nuestro plan:</p>
+<div style="background: #1f2933; color: #f5f7fa; padding: 13px 18px; border-radius: 7px; margin: 15px 0; font-family: Consolas,monospace; text-align: center;">inet 192.168.X.154/24</div>
+<div style="background: #eaf7ee; border-left: 5px solid #4f8a62; padding: 14px 18px; margin: 18px 0; border-radius: 5px;"><strong style="color: #315f40;"> 🔍 Comprueba:</strong>
+<ul style="margin-bottom: 0;">
+<li>Que estás observando la interfaz <code>enp0s3</code>.</li>
+<li>Que aparece la dirección <code>192.168.X.154</code>.</li>
+<li>Que utiliza el prefijo <code>/24</code>.</li>
+<li>Que <code>X</code> corresponde al rango que tienes asignado.</li>
+</ul>
+</div>
+<!-- ====================================================== --> <!-- 9.2 IP ROUTE                                           --> <!-- ====================================================== -->
+<h4 style="color: #17365d; margin-top: 28px;">🚪 9.2 · Check the routing table</h4>
+<p style="text-align: justify;">La dirección IPv4 no es el único elemento que hemos configurado. En Netplan también hemos definido una <strong>ruta predeterminada</strong> para permitir que la máquina pueda enviar tráfico destinado a otras redes.</p>
+<p>Para consultar la tabla de rutas ejecutamos:</p>
+<div style="background: #1f2933; color: #f5f7fa; padding: 13px 18px; border-radius: 7px; margin: 15px 0; font-family: Consolas,monospace;">$ ip route</div>
+<p style="text-align: justify;">Si utilizamos como ejemplo un alumno con <strong>X = 35</strong>, en el servidor Web podríamos obtener una salida similar a:</p>
+<div style="background: #1f2933; color: #f5f7fa; padding: 15px 18px; border-radius: 7px; margin: 15px 0; font-family: Consolas,monospace; line-height: 1.7; overflow-x: auto;">default via 192.168.200.253 dev enp0s3<br />192.168.35.0/24 dev enp0s3 proto kernel scope link src 192.168.200.154</div>
+<!-- INTERPRETAR -->
+<p style="text-align: justify;">No queremos limitarnos a ejecutar el comando. Debemos ser capaces de <strong>interpretar su resultado</strong>.</p>
+<table style="width: 100%; border-collapse: collapse; margin: 18px 0;">
+<thead>
+<tr style="background: #17365d; color: white;">
+<th style="padding: 9px; border: 1px solid #ccd6df; text-align: center;">Información</th>
+<th style="padding: 9px; border: 1px solid #ccd6df; text-align: center;">Significado</th>
+<th style="padding: 9px; border: 1px solid #ccd6df; text-align: center;">En nuestro escenario</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="padding: 9px; border: 1px solid #ccd6df; text-align: center;"><code>default</code></td>
+<td style="padding: 9px; border: 1px solid #ccd6df;">Ruta utilizada cuando no existe otra ruta más específica.</td>
+<td style="padding: 9px; border: 1px solid #ccd6df;">Permite enviar tráfico destinado a otras redes.</td>
+</tr>
+<tr style="background: #f7f9fa;">
+<td style="padding: 9px; border: 1px solid #ccd6df; text-align: center;"><code>via 192.168.X.253</code></td>
+<td style="padding: 9px; border: 1px solid #ccd6df;">Dirección de la puerta de enlace.</td>
+<td style="padding: 9px; border: 1px solid #ccd6df;">Debe corresponder a la interfaz interna de DNS-LDAP.</td>
+</tr>
+<tr>
+<td style="padding: 9px; border: 1px solid #ccd6df; text-align: center;"><code>dev enp0s3</code></td>
+<td style="padding: 9px; border: 1px solid #ccd6df;">Interfaz utilizada para alcanzar ese destino.</td>
+<td style="padding: 9px; border: 1px solid #ccd6df;">Web utiliza su interfaz conectada a la Red interna.</td>
+</tr>
+<tr style="background: #f7f9fa;">
+<td style="padding: 9px; border: 1px solid #ccd6df; text-align: center;"><code>192.168.X.0/24</code></td>
+<td style="padding: 9px; border: 1px solid #ccd6df;">Ruta hacia la red directamente conectada.</td>
+<td style="padding: 9px; border: 1px solid #ccd6df;">Debe coincidir con nuestra Red interna.</td>
+</tr>
+<tr>
+<td style="padding: 9px; border: 1px solid #ccd6df; text-align: center;"><code>src 192.168.X.154</code></td>
+<td style="padding: 9px; border: 1px solid #ccd6df;">Dirección de origen asociada a esa ruta.</td>
+<td style="padding: 9px; border: 1px solid #ccd6df;">Debe coincidir con la dirección IPv4 de Web.</td>
+</tr>
+</tbody>
+</table>
+<div style="background: #eaf7ee; border-left: 5px solid #4f8a62; padding: 14px 18px; margin: 18px 0; border-radius: 5px;"><strong style="color: #315f40;"> 🔍 Comprueba:</strong>
+<ul style="margin-bottom: 0;">
+<li>Que existe una <strong>ruta predeterminada</strong>.</li>
+<li>Que la puerta de enlace es <code>192.168.X.253</code>.</li>
+<li>Que utiliza la interfaz <code>enp0s3</code>.</li>
+<li>Que aparece una ruta hacia <code>192.168.X.0/24</code>.</li>
+<li>Que la dirección de origen coincide con la dirección asignada al servidor Web.</li>
+</ul>
+</div>
+<!-- ====================================================== --> <!-- 9.3 COMPARAR                                           --> <!-- ====================================================== -->
+<h4 style="color: #17365d; margin-top: 28px;">🧩 9.3 · Compare plan and reality</h4>
+<p style="text-align: justify;">Para finalizar, compara la configuración que habías planificado con la que realmente está utilizando el sistema.</p>
+<table style="width: 100%; border-collapse: collapse; margin: 18px 0;">
+<thead>
+<tr style="background: #17365d; color: white;">
+<th style="padding: 9px; border: 1px solid #ccd6df; text-align: center;">Elemento</th>
+<th style="padding: 9px; border: 1px solid #ccd6df; text-align: center;">Nuestro plan</th>
+<th style="padding: 9px; border: 1px solid #ccd6df; text-align: left;">¿Cómo lo comprobamos?</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="padding: 9px; border: 1px solid #ccd6df; text-align: center;">Interfaz</td>
+<td style="padding: 9px; border: 1px solid #ccd6df; text-align: center;"><code>enp0s3</code></td>
+<td style="padding: 9px; border: 1px solid #ccd6df;"><code>ip addr show enp0s3</code></td>
+</tr>
+<tr style="background: #f7f9fa;">
+<td style="padding: 9px; border: 1px solid #ccd6df; text-align: center;">IPv4</td>
+<td style="padding: 9px; border: 1px solid #ccd6df; text-align: center;"><code>192.168.X.154</code></td>
+<td style="padding: 9px; border: 1px solid #ccd6df;"><code>ip addr show enp0s3</code></td>
+</tr>
+<tr>
+<td style="padding: 9px; border: 1px solid #ccd6df; text-align: center;">Prefijo</td>
+<td style="padding: 9px; border: 1px solid #ccd6df; text-align: center;"><code>/24</code></td>
+<td style="padding: 9px; border: 1px solid #ccd6df;"><code>ip addr show enp0s3</code></td>
+</tr>
+<tr style="background: #f7f9fa;">
+<td style="padding: 9px; border: 1px solid #ccd6df; text-align: center;">Red</td>
+<td style="padding: 9px; border: 1px solid #ccd6df; text-align: center;"><code>192.168.X.0/24</code></td>
+<td style="padding: 9px; border: 1px solid #ccd6df;"><code>ip route</code></td>
+</tr>
+<tr>
+<td style="padding: 9px; border: 1px solid #ccd6df; text-align: center;">Gateway</td>
+<td style="padding: 9px; border: 1px solid #ccd6df; text-align: center;"><code>192.168.X.253</code></td>
+<td style="padding: 9px; border: 1px solid #ccd6df;"><code>ip route</code></td>
+</tr>
+</tbody>
+</table>
+<!-- ====================================================== --> <!-- VERIFICACIÓN FINAL                                     --> <!-- ====================================================== -->
+<div style="background: #eaf7ee; border-left: 5px solid #4f8a62; padding: 15px 18px; margin: 22px 0; border-radius: 5px;"><strong style="color: #315f40; font-size: 17px;"> ✅ Configuration verified </strong>
+<p style="margin: 8px 0 0; text-align: justify;">La configuración estará verificada cuando podamos demostrar que la <strong>interfaz, dirección IPv4, prefijo, red y puerta de enlace</strong> coinciden con los valores definidos en nuestro plan de direccionamiento.</p>
+</div>
+<!-- ====================================================== --> <!-- DIFERENCIA CONFIGURACIÓN / CONECTIVIDAD                --> <!-- ====================================================== -->
+<div style="background: #eef5fb; border-left: 5px solid #3498db; padding: 15px 18px; margin: 20px 0; border-radius: 5px;"><strong style="color: #1769aa;"> 💡 Configuration ≠ Connectivity </strong>
+<p style="margin: 7px 0 0; text-align: justify;">Hemos demostrado que nuestra máquina tiene la <strong>configuración que habíamos planificado</strong>, pero todavía no hemos demostrado que pueda comunicarse correctamente con otras máquinas.</p>
+<p style="margin: 7px 0 0;">Esa será nuestra siguiente tarea en <strong>2.2.4 · Network diagnostics</strong>.</p>
+</div>
+<!-- ====================================================== --> <!-- PROCEDIMIENTO                                          --> <!-- ====================================================== -->
+<h3 style="color: #17365d; margin-top: 32px;">🧭 10 · The procedure</h3>
+<div style="display: flex; align-items: center; justify-content: center; flex-wrap: wrap; gap: 8px; margin: 24px 0; text-align: center;">
+<div style="background: #eef5fb; padding: 11px 13px; border-radius: 6px;">🔌 <strong>Identificar</strong><br /><small>interfaz</small></div>
+<strong>→</strong>
+<div style="background: #eef5fb; padding: 11px 13px; border-radius: 6px;">👀 <strong>Consultar</strong><br /><small>configuración</small></div>
+<strong>→</strong>
+<div style="background: #eef5fb; padding: 11px 13px; border-radius: 6px;">✏️ <strong>Editar</strong><br /><small>Netplan</small></div>
+<strong>→</strong>
+<div style="background: #eef5fb; padding: 11px 13px; border-radius: 6px;">▶️ <strong>Aplicar</strong><br /><small>cambios</small></div>
+<strong>→</strong>
+<div style="background: #eaf7ee; padding: 11px 13px; border-radius: 6px;">🔍 <strong>Verificar</strong><br /><small>resultado</small></div>
+</div>
+<!-- ====================================================== --> <!-- CHECK IT                                               --> <!-- ====================================================== -->
+<div style="background: #eaf7ee; border-left: 5px solid #4f8a62; padding: 16px 18px; margin: 24px 0; border-radius: 5px;"><strong style="color: #315f40; font-size: 17px;"> 🔍 Check it </strong>
+<p style="margin: 8px 0;">Antes de modificar ninguna máquina de tu escenario:</p>
+<ol style="margin-bottom: 0; padding-left: 25px;">
+<li>Identifica la interfaz que quieres configurar.</li>
+<li>Localiza el archivo existente en <code>/etc/netplan/</code>.</li>
+<li>Consulta su contenido actual.</li>
+<li>Identifica si utiliza DHCP.</li>
+<li>Localiza dónde debería aparecer la dirección estática.</li>
+<li>Determina qué valores tendrías que utilizar según tu rango.</li>
+</ol>
+</div>
+<!-- ====================================================== --> <!-- MINI CHALLENGE                                         --> <!-- ====================================================== -->
+<div style="background: #f7f9fa; border: 2px solid #4f8a62; padding: 18px 20px; margin: 25px 0; border-radius: 8px;"><strong style="color: #315f40; font-size: 18px;"> 🧩 Mini challenge · Configure your Web server </strong>
+<p style="margin: 10px 0; text-align: justify;">En <strong>2.2.2 · IPv4 addressing</strong> preparaste tu propio plan de direccionamiento. Ahora vas a utilizarlo para configurar realmente <strong>Web</strong>.</p>
+<div style="background: #eef5fb; border-left: 5px solid #3498db; padding: 13px 16px; margin: 15px 0; border-radius: 5px;"><strong style="color: #1769aa;"> 📌 Requisitos </strong>
+<p style="margin: 7px 0 0;">La máquina Web debe utilizar:</p>
+<ul style="margin-bottom: 0;">
+<li>Su interfaz conectada a la Red interna.</li>
+<li><code>192.168.X.154/24</code> como dirección IPv4.</li>
+<li><code>192.168.X.253</code> como puerta de enlace-</li>
+<li>Una configuración IPv4 estática.</li>
+</ul>
+</div>
+<p><strong>Tu tarea:</strong></p>
+<ol style="padding-left: 25px;">
+<li>Comprueba qué interfaz vas a configurar.</li>
+<li>Localiza el archivo de Netplan existente.</li>
+<li>Consulta su configuración antes de modificarla.</li>
+<li>Adapta la configuración a los requisitos anteriores.</li>
+<li>Guarda los cambios.</li>
+<li>Aplica la nueva configuración.</li>
+<li>Comprueba que la dirección obtenida coincide con tu plan.</li>
+</ol>
+<div style="background: #fff8e8; border-left: 4px solid #f0ad4e; padding: 12px 14px; margin-top: 16px; border-radius: 4px;"><strong style="color: #8a5a00;"> ⚠️ Esta vez, no copies el ejemplo </strong>
+<p style="margin: 6px 0 0;">El ejemplo utiliza <code>X = 200</code>. Tú debes utilizar <strong>el rango que tienes asignado en el aula</strong>.</p>
+</div>
+<div style="background: #eaf7ee; border-left: 4px solid #4f8a62; padding: 12px 14px; margin-top: 16px; border-radius: 4px;"><strong> 🔍 Demuestra que funciona </strong>
+<p style="margin: 6px 0 0;">No terminas cuando ejecutas <code>netplan apply</code>. Debes mostrar la configuración de la interfaz y comprobar que contiene exactamente la dirección IPv4 que habías planificado.</p>
+</div>
+</div>
+<!-- ====================================================== --> <!-- RECURSO                                                --> <!-- ====================================================== -->
+<h3 style="color: #17365d; margin-top: 32px;">📖 Reference</h3>
+<div style="background: #eef5fb; border: 1px solid #c8dbea; border-radius: 8px; padding: 17px 18px; margin: 18px 0;"><strong style="color: #17365d;"> Establecer una dirección IP estática en Ubuntu Server 24.04 </strong>
+<p style="margin: 7px 0 12px; text-align: justify;">Utiliza este recurso como apoyo para revisar el procedimiento de configuración de una dirección IPv4 estática mediante Netplan.</p>
+<a href="https://somebooks.es/establecer-una-direccion-ip-estatica-en-ubuntu-server-24-04/" target="_blank" style="display: inline-block; background: #17365d; color: white; text-decoration: none; padding: 9px 15px; border-radius: 5px; font-weight: bold;" rel="noopener"> 🔗 Consultar tutorial · SomeBooks </a></div>
+<!-- ====================================================== --> <!-- RESUMEN                                                --> <!-- ====================================================== -->
+<h3 style="color: #17365d; margin-top: 32px;">🧠 What should you remember?</h3>
+<div style="background: #f7f9fa; border: 1px solid #d5dde5; border-radius: 8px; padding: 16px 18px; margin: 18px 0;">
+<ul style="margin: 0; padding-left: 24px;">
+<li>Los archivos de Netplan se encuentran en <code>/etc/netplan/</code>.</li>
+<li>La configuración utiliza archivos YAML.</li>
+<li>La indentación forma parte de la estructura del archivo.</li>
+<li><code>addresses</code> permite definir la dirección y el prefijo.</li>
+<li><code>routes</code> permite definir la ruta predeterminada.</li>
+<li><code>sudo netplan apply</code> aplica los cambios.</li>
+<li>Después de configurar debemos comprobar el resultado.</li>
+</ul>
+</div>
+<!-- ====================================================== --> <!-- CIERRE                                                 --> <!-- ====================================================== -->
+<div style="background: #17365d; color: white; padding: 17px 20px; margin-top: 27px; border-radius: 8px; text-align: center;"><strong style="font-size: 18px;"> Ya sabemos configurar una interfaz. </strong>
+<div style="margin-top: 7px;">El siguiente paso es aprender a detectar qué ocurre cuando una comunicación no funciona como esperamos.</div>
+<div style="margin-top: 9px; font-weight: bold;">🩺 2.2.4 · Network diagnostics</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</article>
+</div></main>
+<footer id="siteFooter"><div id="siteFooterContent"> <div id="packageLicense" class="cc cc-by-sa"> <p> <span class="license-label">Licencia: </span><a href="https://creativecommons.org/licenses/by-sa/4.0/" class="license">Creative Commons: Reconocimiento - compartir igual 4.0</a></p>
+</div>
+</div></footer>
+</div>
+<p id="made-with-eXe"> <a href="https://exelearning.net/" target="_blank" rel="noopener"> <span>Creado con eXeLearning <span>(Ventana nueva)</span></span></a></p>
+</body>
+</html>

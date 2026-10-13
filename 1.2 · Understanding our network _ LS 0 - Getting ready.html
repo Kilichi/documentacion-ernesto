@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="es" id="exe-page-mugzeiy6-2oe4hj4rz">
+<head>
+<meta charset="utf-8">
+<meta name="generator" content="eXeLearning v4.0.5">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="license" type="text/html" href="https://creativecommons.org/licenses/by-sa/4.0/">
+<title>1.2 · Understanding our network | LS 0 - Getting ready</title>
+<link rel="icon" type="image/x-icon" href="../libs/favicon.ico">
+<script>document.querySelector("html").classList.add("js");</script><script src="../libs/jquery/jquery.min.js"> </script><script src="../libs/common_i18n.js"> </script><script src="../libs/common.js"> </script><script src="../libs/exe_export.js"> </script><script src="../libs/bootstrap/bootstrap.bundle.min.js"> </script><link rel="stylesheet" href="../libs/bootstrap/bootstrap.min.css">
+<script src="../idevices/text/text.js"></script><link rel="stylesheet" href="../idevices/text/text.css">
+<link rel="stylesheet" href="../content/css/base.css"><script src="../theme/style.js"> </script><link rel="stylesheet" href="../theme/style.css">
+<script src="../libs/SCORM_API_wrapper.js"></script>
+<script src="../libs/SCOFunctions.js"></script>
+</head>
+<body class="exe-export exe-scorm exe-scorm12" onload="loadPage()">
+<script>document.body.className+=" js"</script>
+<div class="exe-content exe-export pre-js siteNav-hidden"><main id="page-mugzeiy6-2oe4hj4rz" class="page"> 
+<header class="main-header">
+<div class="package-header"><p class="package-title">LS 0 - Getting ready</p></div>
+<div class="page-header"><h1 class="page-title">1.2 · Understanding our network</h1></div>
+</header><div id="page-content-page-mugzeiy6-2oe4hj4rz" class="page-content">
+<article id="block-muh3jcc8-l33nj7yaa" class="box no-header">
+<header class="box-head no-icon">
+<button class="box-toggle box-toggle-on" title="Toggle content">
+<span>Toggle content</span>
+</button></header>
+<div class="box-content">
+<div id="idevice-1790348946487-lcq1rnebv" class="idevice_node text" data-idevice-path="../idevices/text/" data-idevice-type="text" data-idevice-component-type="json" data-idevice-json-data="{&quot;ideviceId&quot;:&quot;idevice-1790348946487-lcq1rnebv&quot;}">
+<div class="exe-text-template">
+    <div style="max-width: 1050px; margin: auto; font-family: Arial,Helvetica,sans-serif; color: #243247; line-height: 1.65;"><!-- ====================================================== --> <!-- CABECERA                                               --> <!-- ====================================================== -->
+<div style="background: #17365d; color: white; padding: 18px 22px; border-radius: 10px;">
+<h2 style="color: white; margin: 0;">🔗 1.2 · Understanding our network</h2>
+<p style="margin: 6px 0 0;">¿Cómo conectamos nuestras máquinas virtuales?</p>
+</div>
+<!-- ====================================================== --> <!-- OBJETIVO                                               --> <!-- ====================================================== -->
+<div style="background: #eef5fb; border-left: 5px solid #2980b9; padding: 14px 18px; margin: 20px 0px; border-radius: 5px; text-align: justify;"><strong style="color: #17365d;">🎯 Objetivo</strong><br />Diferenciar los principales modos de conexión de red de VirtualBox, seleccionar el más adecuado según las necesidades de comunicación y comprender por qué nuestro escenario combina una <strong>Red NAT / NAT</strong> y una <strong>Red interna</strong>.</div>
+<!-- ====================================================== --> <!-- INTRODUCCIÓN                                           --> <!-- ====================================================== -->
+<p style="text-align: justify;">Ya conocemos las máquinas que formarán nuestro entorno. El siguiente paso es comprender <strong>cómo estarán conectadas</strong>.</p>
+<p style="text-align: justify;">Cuando añadimos una tarjeta de red a una máquina virtual, debemos decidir <strong>a qué tipo de red virtual estará conectada</strong>. Esta decisión determina con quién podrá comunicarse: Con otras máquinas virtuales, con el equipo anfitrión, con la red física o con el exterior.</p>
+<!-- ====================================================== --> <!-- IDEA CLAVE                                             --> <!-- ====================================================== -->
+<div style="background: #fff8e8; border-left: 5px solid #f0ad4e; padding: 14px 18px; margin: 20px 0; border-radius: 5px;"><strong style="color: #8a5a00;">💡 Idea principal</strong><br />Una interfaz como <code>enp0s3</code> o <code>enp0s8</code> <strong>no es NAT, puente o red interna por sí misma</strong>. VirtualBox determina a qué tipo de red está conectada cada tarjeta virtual.</div>
+<!-- ====================================================== --> <!-- NECESIDADES INICIALES                                  --> <!-- ====================================================== -->
+<h3 style="color: #17365d; margin-top: 30px;">🤔 Primero, pensemos qué necesitamos</h3>
+<p style="text-align: justify;">Antes de elegir un modo de red debemos preguntarnos <strong>qué comunicaciones necesitamos establecer</strong>. Observa estas cuatro situaciones:</p>
+<div style="display: flex; gap: 14px; flex-wrap: wrap; margin: 20px 0px; text-align: justify;"><!-- CASO A -->
+<div style="flex: 1 1 0%; min-width: 210px; background: #f7f9fa; border-top: 5px solid #7f8c8d; border-radius: 8px; padding: 15px; box-sizing: border-box; text-align: justify;"><strong style="color: #34495e;"> A · Una VM necesita salir al exterior </strong>
+<p style="margin-bottom: 0; text-align: justify;">Una máquina virtual necesita acceder al exterior, por ejemplo para descargar actualizaciones.</p>
+</div>
+<!-- CASO B -->
+<div style="flex: 1 1 0%; min-width: 210px; background: #fff8e8; border-top: 5px solid #e67e22; border-radius: 8px; padding: 15px; box-sizing: border-box; text-align: justify;"><strong style="color: #c65300;"> B · Varias VM y salida al exterior </strong>
+<p style="margin-bottom: 0; text-align: justify;">Varias máquinas virtuales necesitan comunicarse entre ellas y disponer de acceso al exterior.</p>
+</div>
+<!-- CASO C -->
+<div style="flex: 1 1 0%; min-width: 210px; background: #f5f0fa; border-top: 5px solid #8e44ad; border-radius: 8px; padding: 15px; box-sizing: border-box; text-align: justify;"><strong style="color: #6c3483;"> C · Participar en la red física </strong>
+<p style="margin-bottom: 0; text-align: justify;">Queremos que la máquina virtual participe en la red física a la que está conectado el anfitrión.</p>
+</div>
+<!-- CASO D -->
+<div style="flex: 1 1 0%; min-width: 210px; background: #eef5fb; border-top: 5px solid #3498db; border-radius: 8px; padding: 15px; box-sizing: border-box; text-align: justify;"><strong style="color: #1769aa;"> D · Laboratorio aislado </strong>
+<p style="margin-bottom: 0px; text-align: justify;">Varias máquinas virtuales deben comunicarse entre ellas dentro de un entorno virtual aislado.</p>
+</div>
+</div>
+<!-- ====================================================== --> <!-- MODOS DE VIRTUALBOX                                    --> <!-- ====================================================== -->
+<h3 style="color: #17365d; margin-top: 32px;">🌐 Modos de conexión de VirtualBox</h3>
+<p style="text-align: justify;">VirtualBox dispone de diferentes modos de conexión. Para construir nuestro escenario necesitamos comprender cuatro: <strong>NAT</strong>, <strong>Red NAT</strong>, <strong>Adaptador puente</strong> y <strong>Red interna</strong>.</p>
+<!-- ====================================================== --> <!-- NAT                                                    --> <!-- ====================================================== -->
+<div style="background: #f7f9fa; border: 1px solid #d5dde5; border-left: 6px solid #7f8c8d; padding: 17px 19px; margin: 18px 0; border-radius: 7px;">
+<div style="font-size: 19px; font-weight: bold; color: #34495e;">1 · NAT</div>
+<p style="margin: 8px 0; text-align: justify;">NAT es una forma sencilla de proporcionar <strong>acceso al exterior a una máquina virtual</strong>. VirtualBox sitúa un motor NAT entre la máquina virtual y la red utilizada por el anfitrión.</p>
+<div style="background: white; border-radius: 7px; padding: 14px; margin: 13px 0; text-align: center;"><span style="display: inline-block; padding: 7px 12px;"> 🖥️ Máquina virtual </span> <strong style="color: #7f8c8d;"> → </strong> <span style="display: inline-block; background: #f1f3f4; padding: 7px 14px; border-radius: 5px;"> NAT </span> <strong style="color: #7f8c8d;"> → </strong> <span style="display: inline-block; padding: 7px 12px;"> ☁️ Exterior </span></div>
+<p style="margin-bottom: 0; text-align: justify;">Cada máquina configurada de esta forma queda, por defecto, detrás de su propio NAT. Por tanto, <strong>varias máquinas con NAT no forman automáticamente una misma red virtual entre ellas</strong>.</p>
+<div style="background: white; border-left: 4px solid #7f8c8d; padding: 10px 13px; margin-top: 12px;"><strong>Recordar:</strong><br />Una VM necesita una forma sencilla de <strong>salir al exterior</strong>.</div>
+</div>
+<!-- ====================================================== --> <!-- NAT NETWORK                                            --> <!-- ====================================================== -->
+<div style="background: #fff8e8; border: 1px solid #ead8ad; border-left: 6px solid #e67e22; padding: 17px 19px; margin: 18px 0; border-radius: 7px;">
+<div style="font-size: 19px; font-weight: bold; color: #c65300;">2 · Red NAT · NAT Network</div>
+<p style="margin: 8px 0; text-align: justify;">Una Red NAT crea una <strong>red virtual compartida</strong>. Las máquinas conectadas a ella pueden comunicarse entre sí y disponer, al mismo tiempo, de acceso al exterior.</p>
+<div style="background: white; border-radius: 7px; padding: 14px; margin: 13px 0; text-align: center;">
+<div>🖥️ VM 1      🖥️ VM 2      🖥️ VM 3</div>
+<div style="color: #e67e22; font-size: 21px;">↓       ↓       ↓</div>
+<div style="display: inline-block; background: #fff3e0; border: 2px solid #e67e22; border-radius: 6px; padding: 7px 25px;"><strong style="color: #c65300;"> Red NAT </strong></div>
+<div style="color: #e67e22; font-size: 21px;">↓</div>
+<div>☁️ Exterior</div>
+</div>
+<div style="background: white; border-left: 4px solid #e67e22; padding: 10px 13px; margin-top: 12px;"><strong>Recordar:</strong><br />Varias VM pueden compartir una misma red virtual <strong>y salir al exterior</strong>.</div>
+</div>
+<!-- ====================================================== --> <!-- BRIDGED                                                --> <!-- ====================================================== -->
+<div style="background: #f5f0fa; border: 1px solid #d8c9e8; border-left: 6px solid #8e44ad; padding: 17px 19px; margin: 18px 0; border-radius: 7px;">
+<div style="font-size: 19px; font-weight: bold; color: #6c3483;">3 · Adaptador puente · Bridged Networking</div>
+<p style="margin: 8px 0; text-align: justify;">El modo puente conecta la interfaz virtual con una <strong>interfaz física del equipo anfitrión</strong>, permitiendo que la máquina virtual participe en la red a la que está conectado el anfitrión.</p>
+<div style="background: white; border-radius: 7px; padding: 14px; margin: 13px 0; text-align: center;">💻 Máquina virtual <strong style="color: #8e44ad;"> → </strong> 🖥️ Interfaz del anfitrión <strong style="color: #8e44ad;"> → </strong> 🏫 Red física</div>
+<div style="background: white; border-left: 4px solid #8e44ad; padding: 10px 13px; margin-top: 12px;"><strong>Recordar:</strong><br />La máquina virtual pasa a <strong>participar en la red física</strong> a través del equipo anfitrión.</div>
+</div>
+<!-- ====================================================== --> <!-- INTERNAL NETWORK                                       --> <!-- ====================================================== -->
+<div style="background: #eef5fb; border: 1px solid #bdd7ea; border-left: 6px solid #3498db; padding: 17px 19px; margin: 18px 0; border-radius: 7px;">
+<div style="font-size: 19px; font-weight: bold; color: #1769aa;">4 · Red interna · Internal Network</div>
+<p style="margin: 8px 0; text-align: justify;">Una Red interna crea una <strong>red virtual aislada</strong>. Las máquinas virtuales conectadas a la misma red interna pueden comunicarse entre ellas.</p>
+<div style="background: white; border-radius: 7px; padding: 14px; margin: 13px 0; text-align: center;">
+<div>🖥️ VM 1      🖥️ VM 2      🖥️ VM 3</div>
+<div style="color: #3498db; font-size: 21px;">↓       ↓       ↓</div>
+<div style="display: inline-block; background: #eaf4fb; border: 2px solid #3498db; border-radius: 6px; padding: 7px 25px;"><strong style="color: #1769aa;"> Red interna </strong></div>
+</div>
+<p style="text-align: justify;">Por sí sola, esta red <strong>no proporciona acceso al exterior ni a la red física</strong>.</p>
+<div style="background: white; border-left: 4px solid #3498db; padding: 10px 13px; margin-top: 12px;"><strong>Recordar:</strong><br />Varias VM pueden comunicarse dentro de un <strong>laboratorio virtual aislado</strong>.</div>
+</div>
+<!-- ====================================================== --> <!-- COMPARACIÓN                                            --> <!-- ====================================================== -->
+<h3 style="color: #17365d; margin-top: 32px;">🧭 Comparemos los cuatro modos</h3>
+<p style="text-align: justify;">Ahora podemos comparar qué necesidad resuelve cada modo antes de decidir cuál utilizar en nuestro escenario.</p>
+<div style="overflow-x: auto; margin-top: 15px;">
+<table style="width: 100%; border-collapse: collapse; min-width: 760px;">
+<thead>
+<tr style="background: #17365d; color: white;">
+<th style="padding: 11px; border: 1px solid #ccd6df; text-align: center;">Modo</th>
+<th style="padding: 11px; border: 1px solid #ccd6df; text-align: center;">Comunicación<br />VM ↔ VM</th>
+<th style="padding: 11px; border: 1px solid #ccd6df; text-align: center;">Acceso<br />al exterior</th>
+<th style="padding: 11px; border: 1px solid #ccd6df; text-align: center;">Participa en<br />la red física</th>
+<th style="padding: 11px; border: 1px solid #ccd6df; text-align: center;">Idea principal</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="padding: 10px; border: 1px solid #ccd6df; text-align: center;"><strong>NAT</strong></td>
+<td style="padding: 10px; border: 1px solid #ccd6df; text-align: center;">✖*</td>
+<td style="padding: 10px; border: 1px solid #ccd6df; text-align: center;">✔</td>
+<td style="padding: 10px; border: 1px solid #ccd6df; text-align: center;">✖</td>
+<td style="padding: 10px; border: 1px solid #ccd6df;">Una VM necesita salir al exterior.</td>
+</tr>
+<tr style="background: #fff8e8;">
+<td style="padding: 10px; border: 1px solid #ccd6df; text-align: center;"><strong>Red NAT</strong></td>
+<td style="padding: 10px; border: 1px solid #ccd6df; text-align: center;">✔</td>
+<td style="padding: 10px; border: 1px solid #ccd6df; text-align: center;">✔</td>
+<td style="padding: 10px; border: 1px solid #ccd6df; text-align: center;">✖</td>
+<td style="padding: 10px; border: 1px solid #ccd6df;">Varias VM comparten red virtual y salida.</td>
+</tr>
+<tr style="background: #f5f0fa;">
+<td style="padding: 10px; border: 1px solid #ccd6df; text-align: center;"><strong>Puente</strong></td>
+<td style="padding: 10px; border: 1px solid #ccd6df; text-align: center;">✔**</td>
+<td style="padding: 10px; border: 1px solid #ccd6df; text-align: center;">Según red</td>
+<td style="padding: 10px; border: 1px solid #ccd6df; text-align: center;">✔</td>
+<td style="padding: 10px; border: 1px solid #ccd6df;">La VM participa en la red física.</td>
+</tr>
+<tr style="background: #eef5fb;">
+<td style="padding: 10px; border: 1px solid #ccd6df; text-align: center;"><strong>Red interna</strong></td>
+<td style="padding: 10px; border: 1px solid #ccd6df; text-align: center;">✔</td>
+<td style="padding: 10px; border: 1px solid #ccd6df; text-align: center;">✖</td>
+<td style="padding: 10px; border: 1px solid #ccd6df; text-align: center;">✖</td>
+<td style="padding: 10px; border: 1px solid #ccd6df;">Laboratorio virtual aislado.</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p style="font-size: 12px; color: #5d6d7e; margin-top: 7px;">* Con la configuración NAT predeterminada, las máquinas no forman automáticamente una red común entre ellas.<br />** Dependerá de la configuración y de las condiciones de la red física.</p>
+<!-- ====================================================== --> <!-- APLICAMOS LO APRENDIDO                                 --> <!-- ====================================================== -->
+<h3 style="color: #17365d; margin-top: 34px;">🧩 Apliquemos lo aprendido a nuestro escenario</h3>
+<p style="text-align: justify;">Ya conocemos las principales posibilidades que ofrece VirtualBox. Ahora debemos decidir <strong>cómo conectar las máquinas de nuestro entorno de despliegue</strong>.</p>
+<p style="text-align: justify;">No vamos a elegir un modo de red porque resulte más sencillo de configurar. Primero analizaremos <strong>qué comunicaciones necesitamos</strong> y, a partir de ellas, tomaremos una decisión.</p>
+<!-- ====================================================== --> <!-- NECESIDADES DEL ESCENARIO                              --> <!-- ====================================================== -->
+<div style="background: #ffffff; border: 1px solid #d5dde5; border-left: 6px solid #17365d; border-radius: 8px; padding: 17px 19px; margin: 20px 0;"><strong style="color: #17365d; font-size: 17px;"> Nuestro entorno necesita... </strong>
+<div style="margin-top: 12px;">
+<p style="margin: 8px 0;">🖥️ Los servidores <strong>Git, Web, FTP y DNS-LDAP</strong> y el cliente <strong>Linux Mint</strong> deben poder comunicarse dentro de nuestro entorno.</p>
+<p style="margin: 8px 0;">🔒 Queremos disponer de un <strong>laboratorio virtual aislado</strong> de la red física del centro.</p>
+<p style="margin: 8px 0;">🌍 Nuestro entorno necesitará también disponer de <strong>conexión con el exterior</strong>.</p>
+<p style="margin: 8px 0 0;">🏫 No queremos conectar directamente cada servidor a la <strong>red física del centro</strong>.</p>
+</div>
+</div>
+<!-- ====================================================== --> <!-- PREGUNTA DE DECISIÓN                                   --> <!-- ====================================================== -->
+<div style="background: #fff8e8; border-left: 5px solid #f0ad4e; padding: 16px 18px; margin: 20px 0; border-radius: 5px;"><strong style="color: #8a5a00; font-size: 17px;"> 🤔 ¿Qué elegirías? </strong>
+<p style="margin: 8px 0;">Recuerda los cuatro modos que acabamos de analizar:</p>
+<div style="text-align: center; margin: 14px 0;"><span style="display: inline-block; background: #f1f3f4; padding: 7px 14px; margin: 4px; border-radius: 5px;"> NAT </span> <span style="display: inline-block; background: #fff3e0; padding: 7px 14px; margin: 4px; border-radius: 5px;"> Red NAT </span> <span style="display: inline-block; background: #f5f0fa; padding: 7px 14px; margin: 4px; border-radius: 5px;"> Adaptador puente </span> <span style="display: inline-block; background: #eaf4fb; padding: 7px 14px; margin: 4px; border-radius: 5px;"> Red interna </span></div>
+<p style="text-align: center; font-size: 17px; margin: 12px 0 0;"><strong> ¿Utilizarías un único modo de red o combinarías varios? </strong></p>
+<p style="text-align: center; margin: 6px 0 0;">Piensa qué opción responde mejor a <strong>cada una de las necesidades anteriores</strong>.</p>
+</div>
+<!-- ====================================================== --> <!-- ANALIZAMOS                                             --> <!-- ====================================================== -->
+<h3 style="color: #17365d; margin-top: 30px;">🔍 Analicemos las necesidades</h3>
+<!-- PASO 1 -->
+<div style="background: #eef5fb; border-left: 5px solid #3498db; padding: 15px 18px; margin: 16px 0; border-radius: 5px;"><strong style="color: #1769aa; font-size: 17px;"> 1 · Necesitamos un laboratorio aislado </strong>
+<p style="margin: 8px 0; text-align: justify;">Git, Web, FTP, DNS-LDAP y Linux Mint necesitan comunicarse entre sí, pero queremos mantener estas comunicaciones <strong>separadas de la red física del centro</strong>.</p>
+<p style="margin: 8px 0 0; text-align: justify;">De los modos estudiados, la <strong>Red interna</strong> responde a esta necesidad: Permite comunicar nuestras máquinas dentro de un entorno virtual aislado.</p>
+</div>
+<!-- PASO 2 -->
+<div style="background: #f7f9fa; border-left: 5px solid #7f8c8d; padding: 15px 18px; margin: 16px 0; border-radius: 5px;"><strong style="color: #34495e; font-size: 17px;"> 2 · Pero tenemos un problema... </strong>
+<p style="margin: 8px 0; text-align: justify;">Una Red interna permite comunicar nuestras máquinas, pero <strong>no proporciona por sí sola conexión con el exterior</strong>.</p>
+<p style="margin: 8px 0 0;">Necesitamos, por tanto, una segunda conexión.</p>
+</div>
+<!-- PASO 3 -->
+<div style="background: #fff3e0; border-left: 5px solid #e67e22; padding: 15px 18px; margin: 16px 0; border-radius: 5px;"><strong style="color: #c65300; font-size: 17px;"> 3 · Necesitamos conexión con el exterior </strong>
+<p style="margin: 8px 0; text-align: justify;">Podríamos conectar las máquinas directamente a la red física mediante un adaptador puente, pero nuestro objetivo es mantener el laboratorio <strong>independiente de la infraestructura física del centro</strong>.</p>
+<p style="margin: 8px 0 0; text-align: justify;">Utilizaremos una <strong>Red NAT o NAT</strong> como conexión de nuestro escenario con el exterior.</p>
+</div>
+<!-- ====================================================== --> <!-- DOS PIEZAS                                             --> <!-- ====================================================== -->
+<div style="background: #eaf7ee; border-left: 5px solid #4f8a62; padding: 16px 18px; margin: 20px 0; border-radius: 5px;"><strong style="color: #315f40; font-size: 17px;"> 💡 Ya tenemos las dos piezas </strong>
+<div style="text-align: center; margin: 14px 0; font-size: 18px;">🟦 <strong>Red interna</strong> <span style="color: #7f8c8d; margin: 0 12px;">+</span> 🟧 <strong>Red NAT / NAT</strong></div>
+<p style="text-align: center; margin: 8px 0 0;">Pero todavía tenemos que decidir <strong>cómo relacionar ambas redes</strong>.</p>
+<p style="text-align: center; margin: 6px 0 0;">¿Necesitan todos nuestros servidores estar conectados directamente a las dos?</p>
+</div>
+<!-- ====================================================== --> <!-- NUESTRA SOLUCIÓN                                       --> <!-- ====================================================== -->
+<h3 style="color: #17365d; margin-top: 30px;">🔧 Nuestra solución</h3>
+<p style="text-align: justify;">No conectaremos todas las máquinas a las dos redes. Nuestro diseño utilizará el servidor <strong>DNS-LDAP como punto de unión entre ambos ámbitos</strong>.</p>
+<p style="text-align: justify;">Para ello, DNS-LDAP será la única máquina de nuestro escenario que dispondrá de <strong>dos interfaces de red</strong>.</p>
+<!-- RED NAT -->
+<div style="background: #fff3e0; border-left: 5px solid #e67e22; padding: 15px 18px; margin: 16px 0; border-radius: 5px;"><strong style="color: #c65300; font-size: 17px;"> 🟧 Red NAT · Conexión con el exterior </strong>
+<p style="margin: 8px 0 0; text-align: justify;">La interfaz <code>enp0s3</code> del servidor <strong>DNS-LDAP</strong> estará conectada a una <strong>Red NAT / NAT</strong>. Esta será la conexión de nuestro escenario con el exterior.</p>
+</div>
+<!-- RED INTERNA -->
+<div style="background: #eef5fb; border-left: 5px solid #3498db; padding: 15px 18px; margin: 16px 0; border-radius: 5px;"><strong style="color: #1769aa; font-size: 17px;"> 🟦 Red interna · Nuestro laboratorio </strong>
+<p style="margin: 8px 0;">Las cinco máquinas compartirán nuestra red interna:</p>
+<div style="background: white; border: 1px solid #bdd7ea; border-radius: 6px; padding: 10px; text-align: center; margin: 12px 0;"><code style="font-size: 20px; font-weight: bold;">
+        192.168.<span style="color: #c65300;">X</span>.0/24
+      </code>
+<div style="font-size: 12px; color: #5d6d7e; margin-top: 4px;">X = número de rango indicado en el aula</div>
+</div>
+<p style="margin-bottom: 0; text-align: justify;">Git, Web, FTP y Linux Mint estarán conectados a esta red. El servidor DNS-LDAP también pertenecerá a ella mediante su segunda interfaz, <code>enp0s8</code>.</p>
+</div>
+<!-- ====================================================== --> <!-- ESQUEMA FINAL                                          --> <!-- ====================================================== -->
+<h3 style="color: #17365d; margin-top: 32px;">🔎 Dos redes, una infraestructura</h3>
+<div style="background: #f7f9fa; border: 1px solid #d5dde5; border-radius: 10px; padding: 22px; text-align: center;"><!-- EXTERIOR -->
+<div style="display: inline-block; background: white; border: 2px solid #17365d; border-radius: 25px; padding: 8px 25px; font-weight: bold;">☁️ Exterior</div>
+<div style="color: #e67e22; font-size: 22px;">↓</div>
+<!-- NAT NETWORK -->
+<div style="display: inline-block; background: #fff3e0; border: 2px solid #e67e22; border-radius: 7px; padding: 8px 25px;"><strong style="color: #c65300;"> Red NAT / NAT</strong></div>
+<div style="color: #e67e22; font-size: 20px;">↓</div>
+<div style="font-size: 12px; color: #c65300;">enp0s3</div>
+<!-- DNS-LDAP -->
+<div style="display: inline-block; background: white; border: 2px solid #17365d; border-radius: 7px; padding: 10px 25px; margin-top: 4px;">🖥️ <strong>DNS-LDAP</strong><br /><code>192.168.X.253</code></div>
+<div style="font-size: 12px; color: #1769aa; margin-top: 5px;">enp0s8</div>
+<div style="color: #3498db; font-size: 20px;">↓</div>
+<!-- INTERNAL -->
+<div style="display: inline-block; background: #eaf4fb; border: 2px solid #3498db; border-radius: 7px; padding: 8px 25px;"><strong style="color: #1769aa;"> Red interna · 192.168.X.0/24 </strong></div>
+<div style="color: #3498db; font-size: 20px;">↓</div>
+<!-- HOSTS -->
+<div style="margin-top: 7px;"><span style="display: inline-block; margin: 5px 10px;"> 🖥️ <strong>Git</strong><br /><code>.104</code> </span> <span style="display: inline-block; margin: 5px 10px;"> 🌐 <strong>Web</strong><br /><code>.154</code> </span> <span style="display: inline-block; margin: 5px 10px;"> 📁 <strong>FTP</strong><br /><code>.204</code> </span> <span style="display: inline-block; margin: 5px 10px; background: #eaf7ee; border-radius: 6px; padding: 6px 10px;"> 💻 <strong>Linux Mint</strong><br /><code>.Y</code> </span></div>
+</div>
+<!-- ====================================================== --> <!-- TODAVÍA NO EXPLICAMOS EL RECORRIDO                     --> <!-- ====================================================== -->
+<div style="background: #fff8e8; border-left: 5px solid #f0ad4e; padding: 15px 18px; margin: 22px 0; border-radius: 5px;"><strong style="color: #8a5a00;"> 🤔 Una nueva pregunta </strong>
+<p style="margin: 8px 0;">Ya sabemos que Git, Web, FTP y Linux Mint están en nuestra Red interna y que DNS-LDAP dispone además de una conexión con la Red NAT.</p>
+<p style="margin: 8px 0 0; text-align: center; font-size: 17px;"><strong> ¿Qué camino seguirá una comunicación cuando una máquina de nuestra Red interna necesite alcanzar el exterior? </strong></p>
+</div>
+<!-- ====================================================== --> <!-- CONCLUSIÓN                                             --> <!-- ====================================================== -->
+<div style="background: #17365d; color: white; padding: 17px 20px; margin-top: 25px; border-radius: 8px; text-align: center;"><strong style="font-size: 18px;"> El tipo de red no se elige al azar. </strong>
+<div style="margin-top: 6px;">Primero analizamos qué equipos necesitan comunicarse y después diseñamos la infraestructura que responde a esas necesidades.</div>
+</div>
+<!-- ====================================================== --> <!-- RECURSOS DE APOYO                                       --> <!-- ====================================================== -->
+<div style="background: #f7f9fa; border-left: 5px solid #7f8c8d; padding: 15px 18px; margin-top: 20px; border-radius: 5px;"><strong style="color: #17365d; font-size: 17px;"> 📚 Recursos de apoyo </strong> <!-- ====================================================== --> <!-- DOCUMENTACIÓN OFICIAL                                  --> <!-- ====================================================== -->
+<div style="background: white; border: 1px solid #d5dde5; border-radius: 7px; padding: 14px 16px; margin: 15px 0;"><strong style="color: #17365d;"> 📖 Documentación oficial </strong>
+<p style="margin: 7px 0 10px;">Consulta el capítulo dedicado a redes del manual oficial de VirtualBox.</p>
+<a href="https://www.virtualbox.org/manual/ch06.html" target="_blank" rel="noopener noreferrer" style="display: inline-block; background: #17365d; color: white; text-decoration: none; padding: 8px 16px; border-radius: 6px; font-weight: bold;"> 🔗 VirtualBox Manual · Virtual Networking </a></div>
+<!-- ====================================================== --> <!-- RECURSO AUDIOVISUAL                                    --> <!-- ====================================================== -->
+<div style="background: white; border: 1px solid #d5dde5; border-radius: 7px; padding: 14px 16px; margin: 15px 0;"><strong style="color: #17365d;"> 🎬 Recurso audiovisual </strong>
+<p style="margin: 7px 0 14px;">Utiliza este vídeo como apoyo visual para reforzar los conceptos trabajados sobre los modos de red de VirtualBox.</p>
+<!-- VÍDEO RESPONSIVE -->
+<div style="position: relative; width: 100%; padding-top: 56.25%; overflow: hidden; border-radius: 7px; background: #000;"><iframe width="100" height="100" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0;" src="https://www.youtube.com/embed/CSkCkF67lXk" title="Vídeo de apoyo sobre los modos de red de VirtualBox" allow="accelerometer; autoplay; clipboard-write; encrypted-media;
+               gyroscope; picture-in-picture; web-share" allowfullscreen="allowfullscreen" referrerpolicy="strict-origin-when-cross-origin">
+      </iframe></div>
+<!-- ORIENTACIÓN -->
+<div style="background: #eef5fb; border-left: 4px solid #3498db; padding: 11px 14px; margin-top: 14px; border-radius: 4px;"><strong style="color: #1769aa;"> 👀 Mientras lo visualizas... </strong>
+<p style="margin: 6px 0 0;">Relaciona los diferentes modos de red con las necesidades que hemos estudiado: <strong>Acceso al exterior</strong>, <strong>comunicación entre máquinas virtuales</strong>, <strong>participación en la red física</strong> y <strong>creación de un laboratorio aislado</strong>.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</article>
+</div></main>
+<footer id="siteFooter"><div id="siteFooterContent"> <div id="packageLicense" class="cc cc-by-sa"> <p> <span class="license-label">Licencia: </span><a href="https://creativecommons.org/licenses/by-sa/4.0/" class="license">Creative Commons: Reconocimiento - compartir igual 4.0</a></p>
+</div>
+</div></footer>
+</div>
+<p id="made-with-eXe"> <a href="https://exelearning.net/" target="_blank" rel="noopener"> <span>Creado con eXeLearning <span>(Ventana nueva)</span></span></a></p>
+</body>
+</html>

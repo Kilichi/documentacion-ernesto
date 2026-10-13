@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="es" id="exe-page-mugzgncl-8zqqkqpxd">
+<head>
+<meta charset="utf-8">
+<meta name="generator" content="eXeLearning v4.0.5">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="license" type="text/html" href="https://creativecommons.org/licenses/by-sa/4.0/">
+<title>2.2.2 · IPv4 addressing | LS 0 - Getting ready</title>
+<link rel="icon" type="image/x-icon" href="../libs/favicon.ico">
+<script>document.querySelector("html").classList.add("js");</script><script src="../libs/jquery/jquery.min.js"> </script><script src="../libs/common_i18n.js"> </script><script src="../libs/common.js"> </script><script src="../libs/exe_export.js"> </script><script src="../libs/bootstrap/bootstrap.bundle.min.js"> </script><link rel="stylesheet" href="../libs/bootstrap/bootstrap.min.css">
+<script src="../idevices/text/text.js"></script><link rel="stylesheet" href="../idevices/text/text.css">
+<link rel="stylesheet" href="../content/css/base.css"><script src="../theme/style.js"> </script><link rel="stylesheet" href="../theme/style.css">
+<script src="../libs/SCORM_API_wrapper.js"></script>
+<script src="../libs/SCOFunctions.js"></script>
+</head>
+<body class="exe-export exe-scorm exe-scorm12" onload="loadPage()">
+<script>document.body.className+=" js"</script>
+<div class="exe-content exe-export pre-js siteNav-hidden"><main id="page-mugzgncl-8zqqkqpxd" class="page"> 
+<header class="main-header">
+<div class="package-header"><p class="package-title">LS 0 - Getting ready</p></div>
+<div class="page-header"><h1 class="page-title">2.2.2 · IPv4 addressing</h1></div>
+</header><div id="page-content-page-mugzgncl-8zqqkqpxd" class="page-content">
+<article id="block-mumomrsq-ewh2ri0bf" class="box no-header">
+<header class="box-head no-icon">
+<button class="box-toggle box-toggle-on" title="Toggle content">
+<span>Toggle content</span>
+</button></header>
+<div class="box-content">
+<div id="idevice-1790686709305-r34o79v4a" class="idevice_node text" data-idevice-path="../idevices/text/" data-idevice-type="text" data-idevice-component-type="json" data-idevice-json-data="{&quot;ideviceId&quot;:&quot;idevice-1790686709305-r34o79v4a&quot;}">
+<div class="exe-text-template">
+    <div style="max-width: 1050px; margin: auto; font-family: Arial,Helvetica,sans-serif; color: #243247; line-height: 1.65;"><!-- ====================================================== --> <!-- CABECERA                                               --> <!-- ====================================================== -->
+<div style="background: #17365d; color: white; padding: 18px 22px; border-radius: 10px;">
+<h2 style="color: white; margin: 0px; text-align: center;">🌐 2.2.2 · IPv4 addressing</h2>
+<p style="margin: 6px 0px 0px; text-align: center;">Recuperamos cómo interpretar el direccionamiento de nuestra red</p>
+</div>
+<!-- ====================================================== --> <!-- OBJETIVO                                               --> <!-- ====================================================== -->
+<div style="background: #eef5fb; border-left: 5px solid #2980b9; padding: 14px 18px; margin: 20px 0px; border-radius: 5px; text-align: justify;"><strong style="color: #17365d;"> 🎯 Objetivo </strong><br />Recordar cómo se estructura una <strong>dirección IPv4</strong>, interpretar una <strong>máscara o prefijo de red</strong>, identificar la dirección de red y determinar si dos máquinas pertenecen a la misma red y pueden comunicarse directamente.</div>
+<!-- ====================================================== --> <!-- CONTINUIDAD                                            --> <!-- ====================================================== -->
+<div style="background: #eef5fb; border-left: 5px solid #3498db; padding: 15px 18px; margin: 20px 0; border-radius: 5px;"><strong style="color: #1769aa;"> 🔗 Continuamos desde 2.2.1 </strong>
+<p style="margin: 7px 0 0; text-align: justify;">Ya sabemos identificar nuestras interfaces mediante <code>ip link</code> e <code>ip addr</code>. En la salida de este último comando encontramos información como:</p>
+<div style="background: #1f2933; color: #f5f7fa; padding: 11px 14px; border-radius: 5px; margin-top: 12px; font-family: Consolas,monospace;">inet 192.168.200.104/24</div>
+<p style="margin: 10px 0 0;">Ahora necesitamos comprender <strong>qué significa realmente</strong>.</p>
+</div>
+<!-- ====================================================== --> <!-- 1. IPv4                                                --> <!-- ====================================================== -->
+<h3 style="color: #17365d; margin-top: 32px;">🔢 1 · Reading an IPv4 address</h3>
+<p style="text-align: justify;">Una dirección IPv4 está formada por <strong>32 bits</strong>, organizados en cuatro grupos de 8 bits llamados <strong>octetos</strong>.</p>
+<p>Normalmente la representamos en notación decimal:</p>
+<div style="display: flex; justify-content: center; flex-wrap: wrap; gap: 7px; margin: 20px 0; align-items: center;">
+<div style="background: #eef5fb; padding: 12px 18px; border-radius: 6px; font-family: Consolas,monospace; font-size: 19px;">192</div>
+<strong>.</strong>
+<div style="background: #eef5fb; padding: 12px 18px; border-radius: 6px; font-family: Consolas,monospace; font-size: 19px;">168</div>
+<strong>.</strong>
+<div style="background: #fff8e8; padding: 12px 18px; border-radius: 6px; font-family: Consolas,monospace; font-size: 19px;">200</div>
+<strong>.</strong>
+<div style="background: #eaf7ee; padding: 12px 18px; border-radius: 6px; font-family: Consolas,monospace; font-size: 19px;">104</div>
+</div>
+<p style="text-align: justify;">Cada octeto puede representar valores comprendidos entre <strong>0 y 255</strong>.</p>
+<!-- ====================================================== --> <!-- ESCENARIO X                                            --> <!-- ====================================================== -->
+<h3 style="color: #17365d; margin-top: 32px;">🧩 2 · Our addressing scheme</h3>
+<p style="text-align: justify;">En nuestro entorno de despliegue utilizaremos el siguiente patrón:</p>
+<div style="background: #1f2933; color: #f5f7fa; padding: 14px 18px; border-radius: 7px; margin: 15px 0; font-family: Consolas,monospace; text-align: center; font-size: 18px;">192.168.X.0/24</div>
+<div style="display: flex; flex-wrap: wrap; gap: 14px; margin: 18px 0;">
+<div style="flex: 1 1 280px; background: #fff8e8; border-top: 5px solid #f0ad4e; border-radius: 7px; padding: 15px; text-align: center;"><strong style="color: #8a5a00;"> X · Tu rango </strong>
+<p style="margin: 7px 0px 0px; text-align: justify;"><code>X</code> corresponde exclusivamente al <strong>tercer octeto</strong> y es el número de rango asignado en el aula.</p>
+</div>
+<div style="flex: 1 1 280px; background: #eaf7ee; border-top: 5px solid #4f8a62; border-radius: 7px; padding: 15px; text-align: center;"><strong style="color: #315f40;"> Último octeto · La máquina </strong>
+<p style="margin: 7px 0px 0px; text-align: justify;">En nuestra red, el último octeto nos permitirá diferenciar las distintas máquinas.</p>
+</div>
+</div>
+<!-- EJEMPLO -->
+<div style="background: #f7f9fa; border: 1px solid #d5dde5; border-radius: 8px; padding: 16px 18px; margin: 20px 0;"><strong style="color: #17365d;"> 🧠 Ejemplo </strong>
+<p style="margin: 7px 0;">Si el rango asignado a un alumno es <strong>X = 200</strong>:</p>
+<div style="background: #1f2933; color: #f5f7fa; padding: 11px 14px; border-radius: 5px; font-family: Consolas,monospace;">Red → 192.168.200.0/24</div>
+</div>
+<!-- ====================================================== --> <!-- 3. MÁSCARA                                             --> <!-- ====================================================== -->
+<h3 style="color: #17365d; margin-top: 32px;">🎭 3 · Network mask</h3>
+<p style="text-align: justify;">Una dirección IP por sí sola no es suficiente para saber a qué red pertenece una máquina. Necesitamos también una <strong>máscara de red</strong>.</p>
+<p>En nuestro escenario utilizaremos:</p>
+<div style="display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 18px; margin: 20px 0;">
+<div style="background: #eef5fb; padding: 14px 22px; border-radius: 7px; text-align: center;"><strong>Máscara</strong><br /><code>255.255.255.0</code></div>
+<strong style="font-size: 22px;">=</strong>
+<div style="background: #eaf7ee; padding: 14px 22px; border-radius: 7px; text-align: center;"><strong>Prefijo</strong><br /><code>/24</code></div>
+</div>
+<p style="text-align: justify;">El prefijo <code>/24</code> indica que los primeros <strong>24 bits</strong> identifican la parte de red. En este caso corresponden a los tres primeros octetos.</p>
+<!-- ====================================================== --> <!-- RED/HOST                                               --> <!-- ====================================================== -->
+<h3 style="color: #17365d; margin-top: 32px;">🧱 4 · Network and host</h3>
+<p>Con una red <code>/24</code> podemos visualizarlo de forma sencilla:</p>
+<div style="display: flex; justify-content: center; flex-wrap: wrap; margin: 22px 0; text-align: center;">
+<div style="background: #3498db; color: white; padding: 15px 22px; border-radius: 7px 0 0 7px; font-family: Consolas,monospace; font-size: 18px;">192.168.200
+<div style="font-family: Arial,Helvetica,sans-serif; font-size: 13px; margin-top: 5px;">NETWORK</div>
+</div>
+<div style="background: #4f8a62; color: white; padding: 15px 22px; border-radius: 0 7px 7px 0; font-family: Consolas,monospace; font-size: 18px;">.104
+<div style="font-family: Arial,Helvetica,sans-serif; font-size: 13px; margin-top: 5px;">HOST</div>
+</div>
+</div>
+<p style="text-align: justify;">Todas las máquinas de nuestra red compartirán los tres primeros octetos y tendrán un valor diferente en el último.</p>
+<!-- ====================================================== --> <!-- 5. DIRECCIÓN DE RED                                    --> <!-- ====================================================== -->
+<h3 style="color: #17365d; margin-top: 32px;">🏠 5 · Network address</h3>
+<p style="text-align: justify;">La <strong>dirección de red</strong> identifica a la propia red, no a una máquina concreta.</p>
+<div style="background: #1f2933; color: #f5f7fa; padding: 14px 18px; border-radius: 7px; margin: 15px 0; font-family: Consolas,monospace; text-align: center; font-size: 18px;">192.168.200.0/24</div>
+<div style="background: #fff8e8; border-left: 5px solid #f0ad4e; padding: 14px 18px; margin: 18px 0; border-radius: 5px;"><strong style="color: #8a5a00;"> ⚠️ Importante </strong>
+<p style="margin: 7px 0 0;">En esta red, <code>192.168.35.0</code> identifica la red y <strong>no debe asignarse a una de nuestras máquinas</strong>.</p>
+</div>
+<!-- ====================================================== --> <!-- BROADCAST                                              --> <!-- ====================================================== -->
+<h3 style="color: #17365d; margin-top: 32px;">📢 6 · Broadcast address</h3>
+<p style="text-align: justify;">Una red IPv4 también dispone de una <strong>dirección de broadcast</strong>, utilizada para dirigirse al conjunto de equipos de la red mediante broadcast.</p>
+<p>Para nuestra red de ejemplo:</p>
+<div style="background: #1f2933; color: #f5f7fa; padding: 14px 18px; border-radius: 7px; margin: 15px 0; font-family: Consolas,monospace; text-align: center; font-size: 18px;">192.168.200.255</div>
+<p style="text-align: justify;">Por tanto, tampoco utilizaremos esta dirección como dirección individual de una máquina.</p>
+<!-- ====================================================== --> <!-- RANGO                                                  --> <!-- ====================================================== -->
+<h3 style="color: #17365d; margin-top: 32px;">🖥️ 7 · Host addresses</h3>
+<p>Para una red <code>192.168.200.0/24</code> tendremos:</p>
+<table style="width: 100%; border-collapse: collapse; margin: 18px 0;">
+<thead>
+<tr style="background: #17365d; color: white;">
+<th style="padding: 9px; border: 1px solid #ccd6df; text-align: center;">Elemento</th>
+<th style="padding: 9px; border: 1px solid #ccd6df; text-align: center;">Dirección</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="padding: 9px; border: 1px solid #ccd6df; text-align: center;">Dirección de red</td>
+<td style="padding: 9px; border: 1px solid #ccd6df; text-align: center;"><code>192.168.200.0</code></td>
+</tr>
+<tr style="background: #eaf7ee;">
+<td style="padding: 9px; border: 1px solid #ccd6df; text-align: center;">Direcciones de host utilizables</td>
+<td style="padding: 9px; border: 1px solid #ccd6df; text-align: center;"><code>192.168.200.1</code> – <code>192.168.200.254</code></td>
+</tr>
+<tr>
+<td style="padding: 9px; border: 1px solid #ccd6df; text-align: center;">Broadcast</td>
+<td style="padding: 9px; border: 1px solid #ccd6df; text-align: center;"><code>192.168.200.255</code></td>
+</tr>
+</tbody>
+</table>
+<!-- ====================================================== --> <!-- 8. MISMA RED                                           --> <!-- ====================================================== -->
+<h3 style="color: #17365d; margin-top: 32px;">🔗 8 · Are they on the same network?</h3>
+<p style="text-align: justify;">Una de las preguntas más importantes que debemos poder responder es si dos máquinas pertenecen a la <strong>misma red</strong>.</p>
+<p>Observa estas dos direcciones:</p>
+<div style="background: #eaf7ee; border-left: 5px solid #4f8a62; padding: 15px 18px; margin: 18px 0; border-radius: 5px;"><strong style="color: #315f40;"> Caso A </strong>
+<div style="font-family: Consolas,monospace; margin-top: 8px;">Web → 192.168.200.154/24<br />Git → 192.168.200.104/24</div>
+<p style="margin: 10px 0 0;">Ambos pertenecen a <code>192.168.200.0/24</code>. Por tanto, están en la <strong>misma red</strong>.</p>
+</div>
+<div style="background: #fff8e8; border-left: 5px solid #f0ad4e; padding: 15px 18px; margin: 18px 0; border-radius: 5px;"><strong style="color: #8a5a00;"> Caso B </strong>
+<div style="font-family: Consolas,monospace; margin-top: 8px;">Web → 192.168.200.154/24<br />Equipo B → 192.168.240.104/24</div>
+<p style="margin: 10px 0 0;">El primero pertenece a <code>192.168.200.0/24</code> y el segundo a <code>192.168.240.0/24</code>. Están en <strong>redes diferentes</strong>.</p>
+</div>
+<!-- ====================================================== --> <!-- 9. GATEWAY                                             --> <!-- ====================================================== -->
+<h3 style="color: #17365d; margin-top: 32px;">🚪 9 · Default gateway</h3>
+<p style="text-align: justify;">Si el destino está dentro de nuestra misma red, podemos comunicarnos con él directamente a través de la red local.</p>
+<p style="text-align: justify;">Si queremos alcanzar un destino que pertenece a <strong>otra red</strong>, necesitamos enviar el tráfico hacia una máquina capaz de encaminarnos fuera de nuestra red: La <strong>puerta de enlace predeterminada</strong> o <em>default gateway</em>.</p>
+<div style="background: #eef5fb; border-left: 5px solid #3498db; padding: 15px 18px; margin: 20px 0; border-radius: 5px;"><strong style="color: #1769aa;"> 🔗 En nuestro escenario </strong>
+<p style="margin: 7px 0 0;">La interfaz interna de <strong>DNS-LDAP</strong> tendrá:</p>
+<div style="background: #1f2933; color: #f5f7fa; padding: 11px 14px; border-radius: 5px; margin-top: 10px; font-family: Consolas,monospace; text-align: center;">192.168.X.253/24</div>
+<p style="margin: 10px 0 0; text-align: justify;">Esta dirección será la <strong>puerta de enlace</strong> que utilizarán las máquinas de nuestra red interna cuando necesiten alcanzar otras redes.</p>
+</div>
+<!-- ====================================================== --> <!-- TABLA ESCENARIO                                        --> <!-- ====================================================== -->
+<h3 style="color: #17365d; margin-top: 32px;">🖥️ 10 · Our deployment environment</h3>
+<p>Ahora podemos interpretar completamente nuestro esquema de direccionamiento:</p>
+<table style="width: 100%; border-collapse: collapse; margin: 18px 0;">
+<thead>
+<tr style="background: #17365d; color: white;">
+<th style="padding: 9px; border: 1px solid #ccd6df; text-align: center;">Máquina</th>
+<th style="padding: 9px; border: 1px solid #ccd6df; text-align: center;">IPv4</th>
+<th style="padding: 9px; border: 1px solid #ccd6df; text-align: center;">Red</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="padding: 9px; border: 1px solid #ccd6df; text-align: center;">DNS-LDAP</td>
+<td style="padding: 9px; border: 1px solid #ccd6df; text-align: center;"><code>192.168.X.253/24</code></td>
+<td style="padding: 9px; border: 1px solid #ccd6df; text-align: center;"><code>192.168.X.0/24</code></td>
+</tr>
+<tr style="background: #f7f9fa;">
+<td style="padding: 9px; border: 1px solid #ccd6df; text-align: center;">Git</td>
+<td style="padding: 9px; border: 1px solid #ccd6df; text-align: center;"><code>192.168.X.104/24</code></td>
+<td style="padding: 9px; border: 1px solid #ccd6df; text-align: center;"><code>192.168.X.0/24</code></td>
+</tr>
+<tr>
+<td style="padding: 9px; border: 1px solid #ccd6df; text-align: center;">Web</td>
+<td style="padding: 9px; border: 1px solid #ccd6df; text-align: center;"><code>192.168.X.154/24</code></td>
+<td style="padding: 9px; border: 1px solid #ccd6df; text-align: center;"><code>192.168.X.0/24</code></td>
+</tr>
+<tr style="background: #f7f9fa;">
+<td style="padding: 9px; border: 1px solid #ccd6df; text-align: center;">FTP</td>
+<td style="padding: 9px; border: 1px solid #ccd6df; text-align: center;"><code>192.168.X.204/24</code></td>
+<td style="padding: 9px; border: 1px solid #ccd6df; text-align: center;"><code>192.168.X.0/24</code></td>
+</tr>
+<tr style="background: #eaf7ee;">
+<td style="padding: 9px; border: 1px solid #ccd6df; text-align: center;">Linux Mint</td>
+<td style="padding: 9px; border: 1px solid #ccd6df; text-align: center;"><code>192.168.X.Y/24</code></td>
+<td style="padding: 9px; border: 1px solid #ccd6df; text-align: center;"><code>192.168.X.0/24</code></td>
+</tr>
+</tbody>
+</table>
+<!-- ====================================================== --> <!-- X e Y                                                  --> <!-- ====================================================== -->
+<div style="background: #eef5fb; border-left: 5px solid #3498db; padding: 15px 18px; margin: 20px 0; border-radius: 5px;"><strong style="color: #1769aa;"> 📌 X and Y </strong>
+<ul style="margin-bottom: 0;">
+<li><code>X</code> = número de rango asignado en el aula. Aparece exclusivamente en el <strong>tercer octeto</strong>.</li>
+<li><code>Y</code> = valor válido y libre del último octeto elegido para Linux Mint.</li>
+</ul>
+</div>
+<!-- ====================================================== --> <!-- CHECK IT                                               --> <!-- ====================================================== -->
+<div style="background: #eaf7ee; border-left: 5px solid #4f8a62; padding: 16px 18px; margin: 24px 0; border-radius: 5px;"><strong style="color: #315f40; font-size: 17px;"> 🔍 Check it </strong>
+<p style="margin: 8px 0;">Supongamos que tu rango es <strong>X = 200</strong>. Sin ejecutar ningún comando, responde:</p>
+<ol style="margin-bottom: 0; padding-left: 25px;">
+<li>¿Cuál es la dirección de red?</li>
+<li>¿Cuál es la máscara en notación decimal?</li>
+<li>¿Cuál es el prefijo?</li>
+<li>¿Cuál es la dirección de broadcast?</li>
+<li>¿Qué rango de direcciones puede utilizarse para hosts?</li>
+<li>¿Qué dirección tendrá el servidor Web?</li>
+<li>¿Qué dirección utilizarán las máquinas como puerta de enlace?</li>
+</ol>
+</div>
+<!-- ====================================================== --> <!-- MINI CHALLENGE                                         --> <!-- ====================================================== -->
+<div style="background: #f7f9fa; border: 2px solid #4f8a62; padding: 18px 20px; margin: 25px 0; border-radius: 8px;"><strong style="color: #315f40; font-size: 18px;"> 🧩 Mini challenge · Build your addressing plan </strong>
+<p style="margin: 10px 0; text-align: justify;">Ha llegado el momento de transformar el esquema general <code>192.168.X.0/24</code> en <strong>tu propio plan de direccionamiento</strong>.</p>
+<!-- RANGO -->
+<div style="background: #eef5fb; border-left: 5px solid #3498db; padding: 13px 16px; margin: 15px 0; border-radius: 5px;"><strong style="color: #1769aa;"> 📌 Utiliza tu rango </strong>
+<p style="margin: 7px 0 0;">Sustituye <code>X</code> por el número de rango que tienes asignado en el aula.</p>
+<p style="margin: 7px 0 0;">Para Linux Mint tendrás que elegir además un valor <code>Y</code> válido y que no produzca ningún conflicto con las direcciones ya utilizadas.</p>
+</div>
+<!-- TAREA -->
+<p><strong>Prepara el direccionamiento de tu red indicando:</strong></p>
+<ol style="padding-left: 25px;">
+<li>La dirección de tu red.</li>
+<li>Su máscara en notación decimal y en formato CIDR.</li>
+<li>La dirección de broadcast.</li>
+<li>El rango de direcciones disponibles para hosts.</li>
+<li>La dirección IPv4 que tendrá cada máquina.</li>
+<li>El valor <code>Y</code> que has elegido para Linux Mint.</li>
+<li>La dirección que utilizarán las máquinas internas como puerta de enlace.</li>
+</ol>
+<!-- TABLA ALUMNO -->
+<p>Completa tu plan:</p>
+<table style="width: 100%; border-collapse: collapse; margin: 16px 0;">
+<thead>
+<tr style="background: #17365d; color: white;">
+<th style="padding: 9px; border: 1px solid #ccd6df; text-align: center;">Máquina</th>
+<th style="padding: 9px; border: 1px solid #ccd6df; text-align: center;">Dirección IPv4</th>
+<th style="padding: 9px; border: 1px solid #ccd6df; text-align: center;">Prefijo</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="padding: 12px; border: 1px solid #ccd6df; text-align: center;">DNS-LDAP</td>
+<td style="padding: 12px; border: 1px solid #ccd6df; text-align: center;"> </td>
+<td style="padding: 12px; border: 1px solid #ccd6df; text-align: center;"> </td>
+</tr>
+<tr style="background: #f7f9fa;">
+<td style="padding: 12px; border: 1px solid #ccd6df; text-align: center;">Git</td>
+<td style="padding: 12px; border: 1px solid #ccd6df; text-align: center;"> </td>
+<td style="padding: 12px; border: 1px solid #ccd6df; text-align: center;"> </td>
+</tr>
+<tr>
+<td style="padding: 12px; border: 1px solid #ccd6df; text-align: center;">Web</td>
+<td style="padding: 12px; border: 1px solid #ccd6df; text-align: center;"> </td>
+<td style="padding: 12px; border: 1px solid #ccd6df; text-align: center;"> </td>
+</tr>
+<tr style="background: #f7f9fa;">
+<td style="padding: 12px; border: 1px solid #ccd6df; text-align: center;">FTP</td>
+<td style="padding: 12px; border: 1px solid #ccd6df; text-align: center;"> </td>
+<td style="padding: 12px; border: 1px solid #ccd6df; text-align: center;"> </td>
+</tr>
+<tr style="background: #eaf7ee;">
+<td style="padding: 12px; border: 1px solid #ccd6df; text-align: center;">Linux Mint</td>
+<td style="padding: 12px; border: 1px solid #ccd6df; text-align: center;"> </td>
+<td style="padding: 12px; border: 1px solid #ccd6df; text-align: center;"> </td>
+</tr>
+</tbody>
+</table>
+<!-- VERIFICACIÓN -->
+<div style="background: #eaf7ee; border-left: 4px solid #4f8a62; padding: 12px 14px; margin-top: 16px; border-radius: 4px;"><strong> 🔍 Antes de terminar </strong>
+<p style="margin: 6px 0 0;">Comprueba que <strong>todas las máquinas pertenecen a tu misma red</strong>, que ninguna dirección está repetida y que no has utilizado ni la dirección de red ni la dirección de broadcast para identificar una máquina.</p>
+</div>
+</div>
+<!-- ====================================================== --> <!-- RESUMEN                                                --> <!-- ====================================================== -->
+<h3 style="color: #17365d; margin-top: 32px;">🧠 What should you remember?</h3>
+<div style="background: #f7f9fa; border: 1px solid #d5dde5; border-radius: 8px; padding: 16px 18px; margin: 18px 0;">
+<ul style="margin: 0; padding-left: 24px;">
+<li>Una dirección IPv4 tiene 32 bits organizados en cuatro octetos.</li>
+<li>La máscara permite determinar qué parte identifica la red.</li>
+<li><code>/24</code> equivale a <code>255.255.255.0</code>.</li>
+<li>La dirección de red identifica la red, no una máquina.</li>
+<li>La dirección de broadcast tampoco se asigna a un host.</li>
+<li>La máscara permite determinar si dos direcciones pertenecen a la misma red.</li>
+<li>Para alcanzar otras redes necesitamos una puerta de enlace.</li>
+</ul>
+</div>
+<!-- ====================================================== --> <!-- CIERRE                                                 --> <!-- ====================================================== -->
+<div style="background: #17365d; color: white; padding: 17px 20px; margin-top: 27px; border-radius: 8px; text-align: center;"><strong style="font-size: 18px;"> Ya sabemos qué configuración necesita cada máquina. </strong>
+<div style="margin-top: 7px;">Ahora tenemos que llevar ese plan a nuestros servidores Ubuntu.</div>
+<div style="margin-top: 9px; font-weight: bold;">⚙️ 2.2.3 · Network configuration with Netplan</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</article>
+</div></main>
+<footer id="siteFooter"><div id="siteFooterContent"> <div id="packageLicense" class="cc cc-by-sa"> <p> <span class="license-label">Licencia: </span><a href="https://creativecommons.org/licenses/by-sa/4.0/" class="license">Creative Commons: Reconocimiento - compartir igual 4.0</a></p>
+</div>
+</div></footer>
+</div>
+<p id="made-with-eXe"> <a href="https://exelearning.net/" target="_blank" rel="noopener"> <span>Creado con eXeLearning <span>(Ventana nueva)</span></span></a></p>
+</body>
+</html>

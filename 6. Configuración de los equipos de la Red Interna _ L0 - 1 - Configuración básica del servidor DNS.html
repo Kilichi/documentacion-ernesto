@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="es" id="exe-page-muwof1lr-us1fharom">
+<head>
+<meta charset="utf-8">
+<meta name="generator" content="eXeLearning v4.0.5">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="license" type="text/html" href="https://creativecommons.org/licenses/by-sa/4.0/">
+<title>6. Configuración de los equipos de la Red Interna | L0 - 1 - Configuración básica del servidor DNS</title>
+<link rel="icon" type="image/x-icon" href="../libs/favicon.ico">
+<script>document.querySelector("html").classList.add("js");</script><script src="../libs/jquery/jquery.min.js"> </script><script src="../libs/common_i18n.js"> </script><script src="../libs/common.js"> </script><script src="../libs/exe_export.js"> </script><script src="../libs/bootstrap/bootstrap.bundle.min.js"> </script><link rel="stylesheet" href="../libs/bootstrap/bootstrap.min.css">
+<script src="../idevices/text/text.js"></script><link rel="stylesheet" href="../idevices/text/text.css">
+<link rel="stylesheet" href="../content/css/base.css"><script src="../theme/style.js"> </script><link rel="stylesheet" href="../theme/style.css">
+<script src="../libs/SCORM_API_wrapper.js"></script>
+<script src="../libs/SCOFunctions.js"></script>
+</head>
+<body class="exe-export exe-scorm exe-scorm12" onload="loadPage()">
+<script>document.body.className+=" js"</script>
+<div class="exe-content exe-export pre-js siteNav-hidden"><main id="page-muwof1lr-us1fharom" class="page"> 
+<header class="main-header">
+<div class="package-header"><p class="package-title">L0 - 1 - Configuración básica del servidor DNS</p></div>
+<div class="page-header"><h1 class="page-title">6. Configuración de los equipos de la Red Interna</h1></div>
+</header><div id="page-content-page-muwof1lr-us1fharom" class="page-content">
+<article id="block-muwovxns-l0ytuf56n" class="box no-header">
+<header class="box-head no-icon">
+<button class="box-toggle box-toggle-on" title="Toggle content">
+<span>Toggle content</span>
+</button></header>
+<div class="box-content">
+<div id="idevice-1791291798567-zphyy54td" class="idevice_node text" data-idevice-path="../idevices/text/" data-idevice-type="text" data-idevice-component-type="json" data-idevice-json-data="{&quot;ideviceId&quot;:&quot;idevice-1791291798567-zphyy54td&quot;}">
+<div class="exe-text-template">
+    <!-- ====================================================== --><!-- ====================================================== -->
+<div style="max-width: 1000px; margin: auto; font-family: Arial, Helvetica, sans-serif; color: #243247; line-height: 1.65;"><!-- ====================================================== --> <!-- CABECERA                                               --> <!-- ====================================================== -->
+<div style="background: #17365d; color: white; padding: 22px; border-radius: 12px; margin-bottom: 24px;">
+<p style="margin: 0px 0px 5px; font-size: 14px; letter-spacing: 0.5px; text-align: center;">CONFIGURACIÓN BÁSICA DEL SERVIDOR DNS</p>
+<h1 style="color: white; margin: 0px; font-size: 28px; text-align: center;">💻 6. Configuración de los equipos de la Red Interna</h1>
+<p style="margin: 8px 0px 0px; text-align: center;">Configuraremos los equipos para utilizar el servidor DNS-LDAP como puerta de enlace y servidor DNS.</p>
+</div>
+<!-- ====================================================== --> <!-- OBJETIVO                                               --> <!-- ====================================================== -->
+<section style="background: #eef5fb; border-left: 5px solid #2f75b5; padding: 20px; border-radius: 10px; margin-bottom: 28px;">
+<h2 style="color: #17365d; margin-top: 0;">🎯 Objetivo</h2>
+<p style="margin-bottom: 0px; text-align: justify;">Configurar correctamente los parámetros de red de los equipos conectados a la <strong>Red Interna</strong> para que utilicen el servidor <strong>DNS-LDAP</strong> como <strong>puerta de enlace y servidor DNS</strong>.</p>
+</section>
+<!-- ====================================================== --> <!-- 6.1 CONFIGURACIÓN DEL CLIENTE                          --> <!-- ====================================================== -->
+<h2 style="color: #17365d;">6.1. Configuración de red del cliente</h2>
+<p>Cada equipo de nuestra infraestructura debe disponer de una <strong>dirección IP única</strong> perteneciente a la Red Interna <code>192.168.x.0/24</code>.</p>
+<p>Además de su dirección IP, debemos configurar dos parámetros fundamentales:</p>
+<!-- TARJETAS -->
+<div style="display: flex; flex-wrap: wrap; gap: 16px; margin: 22px 0 28px;">
+<div style="flex: 1 1 350px; background: #f5f9f3; border: 1px solid #d5e4ce; border-radius: 12px; padding: 20px; box-sizing: border-box;">
+<h3 style="color: #385723; margin-top: 0px; text-align: center;">🚪 Puerta de enlace</h3>
+<p style="text-align: justify;">Permitirá al equipo enviar tráfico destinado a otras redes a través del servidor DNS-LDAP.</p>
+<p style="font-size: 18px; margin-bottom: 0px; text-align: center;"><strong><code>192.168.x.253</code></strong></p>
+</div>
+<div style="flex: 1 1 350px; background: #f4f8fc; border: 1px solid #d4e2ef; border-radius: 12px; padding: 20px; box-sizing: border-box;">
+<h3 style="color: #17365d; margin-top: 0px; text-align: center;">🌐 Servidor DNS</h3>
+<p style="text-align: justify;">Todas las consultas DNS del equipo se enviarán a nuestro servidor DNS-LDAP.</p>
+<p style="font-size: 18px; margin-bottom: 0px; text-align: center;"><strong><code>192.168.x.253</code></strong></p>
+</div>
+</div>
+<!-- IMPORTANTE -->
+<div style="background: #fff8e6; border-left: 5px solid #d6a800; border-radius: 10px; padding: 18px 20px; margin: 24px 0 30px;">
+<h3 style="color: #7f6000; margin-top: 0;">📌 ¿Qué DNS configuramos en los clientes?</h3>
+<p style="text-align: justify;">Los equipos de la Red Interna deben utilizar como servidor DNS <strong>únicamente el servidor DNS-LDAP</strong>.</p>
+<p style="margin-bottom: 0px; text-align: justify;">No configures directamente en los clientes los servidores DNS obtenidos de NAT. Esos servidores ya han sido configurados como <strong>reenviadores de BIND9</strong>. El cliente pregunta a DNS-LDAP y BIND9 se encarga del resto del proceso.</p>
+</div>
+<!-- ====================================================== --> <!-- 6.2 DATOS DE CONFIGURACIÓN                             --> <!-- ====================================================== -->
+<h2 style="color: #17365d;">6.2. Datos de configuración</h2>
+<p>Antes de modificar ningún fichero, identifica los parámetros correspondientes al equipo que estás configurando.</p>
+<div style="overflow-x: auto; margin: 20px 0 28px;">
+<table style="width: 100%; border-collapse: collapse; min-width: 650px;">
+<thead>
+<tr style="background: #17365d; color: white;">
+<th style="padding: 11px; border: 1px solid #d9e2ec; text-align: center;">Parámetro</th>
+<th style="padding: 11px; border: 1px solid #d9e2ec; text-align: center;">Configuración</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="padding: 10px; border: 1px solid #d9e2ec; text-align: center;">Dirección IP</td>
+<td style="padding: 10px; border: 1px solid #d9e2ec;">Dirección asignada al equipo dentro de <code>192.168.x.0/24</code></td>
+</tr>
+<tr style="background: #f8fafc;">
+<td style="padding: 10px; border: 1px solid #d9e2ec; text-align: center;">Prefijo</td>
+<td style="padding: 10px; border: 1px solid #d9e2ec;"><code>/24</code></td>
+</tr>
+<tr>
+<td style="padding: 10px; border: 1px solid #d9e2ec; text-align: center;">Puerta de enlace</td>
+<td style="padding: 10px; border: 1px solid #d9e2ec;"><code>192.168.x.253</code></td>
+</tr>
+<tr style="background: #f8fafc;">
+<td style="padding: 10px; border: 1px solid #d9e2ec; text-align: center;">Servidor DNS</td>
+<td style="padding: 10px; border: 1px solid #d9e2ec;"><code>192.168.x.253</code></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div style="background: #fff8e6; border-left: 5px solid #d6a800; border-radius: 10px; padding: 16px 20px; margin: 20px 0 30px;"><strong style="color: #7f6000;">📌 Recuerda</strong>
+<p style="margin-bottom: 0px; text-align: justify;">Sustituye <code>x</code> por el <strong>tercer octeto asignado a tu infraestructura</strong> y utiliza la dirección IP correspondiente al equipo que estés configurando.</p>
+</div>
+<!-- ====================================================== --> <!-- 6.3 NETPLAN                                           --> <!-- ====================================================== -->
+<h2 style="color: #17365d;">6.3. Configurar la red con Netplan</h2>
+<p style="text-align: justify;">En los servidores Ubuntu de nuestra infraestructura modificaremos la configuración mediante <strong>Netplan</strong>.</p>
+<p>Comprueba primero el nombre del fichero disponible:</p>
+<pre style="background: #1e293b; color: #f8fafc; padding: 14px 16px; border-radius: 8px; overflow-x: auto;"><code>ls /etc/netplan/</code></pre>
+<p>Abre el fichero correspondiente con tu editor:</p>
+<div style="display: flex; flex-wrap: wrap; gap: 12px; margin: 18px 0 28px;">
+<div style="flex: 1 1 300px;"><strong>Con vim</strong>
+<pre style="background: #1e293b; color: #f8fafc; padding: 14px 16px; border-radius: 8px; overflow-x: auto;"><code>sudo vim /etc/netplan/NOMBRE_FICHERO.yaml</code></pre>
+</div>
+<div style="flex: 1 1 300px;"><strong>Con nano</strong>
+<pre style="background: #1e293b; color: #f8fafc; padding: 14px 16px; border-radius: 8px; overflow-x: auto;"><code>sudo nano /etc/netplan/NOMBRE_FICHERO.yaml</code></pre>
+</div>
+</div>
+<!-- EJEMPLO -->
+<h3 style="color: #17365d;">Ejemplo de estructura</h3>
+<p>Adapta la siguiente estructura a la <strong>interfaz y dirección IP de tu equipo</strong>:</p>
+<pre style="background: #1e293b; color: #f8fafc; padding: 16px; border-radius: 8px; overflow-x: auto;"><code>network:
+  version: 2
+  ethernets:
+    INTERFAZ:
+      dhcp4: false
+      addresses:
+        - 192.168.x.IP/24
+      routes:
+        - to: default
+          via: 192.168.x.253
+      nameservers:
+        addresses:
+          - 192.168.x.253</code></pre>
+<!-- INTERPRETAR -->
+<div style="background: #f4f8fc; border: 1px solid #d4e2ef; border-radius: 10px; padding: 18px 20px; margin: 22px 0 30px;">
+<h3 style="color: #17365d; margin-top: 0;">🧠 No copies: adapta la configuración</h3>
+<p><code>INTERFAZ</code> debe sustituirse por el nombre real de la interfaz conectada a la Red Interna.</p>
+<p><code>x</code> corresponde al tercer octeto asignado a tu infraestructura.</p>
+<p style="margin-bottom: 0;"><code>IP</code> debe sustituirse por la dirección asignada al equipo que estás configurando.</p>
+</div>
+<!-- ====================================================== --> <!-- 6.4 VALIDAR                                           --> <!-- ====================================================== -->
+<h2 style="color: #17365d;">6.4. Validar la configuración</h2>
+<p>Antes de aplicar cualquier cambio, comprueba que Netplan puede procesar correctamente el fichero:</p>
+<pre style="background: #1e293b; color: #f8fafc; padding: 14px 16px; border-radius: 8px; overflow-x: auto;"><code>sudo netplan generate</code></pre>
+<div style="background: #edf7ed; border-left: 5px solid #548235; border-radius: 10px; padding: 16px 20px; margin: 18px 0 28px;"><strong style="color: #385723;">✅ Si no aparecen errores</strong>
+<p style="margin-bottom: 0;">La configuración puede ser procesada por Netplan y podemos continuar con su aplicación.</p>
+</div>
+<div style="background: #fff3f3; border-left: 5px solid #b74747; border-radius: 10px; padding: 16px 20px; margin: 18px 0 30px;"><strong style="color: #8b2525;">⚠️ Si aparece un error</strong>
+<p style="margin-bottom: 0;">No apliques todavía la configuración. Revisa especialmente la <strong>indentación YAML</strong>, el nombre de la interfaz y los parámetros introducidos.</p>
+</div>
+<!-- ====================================================== --> <!-- 6.5 APLICAR                                           --> <!-- ====================================================== -->
+<h2 style="color: #17365d;">6.5. Aplicar la configuración</h2>
+<p>Una vez validado el fichero, aplica los cambios:</p>
+<pre style="background: #1e293b; color: #f8fafc; padding: 14px 16px; border-radius: 8px; overflow-x: auto;"><code>sudo netplan apply</code></pre>
+<p>No des por terminada la configuración únicamente porque el comando haya finalizado. Ahora debemos <strong>comprobar el resultado</strong>.</p>
+<!-- ====================================================== --> <!-- 6.6 IP A                                              --> <!-- ====================================================== -->
+<h2 style="color: #17365d;">6.6. Comprobar la dirección IP</h2>
+<p>Consulta las interfaces del equipo:</p>
+<pre style="background: #1e293b; color: #f8fafc; padding: 14px 16px; border-radius: 8px; overflow-x: auto;"><code>ip a</code></pre>
+<p>Localiza la interfaz conectada a la Red Interna y comprueba que dispone de la <strong>dirección IP y el prefijo esperados</strong>.</p>
+<!-- ====================================================== --> <!-- 6.7 IP ROUTE                                          --> <!-- ====================================================== -->
+<h2 style="color: #17365d;">6.7. Comprobar la puerta de enlace</h2>
+<p>Consulta la tabla de enrutamiento:</p>
+<pre style="background: #1e293b; color: #f8fafc; padding: 14px 16px; border-radius: 8px; overflow-x: auto;"><code>ip route</code></pre>
+<p>Debes encontrar una <strong>ruta por defecto</strong> que utilice el servidor DNS-LDAP como puerta de enlace.</p>
+<pre style="background: #1e293b; color: #f8fafc; padding: 14px 16px; border-radius: 8px; overflow-x: auto;"><code>default via 192.168.x.253</code></pre>
+<!-- ====================================================== --> <!-- 6.8 DNS                                               --> <!-- ====================================================== -->
+<h2 style="color: #17365d;">6.8. Comprobar el servidor DNS</h2>
+<p>Comprueba qué servidor DNS está utilizando el sistema:</p>
+<pre style="background: #1e293b; color: #f8fafc; padding: 14px 16px; border-radius: 8px; overflow-x: auto;"><code>resolvectl</code></pre>
+<p>En la información correspondiente a la interfaz de la Red Interna debe aparecer nuestro servidor:</p>
+<pre style="background: #1e293b; color: #f8fafc; padding: 14px 16px; border-radius: 8px; overflow-x: auto;"><code>192.168.x.253</code></pre>
+<!-- ====================================================== --> <!-- COMPROBACIÓN CLIENTE                                   --> <!-- ====================================================== -->
+<section style="background: #edf7ed; border-left: 5px solid #548235; padding: 20px; border-radius: 10px; margin-top: 30px;">
+<h2 style="color: #385723; margin-top: 0;">✅ Comprobación del cliente</h2>
+<p style="text-align: justify;">Antes de realizar las pruebas de conectividad y resolución DNS, comprueba que la configuración del equipo es correcta:</p>
+<div style="background: white; border: 1px solid #cfe0c9; border-radius: 8px; padding: 16px 20px;">
+<p style="margin-top: 0;">☐ El equipo tiene la dirección IP que le corresponde.</p>
+<p>☐ La máscara o prefijo es <code>/24</code>.</p>
+<p>☐ La puerta de enlace es <code>192.168.x.253</code>.</p>
+<p>☐ El servidor DNS configurado es <code>192.168.x.253</code>.</p>
+<p>☐ <code>netplan generate</code> no muestra errores.</p>
+<p>☐ La configuración se ha aplicado correctamente.</p>
+<p>☐ <code>ip a</code> muestra la dirección esperada.</p>
+<p style="margin-bottom: 0;">☐ <code>ip route</code> muestra la ruta por defecto a través del servidor DNS-LDAP.</p>
+</div>
+</section>
+<!-- ====================================================== --> <!-- CONCEPTO CLAVE                                         --> <!-- ====================================================== -->
+<div style="background: #fff8e6; border-left: 5px solid #d6a800; border-radius: 10px; padding: 18px 20px; margin-top: 24px;">
+<h3 style="color: #7f6000; margin-top: 0;">🧠 Comprende el recorrido</h3>
+<div style="text-align: center; font-weight: bold; font-size: 17px; margin: 15px 0;">Cliente → DNS-LDAP → DNS proporcionado por NAT</div>
+<p style="margin-bottom: 0px; text-align: justify;">El cliente <strong>no necesita conocer los DNS externos</strong>. Solo conoce a DNS-LDAP. Cuando sea necesario resolver un nombre externo, BIND9 reenviará la consulta utilizando los servidores DNS que identificamos previamente en la conexión NAT.</p>
+</div>
+<!-- ====================================================== --> <!-- PORTFOLIO                                              --> <!-- ====================================================== -->
+<section style="background: #f4f8fc; border: 1px solid #d4e2ef; border-radius: 10px; padding: 18px 20px; margin-top: 24px;">
+<h3 style="color: #17365d; margin-top: 0;">📁 Portfolio</h3>
+<p style="margin-bottom: 0px; text-align: justify;">Documenta la configuración del equipo y conserva evidencias que permitan comprobar su <strong>dirección IP</strong>, <strong>puerta de enlace</strong> y <strong>servidor DNS</strong>. No es necesario capturar cada comando: selecciona las evidencias que demuestren que la configuración final es correcta.</p>
+</section>
+<!-- ====================================================== --> <!-- CIERRE                                                 --> <!-- ====================================================== -->
+<div style="background: #17365d; color: white; border-radius: 12px; padding: 20px; margin-top: 28px;">
+<h3 style="color: #a7f3d0; margin-top: 0;">➡️ Siguiente paso</h3>
+<p style="margin-bottom: 0px; text-align: justify;">El servidor y los equipos de la Red Interna ya están configurados. Ahora comprobaremos de forma progresiva si funciona <strong>la comunicación interna, el acceso al exterior y la resolución DNS</strong>.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</article>
+</div></main>
+<footer id="siteFooter"><div id="siteFooterContent"> <div id="packageLicense" class="cc cc-by-sa"> <p> <span class="license-label">Licencia: </span><a href="https://creativecommons.org/licenses/by-sa/4.0/" class="license">Creative Commons: Reconocimiento - compartir igual 4.0</a></p>
+</div>
+</div></footer>
+</div>
+<p id="made-with-eXe"> <a href="https://exelearning.net/" target="_blank" rel="noopener"> <span>Creado con eXeLearning <span>(Ventana nueva)</span></span></a></p>
+</body>
+</html>

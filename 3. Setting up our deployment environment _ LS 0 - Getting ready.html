@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="es" id="exe-page-mugzhzd1-gdy4xoqnm">
+<head>
+<meta charset="utf-8">
+<meta name="generator" content="eXeLearning v4.0.5">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="license" type="text/html" href="https://creativecommons.org/licenses/by-sa/4.0/">
+<title>3. Setting up our deployment environment | LS 0 - Getting ready</title>
+<link rel="icon" type="image/x-icon" href="../libs/favicon.ico">
+<script>document.querySelector("html").classList.add("js");</script><script src="../libs/jquery/jquery.min.js"> </script><script src="../libs/common_i18n.js"> </script><script src="../libs/common.js"> </script><script src="../libs/exe_export.js"> </script><script src="../libs/bootstrap/bootstrap.bundle.min.js"> </script><link rel="stylesheet" href="../libs/bootstrap/bootstrap.min.css">
+<script src="../idevices/text/text.js"></script><link rel="stylesheet" href="../idevices/text/text.css">
+<link rel="stylesheet" href="../content/css/base.css"><script src="../theme/style.js"> </script><link rel="stylesheet" href="../theme/style.css">
+<script src="../libs/SCORM_API_wrapper.js"></script>
+<script src="../libs/SCOFunctions.js"></script>
+</head>
+<body class="exe-export exe-scorm exe-scorm12" onload="loadPage()">
+<script>document.body.className+=" js"</script>
+<div class="exe-content exe-export pre-js siteNav-hidden"><main id="page-mugzhzd1-gdy4xoqnm" class="page"> 
+<header class="main-header">
+<div class="package-header"><p class="package-title">LS 0 - Getting ready</p></div>
+<div class="page-header"><h1 class="page-title">3. Setting up our deployment environment</h1></div>
+</header><div id="page-content-page-mugzhzd1-gdy4xoqnm" class="page-content">
+<article id="block-mumpuyqa-alvsmge11" class="box no-header">
+<header class="box-head no-icon">
+<button class="box-toggle box-toggle-on" title="Toggle content">
+<span>Toggle content</span>
+</button></header>
+<div class="box-content">
+<div id="idevice-1790688771152-1huwljzbo" class="idevice_node text" data-idevice-path="../idevices/text/" data-idevice-type="text" data-idevice-component-type="json" data-idevice-json-data="{&quot;ideviceId&quot;:&quot;idevice-1790688771152-1huwljzbo&quot;}">
+<div class="exe-text-template">
+    <div style="max-width: 1050px; margin: auto; font-family: Arial,Helvetica,sans-serif; color: #243247; line-height: 1.65;"><!-- CABECERA -->
+<div style="background: #17365d; color: white; padding: 18px 22px; border-radius: 10px;">
+<h2 style="color: white; margin: 0px; text-align: center;">🏗️ 3 · Setting up our deployment environment</h2>
+<p style="margin: 6px 0px 0px; text-align: center;">Build your deployment infrastructure</p>
+</div>
+<!-- OBJETIVO -->
+<div style="background: #eef5fb; border-left: 5px solid #2980b9; padding: 14px 18px; margin: 20px 0; border-radius: 5px;"><strong style="color: #17365d;">🎯 Objetivo</strong>
+<p style="margin: 7px 0 0; text-align: justify;">Construir y configurar de forma autónoma el <strong>entorno de despliegue diseñado al inicio de esta situación de aprendizaje</strong>, seleccionando y aplicando los procedimientos necesarios para cumplir las especificaciones establecidas.</p>
+</div>
+<!-- CAMBIO DE NIVEL -->
+<div style="background: #fff8e8; border-left: 5px solid #f0ad4e; padding: 15px 18px; margin: 20px 0; border-radius: 5px;"><strong style="color: #8a5a00; font-size: 17px;"> 🧠 From guided practice to autonomous work </strong>
+<p style="margin: 8px 0 0; text-align: justify;">En <strong>1 · Our deployment environment</strong> analizaste la infraestructura que necesitamos y comprendiste cómo deben relacionarse sus máquinas.</p>
+<p style="margin: 8px 0 0; text-align: justify;">En <strong>2 · Refreshing our skills</strong> recuperaste las herramientas de Linux, direccionamiento, configuración y diagnóstico necesarias para trabajar con ella.</p>
+<p style="margin: 8px 0 0; text-align: justify;">Ahora debes utilizar esos conocimientos de forma autónoma. <strong>No encontrarás una secuencia de pasos ni los comandos que debes ejecutar.</strong></p>
+</div>
+<!-- RETO -->
+<h3 style="color: #17365d; margin-top: 32px;">🏗️ The challenge</h3>
+<p style="text-align: justify;">A partir de las máquinas virtuales proporcionadas, <strong>construye y configura el entorno de despliegue</strong> definido en el apartado 1.</p>
+<p style="text-align: justify;">Tú decides cómo organizar el trabajo, qué procedimientos necesitas, en qué orden realizarlos y qué herramientas utilizar.</p>
+<!-- ARQUITECTURA -->
+<div style="background: #f7f9fa; border: 1px solid #d5dde5; border-radius: 8px; padding: 18px; margin: 22px 0;"><strong style="color: #17365d; font-size: 17px;"> 🖥️ Target infrastructure </strong>
+<div style="margin-top: 15px; text-align: center; font-family: Consolas,monospace; line-height: 1.9;">☁ Internet<br />│<br /><span style="color: #c65f00;"><strong>Red NAT</strong></span><br />│<br />DNS-LDAP<br />│<br />┌────────────────────────────────────────────┐<br />│   Red interna 192.168.X.0/24   │<br />│<br />│ Git    Web    FTP    Linux Mint │<br />└────────────────────────────────────────────┘</div>
+</div>
+<!-- ESPECIFICACIONES -->
+<h3 style="color: #17365d; margin-top: 32px;">📋 Technical specifications</h3>
+<p style="text-align: justify;">Tu entorno debe respetar las siguientes especificaciones. Estas indican <strong>qué debes conseguir, no cómo conseguirlo</strong>.</p>
+<table style="width: 100%; border-collapse: collapse; margin: 18px 0;">
+<thead>
+<tr style="background: #17365d; color: white;">
+<th style="padding: 9px; border: 1px solid #ccd6df; text-align: center;">Machine</th>
+<th style="padding: 9px; border: 1px solid #ccd6df; text-align: center;">Internal IPv4</th>
+<th style="padding: 9px; border: 1px solid #ccd6df;">Network connection</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="padding: 9px; border: 1px solid #ccd6df; text-align: center;"><strong>DNS-LDAP</strong></td>
+<td style="padding: 9px; border: 1px solid #ccd6df; text-align: center;"><code>192.168.X.253/24</code></td>
+<td style="padding: 9px; border: 1px solid #ccd6df;">Red NAT / NAT + Red interna</td>
+</tr>
+<tr style="background: #f7f9fa;">
+<td style="padding: 9px; border: 1px solid #ccd6df; text-align: center;"><strong>Git</strong></td>
+<td style="padding: 9px; border: 1px solid #ccd6df; text-align: center;"><code>192.168.X.104/24</code></td>
+<td style="padding: 9px; border: 1px solid #ccd6df;">Red interna</td>
+</tr>
+<tr>
+<td style="padding: 9px; border: 1px solid #ccd6df; text-align: center;"><strong>Web</strong></td>
+<td style="padding: 9px; border: 1px solid #ccd6df; text-align: center;"><code>192.168.X.154/24</code></td>
+<td style="padding: 9px; border: 1px solid #ccd6df;">Red interna</td>
+</tr>
+<tr style="background: #f7f9fa;">
+<td style="padding: 9px; border: 1px solid #ccd6df; text-align: center;"><strong>FTP</strong></td>
+<td style="padding: 9px; border: 1px solid #ccd6df; text-align: center;"><code>192.168.X.204/24</code></td>
+<td style="padding: 9px; border: 1px solid #ccd6df;">Red interna</td>
+</tr>
+<tr>
+<td style="padding: 9px; border: 1px solid #ccd6df; text-align: center;"><strong>Linux Mint</strong></td>
+<td style="padding: 9px; border: 1px solid #ccd6df; text-align: center;"><code>192.168.X.Y/24</code></td>
+<td style="padding: 9px; border: 1px solid #ccd6df;">Red interna</td>
+</tr>
+</tbody>
+</table>
+<!-- X / Y -->
+<div style="background: #eef5fb; border-left: 5px solid #3498db; padding: 14px 18px; margin: 18px 0; border-radius: 5px;"><strong style="color: #1769aa;">🌐 Remember your range</strong>
+<p style="margin: 7px 0 0;"><code>X</code> Corresponde <strong>exclusivamente al tercer octeto</strong> y será el número de rango que tienes asignado en el aula.</p>
+<p style="margin: 7px 0 0;">Para Linux Mint, selecciona un valor <code>Y</code> válido que no genere ningún conflicto de direccionamiento.</p>
+</div>
+<!-- REQUISITOS -->
+<h3 style="color: #17365d; margin-top: 32px;">⚙️ Requirements</h3>
+<ul>
+<li>Las cinco máquinas deben reproducir la arquitectura definida.</li>
+<li>DNS-LDAP debe ser la única máquina conectada simultáneamente a la Red NAT y a la Red interna.</li>
+<li>Las máquinas de la Red interna deben utilizar <strong>direccionamiento IPv4 estático</strong>.</li>
+<li>Git, Web y FTP utilizarán <code>192.168.X.253</code> como puerta de enlace.</li>
+<li>No deben existir conflictos de direccionamiento.</li>
+<li>Todavía no debes instalar ni configurar los servicios <strong>DNS, LDAP, Git, Web o FTP</strong>.</li>
+</ul>
+<!-- AUTONOMÍA -->
+<div style="background: #fff8e8; border-left: 5px solid #f0ad4e; padding: 15px 18px; margin: 22px 0; border-radius: 5px;"><strong style="color: #8a5a00;"> 🧭 You choose the path </strong>
+<p style="margin: 8px 0 0; text-align: justify;">No se proporciona un procedimiento de resolución. Si necesitas recuperar un concepto, un comando o un procedimiento, vuelve a consultar <strong>2 · Refreshing our skills</strong>.</p>
+<p style="margin: 8px 0 0;">Antes de modificar algo, piensa qué necesitas conseguir y qué información necesitas conocer.</p>
+</div>
+<!-- DEFINITION OF DONE -->
+<h3 style="color: #17365d; margin-top: 32px;">✅ Definition of Done</h3>
+<p>Consideraremos finalizada la construcción cuando:</p>
+<div style="background: #eaf7ee; border-left: 5px solid #4f8a62; padding: 16px 18px; margin: 18px 0; border-radius: 5px;">
+<ul style="margin: 0;">
+<li>Las cinco máquinas están preparadas.</li>
+<li>Sus adaptadores están asociados a las redes correspondientes.</li>
+<li>Cada máquina tiene asignado el direccionamiento previsto.</li>
+<li>Las rutas necesarias están configuradas conforme al diseño.</li>
+<li>No existen conflictos de direccionamiento.</li>
+</ul>
+</div>
+<!-- TRANSICIÓN -->
+<div style="background: #17365d; color: white; padding: 18px 22px; border-radius: 8px; margin-top: 28px;"><strong style="font-size: 17px;"> 🏗️ Environment built. But does it work? </strong>
+<p style="margin: 8px 0 0;">Haber construido y configurado el entorno no es suficiente. Ahora tendrás que <strong>demostrar que funciona</strong>.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</article>
+</div></main>
+<footer id="siteFooter"><div id="siteFooterContent"> <div id="packageLicense" class="cc cc-by-sa"> <p> <span class="license-label">Licencia: </span><a href="https://creativecommons.org/licenses/by-sa/4.0/" class="license">Creative Commons: Reconocimiento - compartir igual 4.0</a></p>
+</div>
+</div></footer>
+</div>
+<p id="made-with-eXe"> <a href="https://exelearning.net/" target="_blank" rel="noopener"> <span>Creado con eXeLearning <span>(Ventana nueva)</span></span></a></p>
+</body>
+</html>

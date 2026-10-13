@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="es" id="exe-page-mugzfmm5-5edji6mtq">
+<head>
+<meta charset="utf-8">
+<meta name="generator" content="eXeLearning v4.0.5">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="license" type="text/html" href="https://creativecommons.org/licenses/by-sa/4.0/">
+<title>2.1.2. File sytem and directories | LS 0 - Getting ready</title>
+<link rel="icon" type="image/x-icon" href="../libs/favicon.ico">
+<script>document.querySelector("html").classList.add("js");</script><script src="../libs/jquery/jquery.min.js"> </script><script src="../libs/common_i18n.js"> </script><script src="../libs/common.js"> </script><script src="../libs/exe_export.js"> </script><script src="../libs/bootstrap/bootstrap.bundle.min.js"> </script><link rel="stylesheet" href="../libs/bootstrap/bootstrap.min.css">
+<script src="../idevices/text/text.js"></script><link rel="stylesheet" href="../idevices/text/text.css">
+<link rel="stylesheet" href="../content/css/base.css"><script src="../theme/style.js"> </script><link rel="stylesheet" href="../theme/style.css">
+<script src="../libs/SCORM_API_wrapper.js"></script>
+<script src="../libs/SCOFunctions.js"></script>
+</head>
+<body class="exe-export exe-scorm exe-scorm12" onload="loadPage()">
+<script>document.body.className+=" js"</script>
+<div class="exe-content exe-export pre-js siteNav-hidden"><main id="page-mugzfmm5-5edji6mtq" class="page"> 
+<header class="main-header">
+<div class="package-header"><p class="package-title">LS 0 - Getting ready</p></div>
+<div class="page-header"><h1 class="page-title">2.1.2. File sytem and directories</h1></div>
+</header><div id="page-content-page-mugzfmm5-5edji6mtq" class="page-content">
+<article id="block-mumiw7gc-k4a1oxupo" class="box no-header">
+<header class="box-head no-icon">
+<button class="box-toggle box-toggle-on" title="Toggle content">
+<span>Toggle content</span>
+</button></header>
+<div class="box-content">
+<div id="idevice-1790677071802-ixuq48o0h" class="idevice_node text" data-idevice-path="../idevices/text/" data-idevice-type="text" data-idevice-component-type="json" data-idevice-json-data="{&quot;ideviceId&quot;:&quot;idevice-1790677071802-ixuq48o0h&quot;}">
+<div class="exe-text-template">
+    <div style="max-width: 1050px; margin: auto; font-family: Arial,Helvetica,sans-serif; color: #243247; line-height: 1.65;"><!-- ====================================================== --> <!-- CABECERA                                               --> <!-- ====================================================== -->
+<div style="background: #17365d; color: white; padding: 18px 22px; border-radius: 10px;">
+<h2 style="color: white; margin: 0px; text-align: center;">📁 2.1.2 · File system and directories</h2>
+<p style="margin: 6px 0px 0px; text-align: center;">Recuperamos cómo se organiza y cómo nos movemos por un sistema Linux</p>
+</div>
+<!-- ====================================================== --> <!-- OBJETIVO                                               --> <!-- ====================================================== -->
+<div style="background: #eef5fb; border-left: 5px solid #2980b9; padding: 14px 18px; margin: 20px 0px; border-radius: 5px; text-align: justify;"><strong style="color: #17365d;">🎯 Objetivo</strong><br />Recordar cómo se organiza el <strong>sistema de archivos de Linux</strong>, interpretar rutas absolutas y relativas y recuperar los comandos necesarios para desplazarnos y trabajar con archivos y directorios.</div>
+<!-- ====================================================== --> <!-- INTRODUCCIÓN                                           --> <!-- ====================================================== -->
+<p style="text-align: justify;">Ya hemos recuperado cómo Linux identifica a sus <strong>usuarios y grupos</strong>. Ahora necesitamos recordar dónde se encuentran y cómo se organizan los recursos con los que estos usuarios trabajan.</p>
+<p style="text-align: justify;">En nuestros servidores tendremos que localizar archivos de configuración, movernos entre directorios, crear estructuras de trabajo y manipular archivos desde la terminal. Para hacerlo correctamente necesitamos comprender primero cómo organiza Linux su sistema de archivos.</p>
+<!-- ====================================================== --> <!-- CONEXIÓN CON ESCENARIO                                 --> <!-- ====================================================== -->
+<div style="background: #fff8e8; border-left: 5px solid #f0ad4e; padding: 15px 18px; margin: 20px 0; border-radius: 5px;"><strong style="color: #8a5a00;"> 🔎 ¿Por qué necesitamos recordarlo? </strong>
+<p style="margin: 7px 0 0; text-align: justify;">Cuando trabajemos con nuestros servidores <strong>DNS-LDAP, Git, Web y FTP</strong> no dispondremos siempre de una interfaz gráfica. Tendremos que saber <strong>dónde estamos, dónde se encuentra un recurso y cómo llegar hasta él</strong> utilizando la terminal.</p>
+</div>
+<!-- ====================================================== --> <!-- 1. FILE SYSTEM                                         --> <!-- ====================================================== -->
+<h3 style="color: #17365d; margin-top: 32px;">🌳 1 · The Linux file system</h3>
+<p style="text-align: justify;">Linux organiza sus archivos y directorios mediante una <strong>estructura jerárquica</strong>. Todo parte de un único punto, denominado <strong>directorio raíz</strong>, representado mediante:</p>
+<div style="text-align: center; margin: 18px 0;"><span style="display: inline-block; background: #eef5fb; border: 2px solid #3498db; border-radius: 7px; padding: 8px 28px;"> <code style="font-size: 22px; font-weight: bold;">/</code> </span></div>
+<div style="background: #1f2933; color: #f5f7fa; padding: 16px 20px; border-radius: 7px; margin: 18px 0; font-family: Consolas,monospace; line-height: 1.7; overflow-x: auto;">/<br />├── etc<br />├── home<br />│   └── user<br />├── root<br />├── tmp<br />├── usr<br />└── var</div>
+<div style="background: #eef5fb; border-left: 5px solid #3498db; padding: 14px 18px; margin: 18px 0; border-radius: 5px;"><strong style="color: #1769aa;">💡 Concepto básico:</strong>
+<p style="margin: 7px 0 0;">A diferencia de otros sistemas operativos, no encontraremos diferentes árboles identificados mediante letras como <code>C:</code> o <code>D:</code>. En Linux, los recursos se integran dentro de una única estructura que comienza en <code>/</code>.</p>
+</div>
+<!-- ====================================================== --> <!-- 2. IMPORTANT DIRECTORIES                               --> <!-- ====================================================== -->
+<h3 style="color: #17365d; margin-top: 32px;">🗂️ 2 · Some directories you should recognize</h3>
+<p style="text-align: justify;">No necesitamos memorizar toda la estructura del sistema, pero sí reconocer algunos directorios que encontraremos frecuentemente durante la administración de nuestros servidores.</p>
+<table style="width: 100%; border-collapse: collapse; margin: 16px 0px; height: 364.65px;">
+<thead>
+<tr style="background: #17365d; color: white; height: 45.5812px;">
+<th style="padding: 9px; border: 1px solid #ccd6df; height: 45.5812px; text-align: center;">Directorio</th>
+<th style="padding: 9px; border: 1px solid #ccd6df; height: 45.5812px; text-align: left;">¿Qué encontraremos?</th>
+</tr>
+</thead>
+<tbody>
+<tr style="height: 45.5812px;">
+<td style="padding: 9px; border: 1px solid #ccd6df; height: 45.5812px; text-align: center;"><code>/</code></td>
+<td style="padding: 9px; border: 1px solid #ccd6df; height: 45.5812px;">Raíz del sistema de archivos.</td>
+</tr>
+<tr style="background: #f7f9fa; height: 45.5812px;">
+<td style="padding: 9px; border: 1px solid #ccd6df; height: 45.5812px; text-align: center;"><code>/home</code></td>
+<td style="padding: 9px; border: 1px solid #ccd6df; height: 45.5812px;">Directorios personales de los usuarios habituales.</td>
+</tr>
+<tr style="height: 45.5812px;">
+<td style="padding: 9px; border: 1px solid #ccd6df; height: 45.5812px; text-align: center;"><code>/root</code></td>
+<td style="padding: 9px; border: 1px solid #ccd6df; height: 45.5812px;">Directorio personal del usuario <code>root</code>.</td>
+</tr>
+<tr style="background: #f7f9fa; height: 45.5812px;">
+<td style="padding: 9px; border: 1px solid #ccd6df; height: 45.5812px; text-align: center;"><code>/etc</code></td>
+<td style="padding: 9px; border: 1px solid #ccd6df; height: 45.5812px;">Archivos de configuración del sistema y de numerosos servicios.</td>
+</tr>
+<tr style="height: 45.5812px;">
+<td style="padding: 9px; border: 1px solid #ccd6df; height: 45.5812px; text-align: center;"><code>/var</code></td>
+<td style="padding: 9px; border: 1px solid #ccd6df; height: 45.5812px;">Datos variables generados durante el funcionamiento del sistema y de sus servicios.</td>
+</tr>
+<tr style="background: #f7f9fa; height: 45.5812px;">
+<td style="padding: 9px; border: 1px solid #ccd6df; height: 45.5812px; text-align: center;"><code>/tmp</code></td>
+<td style="padding: 9px; border: 1px solid #ccd6df; height: 45.5812px;">Archivos temporales.</td>
+</tr>
+<tr style="height: 45.5812px;">
+<td style="padding: 9px; border: 1px solid #ccd6df; height: 45.5812px; text-align: center;"><code>/usr</code></td>
+<td style="padding: 9px; border: 1px solid #ccd6df; height: 45.5812px;">Programas, bibliotecas y otros recursos utilizados por el sistema.</td>
+</tr>
+</tbody>
+</table>
+<!-- ====================================================== --> <!-- 3. WHERE AM I?                                         --> <!-- ====================================================== -->
+<h3 style="color: #17365d; margin-top: 32px;">📍 3 · Where am I?</h3>
+<p style="text-align: justify;">Cuando trabajamos desde la terminal siempre nos encontramos situados en un directorio concreto. Este recibe el nombre de <strong>directorio de trabajo actual</strong>.</p>
+<p>Podemos averiguar dónde estamos utilizando:</p>
+<div style="background: #1f2933; color: #f5f7fa; padding: 12px 16px; border-radius: 7px; margin: 15px 0; font-family: Consolas,monospace;">$ pwd</div>
+<p>Por ejemplo:</p>
+<div style="background: #1f2933; color: #f5f7fa; padding: 12px 16px; border-radius: 7px; margin: 15px 0; font-family: Consolas,monospace;">$ pwd<br />/home/student</div>
+<!-- ====================================================== --> <!-- 4. PATHS                                               --> <!-- ====================================================== -->
+<h3 style="color: #17365d; margin-top: 32px;">🧭 4 · Absolute and relative paths</h3>
+<p style="text-align: justify;">Una <strong>ruta</strong> indica dónde se encuentra un archivo o directorio dentro del sistema.</p>
+<div style="display: flex; flex-wrap: wrap; gap: 14px; margin: 18px 0;">
+<div style="flex: 1 1 300px; background: #eef5fb; border-top: 5px solid #3498db; border-radius: 7px; padding: 16px; text-align: center;"><strong style="color: #1769aa;">📍 Absolute path</strong>
+<p style="margin: 7px 0px; text-align: justify;">Indica la ubicación completa comenzando desde <strong>el directorio raíz</strong>.</p>
+<code>/home/student/project</code></div>
+<div style="flex: 1 1 300px; background: #eaf7ee; border-top: 5px solid #4f8a62; border-radius: 7px; padding: 16px; text-align: center;"><strong style="color: #315f40;">🧭 Relative path</strong>
+<p style="margin: 7px 0px; text-align: justify;">Indica una ubicación tomando como referencia <strong>el directorio en el que estamos</strong>.</p>
+<code>project/files</code></div>
+</div>
+<!-- ====================================================== --> <!-- SPECIAL REFERENCES                                     --> <!-- ====================================================== -->
+<h3 style="color: #17365d; margin-top: 30px;">🔎 5 · Useful references</h3>
+<table style="width: 100%; border-collapse: collapse; margin: 16px 0;">
+<thead>
+<tr style="background: #17365d; color: white;">
+<th style="padding: 9px; border: 1px solid #ccd6df; text-align: center;">Referencia</th>
+<th style="padding: 9px; border: 1px solid #ccd6df; text-align: left;">Significado</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="padding: 9px; border: 1px solid #ccd6df; text-align: center;"><code>.</code></td>
+<td style="padding: 9px; border: 1px solid #ccd6df; text-align: left;">Directorio actual.</td>
+</tr>
+<tr style="background: #f7f9fa;">
+<td style="padding: 9px; border: 1px solid #ccd6df; text-align: center;"><code>..</code></td>
+<td style="padding: 9px; border: 1px solid #ccd6df; text-align: left;">Directorio padre.</td>
+</tr>
+<tr>
+<td style="padding: 9px; border: 1px solid #ccd6df; text-align: center;"><code>~</code></td>
+<td style="padding: 9px; border: 1px solid #ccd6df; text-align: left;">Directorio personal del usuario actual.</td>
+</tr>
+<tr style="background: #f7f9fa;">
+<td style="padding: 9px; border: 1px solid #ccd6df; text-align: center;"><code>/</code></td>
+<td style="padding: 9px; border: 1px solid #ccd6df; text-align: left;">Directorio raíz.</td>
+</tr>
+</tbody>
+</table>
+<!-- ====================================================== --> <!-- 6. MOVING AROUND                                       --> <!-- ====================================================== -->
+<h3 style="color: #17365d; margin-top: 32px;">🚶 6 · Moving around</h3>
+<p>Utilizamos <code>cd</code> para cambiar nuestro directorio de trabajo.</p>
+<div style="background: #1f2933; color: #f5f7fa; padding: 14px 18px; border-radius: 7px; margin: 15px 0; font-family: Consolas,monospace; line-height: 1.8;">$ cd /etc<br />$ cd /home/student<br />$ cd ..<br />$ cd ~</div>
+<div style="background: #eaf7ee; border-left: 5px solid #4f8a62; padding: 14px 18px; margin: 18px 0; border-radius: 5px;"><strong style="color: #315f40;">🔍 Check it</strong>
+<p style="margin: 7px 0 0;">Después de utilizar <code>cd</code>, comprueba tu ubicación mediante <code>pwd</code>. No des por supuesto que estás donde esperabas estar.</p>
+</div>
+<!-- ====================================================== --> <!-- 7. LISTING                                             --> <!-- ====================================================== -->
+<h3 style="color: #17365d; margin-top: 32px;">👀 7 · What's here?</h3>
+<p>El comando <code>ls</code> nos permite consultar el contenido de un directorio.</p>
+<div style="background: #1f2933; color: #f5f7fa; padding: 14px 18px; border-radius: 7px; margin: 15px 0; font-family: Consolas,monospace; line-height: 1.8;">$ ls<br />$ ls -l<br />$ ls -a<br />$ ls -lh</div>
+<table style="width: 100%; border-collapse: collapse; margin: 16px 0px; height: 182.325px;">
+<thead>
+<tr style="background: #17365d; color: white; height: 45.5812px;">
+<th style="padding: 9px; border: 1px solid #ccd6df; text-align: center; height: 45.5812px;">Opción</th>
+<th style="padding: 9px; border: 1px solid #ccd6df; height: 45.5812px; text-align: left;">Función</th>
+</tr>
+</thead>
+<tbody>
+<tr style="height: 45.5812px;">
+<td style="padding: 9px; border: 1px solid #ccd6df; text-align: center; height: 45.5812px;"><code>-l</code></td>
+<td style="padding: 9px; border: 1px solid #ccd6df; height: 45.5812px;">Muestra información detallada.</td>
+</tr>
+<tr style="background: #f7f9fa; height: 45.5812px;">
+<td style="padding: 9px; border: 1px solid #ccd6df; text-align: center; height: 45.5812px;"><code>-a</code></td>
+<td style="padding: 9px; border: 1px solid #ccd6df; height: 45.5812px;">Incluye los archivos y directorios ocultos.</td>
+</tr>
+<tr style="height: 45.5812px;">
+<td style="padding: 9px; border: 1px solid #ccd6df; text-align: center; height: 45.5812px;"><code>-h</code></td>
+<td style="padding: 9px; border: 1px solid #ccd6df; height: 45.5812px;">Muestra los tamaños en un formato más fácil de interpretar.</td>
+</tr>
+</tbody>
+</table>
+<div style="background: #eef5fb; border-left: 5px solid #3498db; padding: 14px 18px; margin: 18px 0; border-radius: 5px;"><strong style="color: #1769aa;">💡 Archivos ocultos</strong>
+<p style="margin: 7px 0 0;">En Linux, un archivo o directorio cuyo nombre comienza por <code>.</code> se considera oculto. Por ejemplo: <code>.bashrc</code>.</p>
+</div>
+<!-- ====================================================== --> <!-- 8. WORKING WITH DIRECTORIES                            --> <!-- ====================================================== -->
+<h3 style="color: #17365d; margin-top: 32px;">📂 8 · Working with directories</h3>
+<table style="width: 100%; border-collapse: collapse; margin: 16px 0;">
+<thead>
+<tr style="background: #17365d; color: white;">
+<th style="padding: 9px; border: 1px solid #ccd6df; text-align: center;">Comando</th>
+<th style="padding: 9px; border: 1px solid #ccd6df; text-align: left;">Función</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="padding: 9px; border: 1px solid #ccd6df; text-align: center;"><code>mkdir</code></td>
+<td style="padding: 9px; border: 1px solid #ccd6df; text-align: left;">Crear un directorio.</td>
+</tr>
+<tr style="background: #f7f9fa;">
+<td style="padding: 9px; border: 1px solid #ccd6df; text-align: center;"><code>rmdir</code></td>
+<td style="padding: 9px; border: 1px solid #ccd6df; text-align: left;">Eliminar un directorio vacío.</td>
+</tr>
+</tbody>
+</table>
+<div style="background: #1f2933; color: #f5f7fa; padding: 14px 18px; border-radius: 7px; margin: 15px 0; font-family: Consolas,monospace;">$ mkdir project<br />$ mkdir project/config<br />$ rmdir project/config</div>
+<!-- ====================================================== --> <!-- 9. WORKING WITH FILES                                  --> <!-- ====================================================== -->
+<h3 style="color: #17365d; margin-top: 32px;">📄 9 · Working with files</h3>
+<table style="width: 100%; border-collapse: collapse; margin: 16px 0;">
+<thead>
+<tr style="background: #17365d; color: white;">
+<th style="padding: 9px; border: 1px solid #ccd6df; text-align: center;">Comando</th>
+<th style="padding: 9px; border: 1px solid #ccd6df;">Función</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="padding: 9px; border: 1px solid #ccd6df; text-align: center;"><code>touch</code></td>
+<td style="padding: 9px; border: 1px solid #ccd6df;">Crear un archivo vacío o actualizar su marca temporal.</td>
+</tr>
+<tr style="background: #f7f9fa;">
+<td style="padding: 9px; border: 1px solid #ccd6df; text-align: center;"><code>cp</code></td>
+<td style="padding: 9px; border: 1px solid #ccd6df;">Copiar archivos o directorios.</td>
+</tr>
+<tr>
+<td style="padding: 9px; border: 1px solid #ccd6df; text-align: center;"><code>mv</code></td>
+<td style="padding: 9px; border: 1px solid #ccd6df;">Mover o renombrar archivos y directorios.</td>
+</tr>
+<tr style="background: #f7f9fa;">
+<td style="padding: 9px; border: 1px solid #ccd6df; text-align: center;"><code>rm</code></td>
+<td style="padding: 9px; border: 1px solid #ccd6df;">Eliminar archivos.</td>
+</tr>
+</tbody>
+</table>
+<div style="background: #1f2933; color: #f5f7fa; padding: 14px 18px; border-radius: 7px; margin: 15px 0; font-family: Consolas,monospace; line-height: 1.8;">$ touch notes.txt<br />$ cp notes.txt notes_backup.txt<br />$ mv notes.txt project/<br />$ rm notes_backup.txt</div>
+<!-- ====================================================== --> <!-- WARNING                                                --> <!-- ====================================================== -->
+<div style="background: #fff8e8; border-left: 5px solid #f0ad4e; padding: 15px 18px; margin: 22px 0; border-radius: 5px;"><strong style="color: #8a5a00;">⚠️ Think before you delete</strong>
+<p style="margin: 7px 0 0; text-align: justify;">Los comandos de eliminación pueden modificar el sistema de forma inmediata. Antes de utilizar <code>rm</code>, comprueba <strong>dónde estás</strong> y <strong>qué elemento estás indicando en la ruta</strong>.</p>
+</div>
+<!-- ====================================================== --> <!-- MINI CHALLENGE                                         --> <!-- ====================================================== -->
+<div style="background: #f7f9fa; border: 2px solid #4f8a62; padding: 18px 20px; margin: 25px 0; border-radius: 8px;"><strong style="color: #315f40; font-size: 18px;"> 🧩 Mini challenge · Prepare your workspace </strong>
+<p style="margin: 10px 0; text-align: justify;">Antes de comenzar a trabajar con nuestros servidores necesitamos recuperar nuestra capacidad para desenvolvernos desde la terminal.</p>
+<p><strong>Desde tu directorio personal:</strong></p>
+<ol style="padding-left: 25px;">
+<li>Crea un directorio llamado <code>daw_lab</code>.</li>
+<li>Dentro de él, crea los directorios <code>config</code> y <code>backup</code>.</li>
+<li>Crea dentro de <code>config</code> un archivo llamado <code>server.conf</code>.</li>
+<li>Copia <code>server.conf</code> dentro de <code>backup</code>.</li>
+<li>Regresa a tu directorio personal utilizando una única referencia.</li>
+<li>Comprueba la estructura que has creado.</li>
+</ol>
+<div style="background: #eaf7ee; border-left: 4px solid #4f8a62; padding: 11px 14px; margin-top: 15px; border-radius: 4px;"><strong>🔍 Antes de terminar</strong>
+<p style="margin: 5px 0 0;">Debes poder explicar <strong>dónde estabas</strong>, <strong>qué ruta utilizaste</strong> y <strong>cómo comprobaste el resultado</strong>.</p>
+</div>
+</div>
+<!-- ====================================================== --> <!-- RECURSO                                                --> <!-- ====================================================== -->
+<h3 style="color: #17365d; margin-top: 32px;">📚 Recurso de apoyo</h3>
+<div style="background: white; border: 1px solid #d5dde5; border-radius: 7px; padding: 14px 16px; margin: 15px 0;"><strong style="color: #17365d;"> 📖 Linux Professional Institute · Linux Essentials </strong>
+<p style="margin: 7px 0 10px; text-align: justify;">Utiliza los materiales de Linux Essentials para revisar y ampliar el trabajo con directorios, rutas y archivos desde la línea de comandos.</p>
+<a href="https://learning.lpi.org/es/learning-materials/010-160/" target="_blank" rel="noopener noreferrer" style="display: inline-block; background: #17365d; color: white; text-decoration: none; padding: 8px 16px; border-radius: 6px; font-weight: bold;"> 🔗 LPI · Linux Essentials </a></div>
+<!-- ====================================================== --> <!-- CIERRE                                                 --> <!-- ====================================================== -->
+<div style="background: #17365d; color: white; padding: 17px 20px; margin-top: 25px; border-radius: 8px; text-align: center;"><strong style="font-size: 18px;"> Ya sabemos quién trabaja y dónde están nuestros recursos. </strong>
+<div style="margin-top: 7px;">Ahora necesitamos determinar quién puede utilizarlos y qué puede hacer con ellos.</div>
+<div style="margin-top: 8px; font-weight: bold;">🔐 2.1.3 · Ownership and permissions</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</article>
+</div></main>
+<footer id="siteFooter"><div id="siteFooterContent"> <div id="packageLicense" class="cc cc-by-sa"> <p> <span class="license-label">Licencia: </span><a href="https://creativecommons.org/licenses/by-sa/4.0/" class="license">Creative Commons: Reconocimiento - compartir igual 4.0</a></p>
+</div>
+</div></footer>
+</div>
+<p id="made-with-eXe"> <a href="https://exelearning.net/" target="_blank" rel="noopener"> <span>Creado con eXeLearning <span>(Ventana nueva)</span></span></a></p>
+</body>
+</html>

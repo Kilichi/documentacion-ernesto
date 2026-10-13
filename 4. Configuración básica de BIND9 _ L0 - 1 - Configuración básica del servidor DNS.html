@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="es" id="exe-page-muwo5qlk-fsga1vzs3">
+<head>
+<meta charset="utf-8">
+<meta name="generator" content="eXeLearning v4.0.5">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="license" type="text/html" href="https://creativecommons.org/licenses/by-sa/4.0/">
+<title>4. Configuración básica de BIND9 | L0 - 1 - Configuración básica del servidor DNS</title>
+<link rel="icon" type="image/x-icon" href="../libs/favicon.ico">
+<script>document.querySelector("html").classList.add("js");</script><script src="../libs/jquery/jquery.min.js"> </script><script src="../libs/common_i18n.js"> </script><script src="../libs/common.js"> </script><script src="../libs/exe_export.js"> </script><script src="../libs/bootstrap/bootstrap.bundle.min.js"> </script><link rel="stylesheet" href="../libs/bootstrap/bootstrap.min.css">
+<script src="../idevices/text/text.js"></script><link rel="stylesheet" href="../idevices/text/text.css">
+<link rel="stylesheet" href="../content/css/base.css"><script src="../theme/style.js"> </script><link rel="stylesheet" href="../theme/style.css">
+<script src="../libs/SCORM_API_wrapper.js"></script>
+<script src="../libs/SCOFunctions.js"></script>
+</head>
+<body class="exe-export exe-scorm exe-scorm12" onload="loadPage()">
+<script>document.body.className+=" js"</script>
+<div class="exe-content exe-export pre-js siteNav-hidden"><main id="page-muwo5qlk-fsga1vzs3" class="page"> 
+<header class="main-header">
+<div class="package-header"><p class="package-title">L0 - 1 - Configuración básica del servidor DNS</p></div>
+<div class="page-header"><h1 class="page-title">4. Configuración básica de BIND9</h1></div>
+</header><div id="page-content-page-muwo5qlk-fsga1vzs3" class="page-content">
+<article id="block-muwo5snl-pj91eg2oj" class="box no-header">
+<header class="box-head no-icon">
+<button class="box-toggle box-toggle-on" title="Toggle content">
+<span>Toggle content</span>
+</button></header>
+<div class="box-content">
+<div id="idevice-1791290579025-0jaohm9u9" class="idevice_node text" data-idevice-path="../idevices/text/" data-idevice-type="text" data-idevice-component-type="json" data-idevice-json-data="{&quot;ideviceId&quot;:&quot;idevice-1791290579025-0jaohm9u9&quot;}">
+<div class="exe-text-template">
+    <!-- ====================================================== --><!-- ====================================================== -->
+<div style="max-width: 1000px; margin: auto; font-family: Arial, Helvetica, sans-serif; color: #243247; line-height: 1.65;"><!-- ====================================================== --> <!-- CABECERA                                               --> <!-- ====================================================== -->
+<div style="background: #17365d; color: white; padding: 22px; border-radius: 12px; margin-bottom: 24px;">
+<p style="margin: 0px 0px 5px; font-size: 14px; letter-spacing: 0.5px; text-align: center;">CONFIGURACIÓN BÁSICA DEL SERVIDOR DNS</p>
+<h1 style="color: white; margin: 0px; font-size: 28px; text-align: center;">⚙️ 4. Configuración básica de BIND9</h1>
+<p style="margin: 8px 0px 0px; text-align: center;">Configuraremos BIND9 para atender las consultas de nuestra Red Interna y utilizar los servidores DNS proporcionados por la conexión NAT como reenviadores.</p>
+</div>
+<!-- ====================================================== --> <!-- OBJETIVO                                               --> <!-- ====================================================== -->
+<section style="background: #eef5fb; border-left: 5px solid #2f75b5; padding: 20px; border-radius: 10px; margin-bottom: 28px;">
+<h2 style="color: #17365d; margin-top: 0;">🎯 Objetivo</h2>
+<p style="margin-bottom: 0px; text-align: justify;">Obtener la información de red proporcionada por <strong>NAT</strong> y utilizarla para configurar BIND9, permitiendo las consultas procedentes de nuestra <strong>Red Interna</strong> y el reenvío de las consultas DNS hacia los servidores utilizados por la conexión exterior.</p>
+</section>
+<!-- ====================================================== --> <!-- 4.1 INFORMACIÓN PREVIA                                 --> <!-- ====================================================== -->
+<h2 style="color: #17365d;">4.1. Obtener la información proporcionada por NAT</h2>
+<p style="text-align: justify;">Antes de modificar BIND9 necesitamos conocer cómo está accediendo actualmente nuestro servidor DNS-LDAP al exterior.</p>
+<p>El adaptador configurado como <strong>NAT en VirtualBox</strong> proporciona automáticamente al servidor información necesaria para comunicarse con otras redes y resolver nombres.</p>
+<p>Vamos a identificar esa información antes de configurar BIND9.</p>
+<!-- IP ROUTE -->
+<div style="background: #f4f8fc; border: 1px solid #d4e2ef; border-radius: 12px; padding: 20px; margin: 22px 0;">
+<h3 style="color: #17365d; margin-top: 0;">🔎 Paso 1 · Identifica la salida hacia el exterior</h3>
+<p>Consulta la tabla de enrutamiento del servidor:</p>
+<pre style="background: #1e293b; color: #f8fafc; padding: 14px 16px; border-radius: 8px; overflow-x: auto;"><code>ip route</code></pre>
+<p>Localiza la línea correspondiente a la <strong>ruta por defecto</strong>. A partir de ella debes ser capaz de identificar:</p>
+<div style="background: white; border-left: 4px solid #2f75b5; padding: 15px 18px; border-radius: 8px;">
+<p style="margin-top: 0;"><strong>Puerta de enlace:</strong> __________________________________</p>
+<p style="margin-bottom: 0;"><strong>Interfaz utilizada para salir:</strong> __________________________________</p>
+</div>
+</div>
+<!-- RESOLVECTL -->
+<div style="background: #f5f9f3; border: 1px solid #d5e4ce; border-radius: 12px; padding: 20px; margin: 22px 0;">
+<h3 style="color: #385723; margin-top: 0;">🔎 Paso 2 · Identifica los servidores DNS</h3>
+<p>Consulta ahora la información que utiliza el sistema para la resolución de nombres:</p>
+<pre style="background: #1e293b; color: #f8fafc; padding: 14px 16px; border-radius: 8px; overflow-x: auto;"><code>resolvectl</code></pre>
+<p>Si necesitas visualizar la información de forma más detallada, utiliza:</p>
+<pre style="background: #1e293b; color: #f8fafc; padding: 14px 16px; border-radius: 8px; overflow-x: auto;"><code>resolvectl status</code></pre>
+<p>Localiza la información correspondiente a la <strong>interfaz conectada mediante NAT</strong> y anota los servidores DNS asociados a ella.</p>
+<div style="background: white; border-left: 4px solid #548235; padding: 15px 18px; border-radius: 8px;">
+<p style="margin-top: 0;"><strong>Interfaz NAT:</strong> __________________________________</p>
+<p style="margin-bottom: 0;"><strong>Servidor/es DNS:</strong> __________________________________</p>
+</div>
+</div>
+<!-- INTERPRETACIÓN -->
+<div style="background: #fff8e6; border-left: 5px solid #d6a800; border-radius: 10px; padding: 18px 20px; margin: 24px 0 30px;">
+<h3 style="color: #7f6000; margin-top: 0;">🧠 Interpreta la información antes de continuar</h3>
+<p style="text-align: justify;">La <strong>puerta de enlace</strong> obtenida con <code>ip route</code> y los <strong>servidores DNS</strong> mostrados por <code>resolvectl</code> no tienen la misma función.</p>
+<p style="margin-bottom: 0px; text-align: justify;">Para configurar los <strong>reenviadores de BIND9</strong> utilizaremos los servidores DNS asociados a la conexión <strong>NAT</strong> que acabas de identificar.</p>
+</div>
+<!-- ====================================================== --> <!-- 4.2 NAMED.CONF.OPTIONS                                 --> <!-- ====================================================== -->
+<h2 style="color: #17365d;">4.2. Configurar <code>named.conf.options</code></h2>
+<p>Una vez obtenida la información necesaria, vamos a configurar las opciones básicas de BIND9.</p>
+<p>El fichero que modificaremos es:</p>
+<pre style="background: #1e293b; color: #f8fafc; padding: 14px 16px; border-radius: 8px; overflow-x: auto;"><code>/etc/bind/named.conf.options</code></pre>
+<p>Ábrelo con el editor de texto que utilices habitualmente:</p>
+<div style="display: flex; flex-wrap: wrap; gap: 12px; margin: 18px 0 28px;">
+<div style="flex: 1 1 300px;"><strong>Con vim</strong>
+<pre style="background: #1e293b; color: #f8fafc; padding: 14px 16px; border-radius: 8px; overflow-x: auto;"><code>sudo vim /etc/bind/named.conf.options</code></pre>
+</div>
+<div style="flex: 1 1 300px;"><strong>Con nano</strong>
+<pre style="background: #1e293b; color: #f8fafc; padding: 14px 16px; border-radius: 8px; overflow-x: auto;"><code>sudo nano /etc/bind/named.conf.options</code></pre>
+</div>
+</div>
+<!-- ====================================================== --> <!-- 4.3 LISTEN-ON                                         --> <!-- ====================================================== -->
+<h2 style="color: #17365d;">4.3. Interfaces de escucha · <code>listen-on</code></h2>
+<p>La directiva <code>listen-on</code> indica en qué interfaces IPv4 aceptará BIND9 consultas DNS.</p>
+<p>Configura:</p>
+<pre style="background: #1e293b; color: #f8fafc; padding: 14px 16px; border-radius: 8px; overflow-x: auto;"><code>listen-on { any; };</code></pre>
+<div style="background: #f4f8fc; border-left: 5px solid #2f75b5; border-radius: 10px; padding: 16px 20px; margin: 18px 0 28px;"><strong style="color: #17365d;">💡 ¿Qué significa?</strong>
+<p style="margin-bottom: 0px; text-align: justify;"><code>any</code> permite que BIND9 escuche en las interfaces IPv4 disponibles en el servidor, incluida la interfaz conectada a nuestra Red Interna.</p>
+</div>
+<!-- ====================================================== --> <!-- 4.4 ALLOW-QUERY                                       --> <!-- ====================================================== -->
+<h2 style="color: #17365d;">4.4. Equipos autorizados · <code>allow-query</code></h2>
+<p>Debemos indicar qué equipos pueden enviar consultas a nuestro servidor DNS.</p>
+<p>Permitiremos las consultas procedentes del propio servidor y de nuestra Red Interna:</p>
+<pre style="background: #1e293b; color: #f8fafc; padding: 14px 16px; border-radius: 8px; overflow-x: auto;"><code>allow-query {
+    localhost;
+    192.168.x.0/24;
+};</code></pre>
+<div style="background: #fff8e6; border-left: 5px solid #d6a800; border-radius: 10px; padding: 16px 20px; margin: 18px 0 28px;"><strong style="color: #7f6000;">📌 Recuerda</strong>
+<p style="margin-bottom: 0;">Sustituye <code>x</code> por el <strong>tercer octeto asignado a tu infraestructura</strong>.</p>
+</div>
+<!-- ====================================================== --> <!-- 4.5 FORWARDERS                                        --> <!-- ====================================================== -->
+<h2 style="color: #17365d;">4.5. Configurar los reenviadores · <code>forwarders</code></h2>
+<p style="text-align: justify;">Cuando BIND9 reciba una consulta sobre un nombre externo que necesite resolver, utilizará los servidores definidos como <strong>reenviadores</strong>.</p>
+<p>Para configurar estos reenviadores utilizaremos la información que hemos obtenido previamente mediante <code>resolvectl</code>.</p>
+<p>Sustituye el valor indicado por el <strong>servidor DNS asociado a tu conexión NAT</strong>:</p>
+<pre style="background: #1e293b; color: #f8fafc; padding: 14px 16px; border-radius: 8px; overflow-x: auto;"><code>forwarders {
+    DIRECCIÓN_DNS_OBTENIDA;
+};</code></pre>
+<p>Si tu conexión proporciona más de un servidor DNS, puedes indicar varios reenviadores:</p>
+<pre style="background: #1e293b; color: #f8fafc; padding: 14px 16px; border-radius: 8px; overflow-x: auto;"><code>forwarders {
+    DIRECCIÓN_DNS_1;
+    DIRECCIÓN_DNS_2;
+};</code></pre>
+<!-- AVISO NO GOOGLE -->
+<div style="background: #fff3f3; border-left: 5px solid #b74747; border-radius: 10px; padding: 18px 20px; margin: 22px 0 28px;">
+<h3 style="color: #8b2525; margin-top: 0;">⚠️ No utilices un DNS elegido manualmente</h3>
+<p style="text-align: justify;">En esta práctica no debes configurar directamente servidores DNS públicos conocidos, como <code>8.8.8.8</code>.</p>
+<p style="margin-bottom: 0px; text-align: justify;">Debes utilizar la información obtenida de la <strong>configuración NAT de tu servidor</strong>. El objetivo no es copiar una dirección que sabemos que funciona, sino <strong>identificar e interpretar la configuración real del sistema</strong>.</p>
+</div>
+<!-- RELACIÓN INFORMACIÓN -->
+<div style="overflow-x: auto; margin: 28px 0;">
+<table style="width: 100%; border-collapse: collapse; min-width: 650px;">
+<thead>
+<tr style="background: #17365d; color: white;">
+<th style="padding: 11px; border: 1px solid #d9e2ec; text-align: center;">Información</th>
+<th style="padding: 11px; border: 1px solid #d9e2ec; text-align: center;">Cómo obtenerla</th>
+<th style="padding: 11px; border: 1px solid #d9e2ec; text-align: center;">Utilidad</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="padding: 10px; border: 1px solid #d9e2ec; text-align: center;">Puerta de enlace</td>
+<td style="padding: 10px; border: 1px solid #d9e2ec; text-align: center;"><code>ip route</code></td>
+<td style="padding: 10px; border: 1px solid #d9e2ec;">Identificar la salida hacia otras redes</td>
+</tr>
+<tr style="background: #f8fafc;">
+<td style="padding: 10px; border: 1px solid #d9e2ec; text-align: center;">Interfaz de salida</td>
+<td style="padding: 10px; border: 1px solid #d9e2ec; text-align: center;"><code>ip route</code></td>
+<td style="padding: 10px; border: 1px solid #d9e2ec;">Identificar la interfaz conectada mediante NAT</td>
+</tr>
+<tr>
+<td style="padding: 10px; border: 1px solid #d9e2ec; text-align: center;">Servidores DNS</td>
+<td style="padding: 10px; border: 1px solid #d9e2ec; text-align: center;"><code>resolvectl</code></td>
+<td style="padding: 10px; border: 1px solid #d9e2ec;">Configurar los <code>forwarders</code> de BIND9</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- ====================================================== --> <!-- CONFIGURACIÓN RESULTANTE                               --> <!-- ====================================================== -->
+<h2 style="color: #17365d;">4.6. Revisa la configuración</h2>
+<p style="text-align: justify;">Una vez incorporados los valores correspondientes a tu entorno, la parte relevante de <code>named.conf.options</code> tendrá una estructura equivalente a la siguiente:</p>
+<div style="background: #f7f9fb; border: 1px solid #d9e2ec; border-radius: 12px; padding: 20px; margin: 20px 0 30px;">
+<pre style="background: #1e293b; color: #f8fafc; padding: 16px; border-radius: 8px; overflow-x: auto; margin: 0;"><code>options {
+
+    listen-on { any; };
+
+    allow-query {
+        localhost;
+        192.168.x.0/24;
+    };
+
+    forwarders {
+        DIRECCIÓN_DNS_OBTENIDA;
+    };
+
+};</code></pre>
+</div>
+<div style="background: #fff8e6; border-left: 5px solid #d6a800; border-radius: 10px; padding: 17px 20px; margin: 20px 0 30px;"><strong style="color: #7f6000;">📌 Atención</strong>
+<p style="margin-bottom: 0px; text-align: justify;">El bloque anterior muestra la <strong>estructura</strong> que necesitamos. Debes adaptar tanto la red <code>192.168.x.0/24</code> como el reenviador a los datos correspondientes a tu propia infraestructura.</p>
+</div>
+<!-- ====================================================== --> <!-- 4.7 IPv4                                              --> <!-- ====================================================== -->
+<h2 style="color: #17365d;">4.7. Configurar BIND9 para utilizar IPv4</h2>
+<p style="text-align: justify;">Nuestro entorno de prácticas está configurado para trabajar con <strong>IPv4</strong>. Por ello, configuraremos BIND9 para utilizar únicamente este protocolo.</p>
+<p>Edita el fichero:</p>
+<div style="display: flex; flex-wrap: wrap; gap: 12px; margin: 18px 0;">
+<div style="flex: 1 1 300px;"><strong>Con vim</strong>
+<pre style="background: #1e293b; color: #f8fafc; padding: 14px 16px; border-radius: 8px; overflow-x: auto;"><code>sudo vim /etc/default/named</code></pre>
+</div>
+<div style="flex: 1 1 300px;"><strong>Con nano</strong>
+<pre style="background: #1e293b; color: #f8fafc; padding: 14px 16px; border-radius: 8px; overflow-x: auto;"><code>sudo nano /etc/default/named</code></pre>
+</div>
+</div>
+<p>Añade la opción <code>-4</code> a las opciones de ejecución de BIND9.</p>
+<div style="background: #fff8e6; border-left: 5px solid #d6a800; border-radius: 10px; padding: 17px 20px; margin: 20px 0 30px;"><strong style="color: #7f6000;">📌 Antes de modificar</strong>
+<p style="margin-bottom: 0px; text-align: justify;">Comprueba el contenido actual del fichero y <strong>mantén las opciones que ya existan</strong>. El objetivo es añadir el funcionamiento mediante IPv4, no sustituir innecesariamente el resto de la configuración.</p>
+</div>
+<!-- ====================================================== --> <!-- 4.8 VALIDACIÓN                                        --> <!-- ====================================================== -->
+<h2 style="color: #17365d;">4.8. Validar la configuración</h2>
+<p>Antes de aplicar los cambios debemos comprobar que la configuración de BIND9 no contiene errores de sintaxis.</p>
+<pre style="background: #1e293b; color: #f8fafc; padding: 14px 16px; border-radius: 8px; overflow-x: auto;"><code>sudo named-checkconf</code></pre>
+<div style="background: #edf7ed; border-left: 5px solid #548235; border-radius: 10px; padding: 16px 20px; margin: 18px 0 28px;"><strong style="color: #385723;">✅ Configuración correcta</strong>
+<p style="margin-bottom: 0px; text-align: justify;">Si no existen errores de sintaxis, el comando finalizará sin mostrar mensajes. Si aparece algún error, <strong>no reinicies BIND9 todavía</strong>: localízalo y corrígelo primero.</p>
+</div>
+<!-- ====================================================== --> <!-- 4.9 APLICAR CAMBIOS                                   --> <!-- ====================================================== -->
+<h2 style="color: #17365d;">4.9. Aplicar los cambios</h2>
+<p>Una vez validada correctamente la configuración, reinicia BIND9:</p>
+<pre style="background: #1e293b; color: #f8fafc; padding: 14px 16px; border-radius: 8px; overflow-x: auto;"><code>sudo systemctl restart bind9</code></pre>
+<p>A continuación, comprueba que el servicio continúa funcionando:</p>
+<pre style="background: #1e293b; color: #f8fafc; padding: 14px 16px; border-radius: 8px; overflow-x: auto;"><code>sudo systemctl status bind9</code></pre>
+<p>El servicio deberá aparecer como <strong>activo</strong>.</p>
+<!-- ====================================================== --> <!-- COMPROBACIÓN FINAL                                     --> <!-- ====================================================== -->
+<section style="background: #edf7ed; border-left: 5px solid #548235; padding: 20px; border-radius: 10px; margin-top: 30px;">
+<h2 style="color: #385723; margin-top: 0;">✅ Comprobación de BIND9</h2>
+<p style="text-align: justify;">Antes de continuar, verifica que has completado correctamente todo el proceso:</p>
+<div style="background: white; border: 1px solid #cfe0c9; border-radius: 8px; padding: 16px 20px;">
+<p style="margin-top: 0;">☐ He identificado la puerta de enlace mediante <code>ip route</code>.</p>
+<p>☐ He identificado la interfaz conectada mediante NAT.</p>
+<p>☐ He identificado los servidores DNS mediante <code>resolvectl</code>.</p>
+<p>☐ He configurado <code>listen-on</code>.</p>
+<p>☐ He autorizado mi Red Interna mediante <code>allow-query</code>.</p>
+<p>☐ He utilizado como <code>forwarders</code> los DNS obtenidos de la configuración NAT.</p>
+<p>☐ He configurado BIND9 para trabajar mediante IPv4.</p>
+<p>☐ <code>named-checkconf</code> no muestra errores.</p>
+<p style="margin-bottom: 0;">☐ Después de aplicar los cambios, <code>systemctl status bind9</code> muestra el servicio activo.</p>
+</div>
+</section>
+<!-- ====================================================== --> <!-- PORTFOLIO                                              --> <!-- ====================================================== -->
+<section style="background: #f4f8fc; border: 1px solid #d4e2ef; border-radius: 10px; padding: 18px 20px; margin-top: 24px;">
+<h3 style="color: #17365d; margin-top: 0;">📁 Portfolio</h3>
+<p style="text-align: justify;">Documenta la configuración realizada. Las evidencias deben permitir comprobar <strong>cómo has obtenido la información necesaria</strong>, no únicamente mostrar el resultado final.</p>
+<p style="margin-bottom: 0px; text-align: justify;">Incluye la información relevante obtenida con <code>ip route</code> y <code>resolvectl</code>, identifica el reenviador seleccionado y conserva evidencias de la <strong>validación de la configuración y del estado final de BIND9</strong>.</p>
+</section>
+<!-- ====================================================== --> <!-- CIERRE                                                 --> <!-- ====================================================== -->
+<div style="background: #17365d; color: white; border-radius: 12px; padding: 20px; margin-top: 28px;">
+<h3 style="color: #a7f3d0; margin-top: 0;">➡️ Siguiente paso</h3>
+<p style="margin-bottom: 0px; text-align: justify;">BIND9 ya conoce qué equipos pueden consultarlo y a qué servidores debe reenviar las consultas externas. Ahora prepararemos <strong>DNS-LDAP para actuar como router</strong> y permitir que los equipos de nuestra Red Interna puedan acceder al exterior.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</article>
+</div></main>
+<footer id="siteFooter"><div id="siteFooterContent"> <div id="packageLicense" class="cc cc-by-sa"> <p> <span class="license-label">Licencia: </span><a href="https://creativecommons.org/licenses/by-sa/4.0/" class="license">Creative Commons: Reconocimiento - compartir igual 4.0</a></p>
+</div>
+</div></footer>
+</div>
+<p id="made-with-eXe"> <a href="https://exelearning.net/" target="_blank" rel="noopener"> <span>Creado con eXeLearning <span>(Ventana nueva)</span></span></a></p>
+</body>
+</html>

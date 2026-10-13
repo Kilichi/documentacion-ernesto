@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="es" id="exe-page-mugzepfi-60h8z1z3a">
+<head>
+<meta charset="utf-8">
+<meta name="generator" content="eXeLearning v4.0.5">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="license" type="text/html" href="https://creativecommons.org/licenses/by-sa/4.0/">
+<title>1.3 · Follow the connection | LS 0 - Getting ready</title>
+<link rel="icon" type="image/x-icon" href="../libs/favicon.ico">
+<script>document.querySelector("html").classList.add("js");</script><script src="../libs/jquery/jquery.min.js"> </script><script src="../libs/common_i18n.js"> </script><script src="../libs/common.js"> </script><script src="../libs/exe_export.js"> </script><script src="../libs/bootstrap/bootstrap.bundle.min.js"> </script><link rel="stylesheet" href="../libs/bootstrap/bootstrap.min.css">
+<script src="../idevices/text/text.js"></script><link rel="stylesheet" href="../idevices/text/text.css">
+<link rel="stylesheet" href="../content/css/base.css"><script src="../theme/style.js"> </script><link rel="stylesheet" href="../theme/style.css">
+<script src="../libs/SCORM_API_wrapper.js"></script>
+<script src="../libs/SCOFunctions.js"></script>
+</head>
+<body class="exe-export exe-scorm exe-scorm12" onload="loadPage()">
+<script>document.body.className+=" js"</script>
+<div class="exe-content exe-export pre-js siteNav-hidden"><main id="page-mugzepfi-60h8z1z3a" class="page"> 
+<header class="main-header">
+<div class="package-header"><p class="package-title">LS 0 - Getting ready</p></div>
+<div class="page-header"><h1 class="page-title">1.3 · Follow the connection</h1></div>
+</header><div id="page-content-page-mugzepfi-60h8z1z3a" class="page-content">
+<article id="block-mumaqc9s-q8bhe4uty" class="box no-header">
+<header class="box-head no-icon">
+<button class="box-toggle box-toggle-on" title="Toggle content">
+<span>Toggle content</span>
+</button></header>
+<div class="box-content">
+<div id="idevice-1790663361183-w8up90s23" class="idevice_node text" data-idevice-path="../idevices/text/" data-idevice-type="text" data-idevice-component-type="json" data-idevice-json-data="{&quot;ideviceId&quot;:&quot;idevice-1790663361183-w8up90s23&quot;}">
+<div class="exe-text-template">
+    <div style="max-width: 1050px; margin: auto; font-family: Arial,Helvetica,sans-serif; color: #243247; line-height: 1.65;"><!-- ====================================================== --> <!-- CABECERA                                               --> <!-- ====================================================== -->
+<div style="background: #17365d; color: white; padding: 18px 22px; border-radius: 10px;">
+<h2 style="color: white; margin: 0;">🔎 1.3 · Follow the connection</h2>
+<p style="margin: 6px 0 0;">¿Qué camino sigue una comunicación?</p>
+</div>
+<!-- ====================================================== --> <!-- OBJETIVO                                               --> <!-- ====================================================== -->
+<div style="background: #eef5fb; border-left: 5px solid #2980b9; padding: 14px 18px; margin: 20px 0; border-radius: 5px;"><strong style="color: #17365d;"> 🎯 Objetivo </strong><br />Interpretar el recorrido de una comunicación dentro de nuestro escenario, diferenciando entre un destino situado en la <strong>misma red</strong> y un destino situado <strong>fuera de ella</strong>, e identificar la función de la <strong>puerta de enlace</strong>.</div>
+<!-- ====================================================== --> <!-- INTRODUCCIÓN                                           --> <!-- ====================================================== -->
+<p style="text-align: justify;">Ya sabemos cómo están conectadas nuestras máquinas: Git, Web, FTP, DNS-LDAP y Linux Mint comparten la <strong>Red interna 192.168.X.0/24</strong>.</p>
+<p style="text-align: justify;">También sabemos que DNS-LDAP dispone de una segunda interfaz conectada a la <strong>Red NAT / NAT</strong>.</p>
+<p style="text-align: justify;">Ahora vamos a cambiar nuestra forma de observar la infraestructura. En lugar de preguntarnos <em>«¿cómo están conectadas las máquinas?»</em>, seguiremos el recorrido de una comunicación desde su <strong>origen</strong> hasta su <strong>destino</strong>.</p>
+<!-- ====================================================== --> <!-- PREGUNTA CLAVE                                         --> <!-- ====================================================== -->
+<div style="background: #fff8e8; border-left: 5px solid #f0ad4e; padding: 16px 18px; margin: 20px 0; border-radius: 5px;"><strong style="color: #8a5a00; font-size: 17px;"> 💡 La primera pregunta </strong>
+<p style="text-align: center; font-size: 19px; margin: 12px 0 5px;"><strong> ¿El destino está dentro o fuera de mi red? </strong></p>
+<p style="text-align: center; margin: 5px 0 0;">La respuesta determinará el camino que deberá seguir la comunicación.</p>
+</div>
+<!-- ====================================================== --> <!-- EJEMPLO                                                --> <!-- ====================================================== -->
+<h3 style="color: #17365d; margin-top: 32px;">🧪 Trabajemos con un ejemplo</h3>
+<p style="text-align: justify;">Supongamos que a un alumno se le ha asignado <strong>X = 200</strong> y ha elegido <strong>Y = 200</strong> para su cliente Linux Mint.</p>
+<div style="background: #f7f9fa; border: 1px solid #d5dde5; border-radius: 8px; padding: 15px 18px; margin: 18px 0;">
+<table style="width: 100%; border-collapse: collapse;">
+<thead>
+<tr style="background: #17365d; color: white;">
+<th style="padding: 9px; border: 1px solid #ccd6df; text-align: center;">Máquina</th>
+<th style="padding: 9px; border: 1px solid #ccd6df; text-align: center;">Dirección</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="padding: 9px; border: 1px solid #ccd6df; text-align: center;">DNS-LDAP</td>
+<td style="padding: 9px; border: 1px solid #ccd6df; text-align: center;"><code>192.168.200.253/24</code></td>
+</tr>
+<tr>
+<td style="padding: 9px; border: 1px solid #ccd6df; text-align: center;">Git</td>
+<td style="padding: 9px; border: 1px solid #ccd6df; text-align: center;"><code>192.168.200.104/24</code></td>
+</tr>
+<tr>
+<td style="padding: 9px; border: 1px solid #ccd6df; text-align: center;">Web</td>
+<td style="padding: 9px; border: 1px solid #ccd6df; text-align: center;"><code>192.168.200.154/24</code></td>
+</tr>
+<tr>
+<td style="padding: 9px; border: 1px solid #ccd6df; text-align: center;">FTP</td>
+<td style="padding: 9px; border: 1px solid #ccd6df; text-align: center;"><code>192.168.200.204/24</code></td>
+</tr>
+<tr style="background: #eaf7ee;">
+<td style="padding: 9px; border: 1px solid #ccd6df; text-align: center;">Linux Mint</td>
+<td style="padding: 9px; border: 1px solid #ccd6df; text-align: center;"><code>192.168.80.200/24</code></td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- ====================================================== --> <!-- CASO 1                                                 --> <!-- ====================================================== -->
+<h3 style="color: #17365d; margin-top: 32px;">🟦 Caso 1 · El destino está en nuestra red</h3>
+<p style="text-align: justify;">Desde Linux Mint queremos comunicarnos con el servidor Web.</p>
+<div style="background: #eef5fb; border-left: 5px solid #3498db; padding: 17px 19px; margin: 18px 0; border-radius: 7px;">
+<div style="text-align: center;"><span style="display: inline-block; background: #eaf7ee; border: 2px solid #4f8a62; border-radius: 7px; padding: 9px 16px; margin: 5px;"> 💻 <strong>Linux Mint</strong><br /><code>192.168.200.200</code> </span> <strong style="color: #3498db; font-size: 22px;"> → </strong> <span style="display: inline-block; background: white; border: 2px solid #3498db; border-radius: 7px; padding: 9px 16px; margin: 5px;"> 🌐 <strong>Web</strong><br /><code>192.168.200.154</code> </span></div>
+</div>
+<p style="text-align: justify;">Linux Mint tiene la dirección <code>192.168.200.200/24</code> y Web <code>192.168.200.154/24</code>.</p>
+<p style="text-align: justify;">Ambas direcciones pertenecen a la misma red:</p>
+<div style="text-align: center; margin: 15px 0;"><span style="display: inline-block; background: #eaf4fb; border: 2px solid #3498db; border-radius: 6px; padding: 8px 22px;"> <code style="font-size: 19px; font-weight: bold;">
+        192.168.200.0/24
+      </code> </span></div>
+<div style="background: #eaf7ee; border-left: 5px solid #4f8a62; padding: 14px 18px; margin: 18px 0; border-radius: 5px;"><strong style="color: #315f40;"> ✓ Mismo segmento de red </strong>
+<p style="margin: 7px 0 0;">Como origen y destino pertenecen a la misma red, la comunicación puede realizarse <strong>dentro de nuestra Red interna</strong>. No necesitamos utilizar la conexión con la Red NAT / NAT.</p>
+</div>
+<!-- ====================================================== --> <!-- CAMBIAMOS EL DESTINO                                   --> <!-- ====================================================== -->
+<h3 style="color: #17365d; margin-top: 34px;">🌍 Caso 2 · El destino está fuera de nuestra red</h3>
+<p style="text-align: justify;">Cambiemos ahora la situación. El servidor Web necesita comunicarse con un equipo situado <strong>fuera de la red 192.168.200.0/24</strong>.</p>
+<div style="background: #fff8e8; border-left: 5px solid #f0ad4e; padding: 15px 18px; margin: 18px 0; border-radius: 5px;"><strong style="color: #8a5a00;"> 🤔 Tenemos un problema </strong>
+<p style="margin: 7px 0 0;">El destino ya no pertenece a nuestra Red interna. Por tanto, Web no puede tratarlo como otra máquina de <code>192.168.200.0/24</code>.</p>
+<p style="margin: 7px 0 0;"><strong> ¿A quién debe entregar la comunicación para poder alcanzar otras redes? </strong></p>
+</div>
+<!-- ====================================================== --> <!-- GATEWAY                                                --> <!-- ====================================================== -->
+<h3 style="color: #17365d; margin-top: 30px;">🚪 La puerta de enlace</h3>
+<p style="text-align: justify;">Cuando un equipo necesita comunicarse con un destino que <strong>no pertenece a su propia red</strong>, necesita disponer de una <strong>puerta de enlace predeterminada</strong> o <em>default gateway</em>.</p>
+<div style="background: #eef5fb; border-left: 5px solid #2980b9; padding: 15px 18px; margin: 18px 0; border-radius: 5px;"><strong style="color: #17365d;"> 🚪 Default gateway </strong>
+<p style="margin: 7px 0 0;">Es el equipo de nuestra red al que enviamos las comunicaciones destinadas a <strong>otras redes</strong>.</p>
+</div>
+<!-- ====================================================== --> <!-- NUESTRO GATEWAY                                       --> <!-- ====================================================== -->
+<h3 style="color: #17365d; margin-top: 30px;">🖥️ ¿Quién puede cumplir esa función?</h3>
+<p style="text-align: justify;">Recordemos el diseño que acabamos de estudiar. Solo una de nuestras máquinas está conectada <strong>a las dos redes</strong>:</p>
+<div style="text-align: center; margin: 20px 0;">
+<div style="display: inline-block; background: white; border: 2px solid #17365d; border-radius: 8px; padding: 12px 30px;">🖥️ <strong>DNS-LDAP</strong><br /><code>192.168.X.253</code>
+<div style="font-size: 12px; color: #5d6d7e; margin-top: 5px;">Red interna + Red NAT</div>
+</div>
+</div>
+<p style="text-align: justify;">En nuestro escenario utilizaremos la dirección <code>192.168.X.253</code> del servidor DNS-LDAP como <strong>puerta de enlace de las máquinas de la Red interna</strong>.</p>
+<div style="background: #fff8e8; border-left: 5px solid #f0ad4e; padding: 14px 18px; margin: 18px 0; border-radius: 5px;"><strong style="color: #8a5a00;"> 📌 Importante </strong>
+<p style="margin: 7px 0 0;">La puerta de enlace debe ser una dirección <strong>alcanzable desde la propia red</strong>. Por eso utilizaremos la interfaz interna de DNS-LDAP: <code>192.168.X.253</code>.</p>
+</div>
+<!-- ====================================================== --> <!-- SEGUIMOS EL CAMINO                                    --> <!-- ====================================================== -->
+<h3 style="color: #17365d; margin-top: 32px;">🧭 Sigamos la comunicación</h3>
+<p style="text-align: justify;">Volvamos al ejemplo con <strong>X = 35</strong>. Si Web necesita alcanzar un destino situado fuera de <code>192.168.200.0/24</code>, el recorrido comenzará así:</p>
+<div style="background: #f7f9fa; border: 1px solid #d5dde5; border-radius: 10px; padding: 22px; text-align: center;"><!-- WEB -->
+<div style="display: inline-block; background: #eaf4fb; border: 2px solid #3498db; border-radius: 7px; padding: 9px 24px;">🌐 <strong>Web</strong><br /><code>192.168.200.154</code></div>
+<div style="color: #3498db; font-size: 21px;">↓</div>
+<!-- INTERNAL -->
+<div style="display: inline-block; background: #eaf4fb; border: 2px solid #3498db; border-radius: 7px; padding: 8px 25px;"><strong style="color: #1769aa;"> Red interna · 192.168.200.0/24 </strong></div>
+<div style="color: #3498db; font-size: 21px;">↓</div>
+<!-- GATEWAY -->
+<div style="display: inline-block; background: white; border: 2px solid #17365d; border-radius: 7px; padding: 10px 25px;">🚪 <strong>DNS-LDAP</strong><br /><code>192.168.200.253</code><br /><span style="font-size: 12px; color: #5d6d7e;"> puerta de enlace </span></div>
+<div style="color: #e67e22; font-size: 21px;">↓</div>
+<!-- NAT NETWORK -->
+<div style="display: inline-block; background: #fff3e0; border: 2px solid #e67e22; border-radius: 7px; padding: 8px 25px;"><strong style="color: #c65300;"> Red NAT </strong></div>
+<div style="color: #e67e22; font-size: 21px;">↓</div>
+<!-- EXTERIOR -->
+<div style="display: inline-block; background: white; border: 2px solid #17365d; border-radius: 25px; padding: 8px 25px; font-weight: bold;">☁️ Exterior</div>
+</div>
+<!-- ====================================================== --> <!-- COMPARACIÓN                                            --> <!-- ====================================================== -->
+<h3 style="color: #17365d; margin-top: 32px;">⚖️ Dos destinos, dos recorridos</h3>
+<div style="overflow-x: auto; margin-top: 15px;">
+<table style="width: 100%; border-collapse: collapse; min-width: 700px;">
+<thead>
+<tr style="background: #17365d; color: white;">
+<th style="padding: 10px; border: 1px solid #ccd6df; text-align: center;">Destino</th>
+<th style="padding: 10px; border: 1px solid #ccd6df; text-align: center;">¿Está en mi red?</th>
+<th style="padding: 10px; border: 1px solid #ccd6df; text-align: center;">¿Necesita gateway?</th>
+<th style="padding: 10px; border: 1px solid #ccd6df; text-align: center;">Recorrido</th>
+</tr>
+</thead>
+<tbody>
+<tr style="background: #eef5fb;">
+<td style="padding: 10px; border: 1px solid #ccd6df; text-align: center;"><code>192.168.X...</code></td>
+<td style="padding: 10px; border: 1px solid #ccd6df; text-align: center;">✔</td>
+<td style="padding: 10px; border: 1px solid #ccd6df; text-align: center;">✖</td>
+<td style="padding: 10px; border: 1px solid #ccd6df; text-align: center;">Red interna → destino</td>
+</tr>
+<tr style="background: #fff8e8;">
+<td style="padding: 10px; border: 1px solid #ccd6df; text-align: center;">Otra red</td>
+<td style="padding: 10px; border: 1px solid #ccd6df; text-align: center;">✖</td>
+<td style="padding: 10px; border: 1px solid #ccd6df; text-align: center;">✔</td>
+<td style="padding: 10px; border: 1px solid #ccd6df; text-align: center;">Red interna → gateway → otras redes</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- ====================================================== --> <!-- PEQUEÑO RETO                                           --> <!-- ====================================================== -->
+<div style="background: #eaf7ee; border-left: 5px solid #4f8a62; padding: 16px 18px; margin: 25px 0; border-radius: 5px;"><strong style="color: #315f40; font-size: 17px;"> 🧠 Comprueba que lo has entendido </strong>
+<p style="margin: 10px 0;">Continuamos trabajando con la red <code>192.168.200.0/24</code>.</p>
+<p style="margin: 7px 0;">El servidor Git tiene la dirección <code>192.168.200.104/24</code>.</p>
+<p style="margin: 12px 0 5px;"><strong>1.</strong> Si quiere comunicarse con <code>192.168.200.204</code>, ¿necesitará utilizar la puerta de enlace?</p>
+<p style="margin: 5px 0;"><strong>2.</strong> Si el destino está fuera de <code>192.168.200.0/24</code>, ¿a qué dirección deberá enviar inicialmente la comunicación?</p>
+<p style="margin: 5px 0 0;"><strong>3.</strong> Explica qué diferencia existe entre ambos recorridos.</p>
+</div>
+<!-- ====================================================== --> <!-- TODAVÍA NO CONFIGURAMOS                                --> <!-- ====================================================== -->
+<div style="background: #fff8e8; border-left: 5px solid #f0ad4e; padding: 14px 18px; margin: 20px 0; border-radius: 5px;"><strong style="color: #8a5a00;"> 📌 Por ahora, solo necesitamos comprenderlo </strong>
+<p style="margin: 7px 0 0; text-align: justify;">Todavía no vamos a configurar este comportamiento. Antes necesitamos recuperar algunos conocimientos de <strong>Linux y redes</strong> que utilizaremos para construir y comprobar nuestro escenario.</p>
+</div>
+<!-- ====================================================== --> <!-- CONCLUSIÓN                                             --> <!-- ====================================================== -->
+<div style="background: #17365d; color: white; padding: 17px 20px; margin-top: 25px; border-radius: 8px; text-align: center;"><strong style="font-size: 18px;"> ¿Dentro o fuera de mi red? </strong>
+<div style="margin-top: 6px;">Esa será nuestra primera pregunta cuando analicemos el recorrido de una comunicación.</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</article>
+</div></main>
+<footer id="siteFooter"><div id="siteFooterContent"> <div id="packageLicense" class="cc cc-by-sa"> <p> <span class="license-label">Licencia: </span><a href="https://creativecommons.org/licenses/by-sa/4.0/" class="license">Creative Commons: Reconocimiento - compartir igual 4.0</a></p>
+</div>
+</div></footer>
+</div>
+<p id="made-with-eXe"> <a href="https://exelearning.net/" target="_blank" rel="noopener"> <span>Creado con eXeLearning <span>(Ventana nueva)</span></span></a></p>
+</body>
+</html>

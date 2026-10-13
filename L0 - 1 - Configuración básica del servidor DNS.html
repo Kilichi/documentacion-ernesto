@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="es" id="exe-index">
+<head>
+<meta charset="utf-8">
+<meta name="generator" content="eXeLearning v4.0.5">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="license" type="text/html" href="https://creativecommons.org/licenses/by-sa/4.0/">
+<title>L0 - 1 - Configuración básica del servidor DNS</title>
+<link rel="icon" type="image/x-icon" href="libs/favicon.ico">
+<script>document.querySelector("html").classList.add("js");</script><script src="libs/jquery/jquery.min.js"> </script><script src="libs/common_i18n.js"> </script><script src="libs/common.js"> </script><script src="libs/exe_export.js"> </script><script src="libs/bootstrap/bootstrap.bundle.min.js"> </script><link rel="stylesheet" href="libs/bootstrap/bootstrap.min.css">
+<script src="idevices/text/text.js"></script><link rel="stylesheet" href="idevices/text/text.css">
+<link rel="stylesheet" href="content/css/base.css"><script src="theme/style.js"> </script><link rel="stylesheet" href="theme/style.css">
+<script src="libs/SCORM_API_wrapper.js"></script>
+<script src="libs/SCOFunctions.js"></script>
+</head>
+<body class="exe-export exe-scorm exe-scorm12" onload="loadPage()">
+<script>document.body.className+=" js"</script>
+<div class="exe-content exe-export pre-js siteNav-hidden"><main id="899ef7e5-08c2-4577-bcaf-9de0f2d27bec" class="page"> 
+<header class="main-header">
+<div class="package-header"><p class="package-title">L0 - 1 - Configuración básica del servidor DNS</p></div>
+<div class="page-header"><h1 class="page-title">1. Introducción</h1></div>
+</header><div id="page-content-899ef7e5-08c2-4577-bcaf-9de0f2d27bec" class="page-content">
+<article id="block-muwntcsj-lhdyqy3of" class="box no-header">
+<header class="box-head no-icon">
+<button class="box-toggle box-toggle-on" title="Toggle content">
+<span>Toggle content</span>
+</button></header>
+<div class="box-content">
+<div id="idevice-1791289998593-efvf7obyp" class="idevice_node text" data-idevice-path="idevices/text/" data-idevice-type="text" data-idevice-component-type="json" data-idevice-json-data="{&quot;ideviceId&quot;:&quot;idevice-1791289998593-efvf7obyp&quot;}">
+<div class="exe-text-template">
+    <!-- ====================================================== --><!-- CONFIGURACIÓN BÁSICA DEL SERVIDOR DNS                  --><!-- ====================================================== -->
+<div style="max-width: 1000px; margin: auto; font-family: Arial, Helvetica, sans-serif; color: #243247; line-height: 1.65;"><!-- ====================================================== --> <!-- CABECERA                                               --> <!-- ====================================================== -->
+<div style="background: #17365d; color: white; padding: 24px; border-radius: 12px; margin-bottom: 24px;">
+<p style="margin: 0px 0px 6px; font-size: 14px; letter-spacing: 0.5px; text-align: center;">DESPLIEGUE DE APLICACIONES WEB</p>
+<h1 style="color: white; margin: 0px; font-size: 30px; text-align: center;">🌐 Configuración básica del servidor DNS</h1>
+<p style="margin: 8px 0px 0px; font-size: 18px; text-align: center;">BIND9 · Resolución externa · Enrutamiento de la red interna</p>
+</div>
+<!-- ====================================================== --> <!-- INTRODUCCIÓN                                           --> <!-- ====================================================== -->
+<h2 style="color: #17365d; border-bottom: 2px solid #d9e2ec; padding-bottom: 8px;">1. Introducción</h2>
+<p style="text-align: justify;">Nuestro entorno de despliegue está formado por varias máquinas virtuales conectadas mediante una <strong>Red Interna de VirtualBox</strong>. Esta red permite que los equipos se comuniquen entre sí, pero <strong>se encuentra aislada del exterior.</strong></p>
+<p style="text-align: justify;">Para ampliar nuestra infraestructura vamos a preparar el servidor <strong>DNS-LDAP</strong>. Este equipo tendrá un papel esencial: proporcionará <strong>resolución DNS</strong> a los equipos de la red interna y actuará como <strong>router</strong> para permitir su comunicación con Internet.</p>
+<!-- ====================================================== --> <!-- OBJETIVO                                               --> <!-- ====================================================== -->
+<section style="background: #eef5fb; border-left: 5px solid #2f75b5; padding: 20px; border-radius: 10px; margin: 26px 0;">
+<h2 style="color: #17365d; margin-top: 0;">🎯 Objetivo</h2>
+<p style="margin-bottom: 0px; text-align: justify;">Realizar la <strong>instalación y configuración básica de BIND9</strong> y preparar el servidor <strong>DNS-LDAP</strong> para proporcionar <strong>resolución de nombres externos</strong> y actuar como <strong>puerta de enlace de la red interna</strong>.</p>
+</section>
+<!-- ====================================================== --> <!-- PUNTO DE PARTIDA                                       --> <!-- ====================================================== -->
+<h2 style="color: #17365d;">🧭 Punto de partida</h2>
+<p style="text-align: justify;">Hasta este momento hemos preparado un entorno virtual en el que nuestros servidores y el equipo cliente pueden comunicarse utilizando sus <strong>direcciones IP</strong>.</p>
+<p>Sin embargo, todavía necesitamos proporcionar a la infraestructura dos capacidades importantes:</p>
+<div style="background: #f7f9fb; border: 1px solid #d9e2ec; border-radius: 10px; padding: 18px 22px; margin: 18px 0 26px;">
+<p style="margin-top: 0;"><strong>1.</strong> Resolver nombres de dominio externos mediante un servicio DNS.</p>
+<p style="margin-bottom: 0;"><strong>2.</strong> Permitir que las máquinas conectadas a la <strong>Red Interna</strong> puedan comunicarse con Internet.</p>
+</div>
+<p>Ambas funciones serán proporcionadas por nuestro servidor <strong>DNS-LDAP</strong>.</p>
+<!-- ====================================================== --> <!-- FUNCIONES DEL SERVIDOR                                 --> <!-- ====================================================== -->
+<h2 style="color: #17365d; margin-top: 30px;">⚙️ Funciones del servidor DNS-LDAP</h2>
+<p>En esta primera configuración, el servidor DNS-LDAP desempeñará <strong>dos funciones diferentes pero complementarias</strong>.</p>
+<div style="display: flex; flex-wrap: wrap; gap: 16px; margin: 22px 0 28px;"><!-- SERVIDOR DNS -->
+<div style="flex: 1 1 380px; background: #f4f8fc; border: 1px solid #d4e2ef; border-radius: 12px; padding: 20px; box-sizing: border-box;">
+<div style="font-size: 30px; margin-bottom: 8px; text-align: center;">🌐</div>
+<h3 style="color: #17365d; margin: 0px 0px 10px; text-align: center;">Servidor DNS-LDAP</h3>
+<p style="text-align: justify;">Instalaremos <strong>BIND9</strong> para que el servidor pueda recibir consultas DNS procedentes de los equipos de nuestra red interna.</p>
+<p style="margin-bottom: 0px; text-align: justify;">En esta configuración inicial utilizaremos <strong>reenviadores DNS</strong> para obtener la resolución de nombres externos.</p>
+</div>
+<!-- ROUTER -->
+<div style="flex: 1 1 380px; background: #f5f9f3; border: 1px solid #d5e4ce; border-radius: 12px; padding: 20px; box-sizing: border-box;">
+<div style="font-size: 30px; margin-bottom: 8px; text-align: center;">🔀</div>
+<h3 style="color: #385723; margin: 0px 0px 10px; text-align: center;">Router de la red interna</h3>
+<p style="text-align: justify;">El servidor estará conectado tanto a la <strong>Red Interna de VirtualBox</strong> como a una red con acceso al exterior.</p>
+<p style="margin-bottom: 0px; text-align: justify;">De esta forma podrá actuar como <strong>puerta de enlace</strong> y encaminar hacia Internet el tráfico generado por las máquinas de nuestra red interna.</p>
+</div>
+</div>
+<!-- ====================================================== --> <!-- ALCANCE                                                --> <!-- ====================================================== -->
+<section style="background: #fff8e6; border: 1px solid #e5c365; border-left: 5px solid #d6a800; border-radius: 10px; padding: 20px; margin: 28px 0;">
+<h2 style="color: #7f6000; margin-top: 0;">📌 Alcance de esta configuración</h2>
+<p style="text-align: justify;">En este recurso realizaremos únicamente la <strong>configuración básica del servicio DNS</strong>. Instalaremos BIND9, permitiremos las consultas desde nuestra red interna y configuraremos la resolución de nombres externos.</p>
+<p style="margin-bottom: 0px; text-align: justify;">La creación y administración de <strong>zonas y registros DNS</strong> no se realizará todavía. Estos contenidos se abordarán posteriormente al trabajar de forma específica con el servidor <strong>DNS-LDAP</strong>.</p>
+</section>
+<!-- ====================================================== --> <!-- RESULTADO ESPERADO                                     --> <!-- ====================================================== -->
+<section style="background: #edf7ed; border-left: 5px solid #548235; padding: 20px; border-radius: 10px; margin-top: 28px;">
+<h2 style="color: #385723; margin-top: 0;">✅ Resultado esperado</h2>
+<p style="text-align: justify;">Al finalizar esta configuración, los equipos conectados a nuestra <strong>Red Interna</strong> deberán poder utilizar el servidor DNS-LDAP como <strong>servidor DNS y puerta de enlace</strong>.</p>
+<p style="margin-bottom: 0px; text-align: justify;">Como resultado, deberán ser capaces de <strong>acceder a Internet y resolver nombres de dominio externos</strong> a través de la infraestructura que hemos configurado.</p>
+</section>
+<!-- ====================================================== --> <!-- CONTINUIDAD                                            --> <!-- ====================================================== -->
+<div style="background: #17365d; color: white; border-radius: 12px; padding: 20px; margin-top: 28px;">
+<h3 style="color: #a7f3d0; margin-top: 0;">➡️ Siguiente paso</h3>
+<p style="margin-bottom: 0px; text-align: justify;">Antes de instalar BIND9, analizaremos <strong>cómo está conectada nuestra infraestructura</strong> y qué función desempeña cada interfaz de red del servidor DNS-LDAP.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</article>
+</div></main>
+<footer id="siteFooter"><div id="siteFooterContent"> <div id="packageLicense" class="cc cc-by-sa"> <p> <span class="license-label">Licencia: </span><a href="https://creativecommons.org/licenses/by-sa/4.0/" class="license">Creative Commons: Reconocimiento - compartir igual 4.0</a></p>
+</div>
+</div></footer>
+</div>
+<p id="made-with-eXe"> <a href="https://exelearning.net/" target="_blank" rel="noopener"> <span>Creado con eXeLearning <span>(Ventana nueva)</span></span></a></p>
+</body>
+</html>

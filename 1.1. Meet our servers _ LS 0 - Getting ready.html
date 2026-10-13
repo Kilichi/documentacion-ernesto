@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="es" id="exe-page-mugzdwid-8qxg8mxwo">
+<head>
+<meta charset="utf-8">
+<meta name="generator" content="eXeLearning v4.0.5">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="license" type="text/html" href="https://creativecommons.org/licenses/by-sa/4.0/">
+<title>1.1. Meet our servers | LS 0 - Getting ready</title>
+<link rel="icon" type="image/x-icon" href="../libs/favicon.ico">
+<script>document.querySelector("html").classList.add("js");</script><script src="../libs/jquery/jquery.min.js"> </script><script src="../libs/common_i18n.js"> </script><script src="../libs/common.js"> </script><script src="../libs/exe_export.js"> </script><script src="../libs/bootstrap/bootstrap.bundle.min.js"> </script><link rel="stylesheet" href="../libs/bootstrap/bootstrap.min.css">
+<script src="../idevices/text/text.js"></script><link rel="stylesheet" href="../idevices/text/text.css">
+<link rel="stylesheet" href="../content/css/base.css"><script src="../theme/style.js"> </script><link rel="stylesheet" href="../theme/style.css">
+<script src="../libs/SCORM_API_wrapper.js"></script>
+<script src="../libs/SCOFunctions.js"></script>
+</head>
+<body class="exe-export exe-scorm exe-scorm12" onload="loadPage()">
+<script>document.body.className+=" js"</script>
+<div class="exe-content exe-export pre-js siteNav-hidden"><main id="page-mugzdwid-8qxg8mxwo" class="page"> 
+<header class="main-header">
+<div class="package-header"><p class="package-title">LS 0 - Getting ready</p></div>
+<div class="page-header"><h1 class="page-title">1.1. Meet our servers</h1></div>
+</header><div id="page-content-page-mugzdwid-8qxg8mxwo" class="page-content">
+<article id="block-mugzp24v-2qhugndex" class="box no-header">
+<header class="box-head no-icon">
+<button class="box-toggle box-toggle-on" title="Toggle content">
+<span>Toggle content</span>
+</button></header>
+<div class="box-content">
+<div id="idevice-1790342494734-iy6sm4t68" class="idevice_node text" data-idevice-path="../idevices/text/" data-idevice-type="text" data-idevice-component-type="json" data-idevice-json-data="{&quot;ideviceId&quot;:&quot;idevice-1790342494734-iy6sm4t68&quot;}">
+<div class="exe-text-template">
+    <div style="max-width: 1050px; margin: auto; font-family: Arial,Helvetica,sans-serif; color: #243247; line-height: 1.65;"><!-- ====================================================== --> <!-- CABECERA                                               --> <!-- ====================================================== -->
+<div style="background: #17365d; color: white; padding: 18px 22px; border-radius: 10px;">
+<h2 style="color: white; margin: 0;">🖥️ 1.1 · Meet our servers</h2>
+<p style="margin: 6px 0 0;">Conoce las máquinas de nuestro entorno</p>
+</div>
+<!-- ====================================================== --> <!-- OBJETIVO                                               --> <!-- ====================================================== -->
+<div style="background: #eef5fb; border-left: 5px solid #2980b9; padding: 14px 18px; margin: 20px 0; border-radius: 5px;"><strong style="color: #17365d;">🎯 Objetivo</strong><br />Identificar las máquinas que forman nuestro entorno de despliegue, reconocer el papel que tendrá cada una e interpretar el direccionamiento IP que utilizaremos.</div>
+<!-- ====================================================== --> <!-- INTRODUCCIÓN                                           --> <!-- ====================================================== -->
+<p style="text-align: justify;">Nuestro entorno está formado por <strong>cinco máquinas virtuales</strong>: Cuatro servidores con <strong>Ubuntu Server</strong> y un equipo cliente con <strong>Linux Mint</strong>.</p>
+<p style="text-align: justify;">Los nombres de los servidores indican el <strong>papel que desempeñarán más adelante</strong>. En este momento todavía no hemos instalado ni configurado los servicios DNS, LDAP, Git, Web o FTP.</p>
+<div style="background: #fff8e8; border-left: 5px solid #f0ad4e; padding: 14px 18px; margin: 18px 0; border-radius: 5px;"><strong style="color: #8a5a00;">💡 Importante</strong><br />Partimos de una infraestructura básica. A medida que avancemos en el módulo iremos instalando, configurando y comprobando los diferentes servicios.</div>
+<!-- ====================================================== --> <!-- RANGO DE RED                                           --> <!-- ====================================================== -->
+<h3 style="color: #17365d; margin-top: 30px;">🌐 Tu rango de red</h3>
+<p style="text-align: justify;">Todos los equipos del aula trabajarán con la misma estructura de direccionamiento, pero cada alumno dispondrá de <strong>su propio rango de red</strong>.</p>
+<div style="background: #eef5fb; border: 2px solid #3498db; border-radius: 8px; padding: 17px; text-align: center; margin: 18px 0;">
+<div style="font-size: 13px; color: #526273;">Tu red interna</div>
+<div style="font-size: 26px; font-weight: bold; color: #17365d; margin: 5px 0;">192.168.<span style="color: #c65300;">X</span>.0/24</div>
+<div><strong style="color: #c65300;">X</strong> = número de rango indicado en el aula</div>
+</div>
+<p style="text-align: justify;">La <strong>X corresponde exclusivamente al tercer octeto</strong>. Este valor será el mismo en todas las máquinas de tu entorno.</p>
+<!-- EJEMPLO -->
+<div style="background: #f7f9fa; border-left: 5px solid #7f8c8d; padding: 14px 18px; margin: 18px 0; border-radius: 5px;"><strong>🔎 Ejemplo</strong>
+<p style="margin: 7px 0 0;">Si el rango asignado es <strong>X = 200</strong>, tu red será:</p>
+<div style="text-align: center; margin: 10px 0;"><code style="font-size: 19px; font-weight: bold;">
+        192.168.200.0/24
+      </code></div>
+<p style="margin-bottom: 0;">Todas tus máquinas utilizarán, por tanto, <strong>200 como tercer octeto</strong>.</p>
+</div>
+<!-- ====================================================== --> <!-- MÁQUINAS                                               --> <!-- ====================================================== -->
+<h3 style="color: #17365d; margin-top: 32px;">🖥️ Las máquinas de nuestro entorno</h3>
+<p>Cada máquina tendrá una función diferente dentro de la infraestructura.</p>
+<!-- DNS-LDAP -->
+<div style="background: #ffffff; border: 1px solid #d5dde5; border-left: 6px solid #17365d; border-radius: 8px; padding: 16px 18px; margin: 14px 0;">
+<div style="font-size: 18px; font-weight: bold; color: #17365d;">🖥️ DNS-LDAP</div>
+<div style="margin-top: 5px;"><strong>Sistema:</strong> Ubuntu Server</div>
+<div><strong>Red interna:</strong> <code>192.168.X.253/24</code></div>
+<p style="margin: 8px 0 0;">Será el servidor encargado posteriormente de los servicios <strong>DNS y LDAP</strong>. Además, será la única máquina conectada tanto a nuestra red interna como a la Red NAT.</p>
+</div>
+<!-- GIT -->
+<div style="background: #ffffff; border: 1px solid #d5dde5; border-left: 6px solid #3498db; border-radius: 8px; padding: 16px 18px; margin: 14px 0;">
+<div style="font-size: 18px; font-weight: bold; color: #1769aa;">🗃️ Git</div>
+<div style="margin-top: 5px;"><strong>Sistema:</strong> Ubuntu Server</div>
+<div><strong>Dirección:</strong> <code>192.168.X.104/24</code></div>
+<p style="margin: 8px 0 0;">Más adelante lo utilizaremos para alojar los servicios relacionados con el <strong>control de versiones</strong>.</p>
+</div>
+<!-- WEB -->
+<div style="background: #ffffff; border: 1px solid #d5dde5; border-left: 6px solid #3498db; border-radius: 8px; padding: 16px 18px; margin: 14px 0;">
+<div style="font-size: 18px; font-weight: bold; color: #1769aa;">🌐 Web</div>
+<div style="margin-top: 5px;"><strong>Sistema:</strong> Ubuntu Server</div>
+<div><strong>Dirección:</strong> <code>192.168.X.154/24</code></div>
+<p style="margin: 8px 0 0;">Será la máquina destinada posteriormente al <strong>despliegue de servicios web</strong>.</p>
+</div>
+<!-- FTP -->
+<div style="background: #ffffff; border: 1px solid #d5dde5; border-left: 6px solid #3498db; border-radius: 8px; padding: 16px 18px; margin: 14px 0;">
+<div style="font-size: 18px; font-weight: bold; color: #1769aa;">📁 FTP</div>
+<div style="margin-top: 5px;"><strong>Sistema:</strong> Ubuntu Server</div>
+<div><strong>Dirección:</strong> <code>192.168.X.204/24</code></div>
+<p style="margin: 8px 0 0;">Será el servidor destinado posteriormente a los <strong>servicios de transferencia de archivos</strong>.</p>
+</div>
+<!-- LINUX MINT -->
+<div style="background: #eaf7ee; border: 1px solid #b9d8c1; border-left: 6px solid #4f8a62; border-radius: 8px; padding: 16px 18px; margin: 14px 0;">
+<div style="font-size: 18px; font-weight: bold; color: #315f40;">💻 Linux Mint</div>
+<div style="margin-top: 5px;"><strong>Sistema:</strong> Linux Mint</div>
+<div><strong>Dirección:</strong> <code>192.168.X.Y/24</code></div>
+<p style="margin: 8px 0 0;">Esta máquina <strong>no es un servidor</strong>. Será nuestro <strong>equipo cliente</strong> y la utilizaremos para acceder, administrar y comprobar los servicios que vayamos desplegando.</p>
+</div>
+<!-- ====================================================== --> <!-- X / Y                                                  --> <!-- ====================================================== -->
+<h3 style="color: #17365d; margin-top: 30px;">🔢 ¿Qué significan X e Y?</h3>
+<div style="display: flex; gap: 15px; flex-wrap: wrap; margin: 15px 0;">
+<div style="flex: 1; min-width: 260px; background: #fff8e8; border-top: 5px solid #e67e22; border-radius: 8px; padding: 15px; box-sizing: border-box;"><strong style="font-size: 18px; color: #c65300;"> X · Tu rango </strong>
+<p style="margin-bottom: 0;">Es el <strong>tercer octeto</strong> y será indicado en el aula. Se mantiene igual en todas las máquinas de tu entorno.</p>
+</div>
+<div style="flex: 1; min-width: 260px; background: #eaf7ee; border-top: 5px solid #4f8a62; border-radius: 8px; padding: 15px; box-sizing: border-box;"><strong style="font-size: 18px; color: #315f40;"> Y · Tu elección </strong>
+<p style="margin-bottom: 0;">Es el <strong>cuarto octeto</strong> de Linux Mint. Elegirás un valor válido que no esté siendo utilizado por otra máquina de tu red.</p>
+</div>
+</div>
+<!-- ====================================================== --> <!-- EJEMPLO COMPLETO                                       --> <!-- ====================================================== -->
+<h3 style="color: #17365d; margin-top: 30px;">🧩 Construyamos un ejemplo</h3>
+<p>Supongamos que tienes asignado el rango <strong>X = 200</strong> y eliges <strong>Y = 200</strong> para Linux Mint:</p>
+<div style="overflow-x: auto;">
+<table style="width: 100%; border-collapse: collapse; min-width: 620px;">
+<thead>
+<tr style="background: #17365d; color: white;">
+<th style="padding: 10px; border: 1px solid #ccd6df; text-align: center;">Máquina</th>
+<th style="padding: 10px; border: 1px solid #ccd6df; text-align: center;">Dirección IP</th>
+<th style="padding: 10px; border: 1px solid #ccd6df; text-align: center;">Tipo</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="padding: 10px; border: 1px solid #ccd6df; text-align: center;">DNS-LDAP</td>
+<td style="padding: 10px; border: 1px solid #ccd6df; text-align: center;"><code>192.168.200.253</code></td>
+<td style="padding: 10px; border: 1px solid #ccd6df; text-align: center;">Servidor</td>
+</tr>
+<tr style="background: #f7f9fa;">
+<td style="padding: 10px; border: 1px solid #ccd6df; text-align: center;">Git</td>
+<td style="padding: 10px; border: 1px solid #ccd6df; text-align: center;"><code>192.168.200.104</code></td>
+<td style="padding: 10px; border: 1px solid #ccd6df; text-align: center;">Servidor</td>
+</tr>
+<tr>
+<td style="padding: 10px; border: 1px solid #ccd6df; text-align: center;">Web</td>
+<td style="padding: 10px; border: 1px solid #ccd6df; text-align: center;"><code>192.168.200.154</code></td>
+<td style="padding: 10px; border: 1px solid #ccd6df; text-align: center;">Servidor</td>
+</tr>
+<tr style="background: #f7f9fa;">
+<td style="padding: 10px; border: 1px solid #ccd6df; text-align: center;">FTP</td>
+<td style="padding: 10px; border: 1px solid #ccd6df; text-align: center;"><code>192.168.200.204</code></td>
+<td style="padding: 10px; border: 1px solid #ccd6df; text-align: center;">Servidor</td>
+</tr>
+<tr style="background: #eaf7ee;">
+<td style="padding: 10px; border: 1px solid #ccd6df; text-align: center;"><strong>Linux Mint</strong></td>
+<td style="padding: 10px; border: 1px solid #ccd6df; text-align: center;"><code>192.168.200.200</code></td>
+<td style="padding: 10px; border: 1px solid #ccd6df; text-align: center;"><strong>Cliente</strong></td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- ====================================================== --> <!-- CIERRE                                                 --> <!-- ====================================================== -->
+<div style="background: #17365d; color: white; padding: 17px 20px; margin-top: 25px; border-radius: 8px; text-align: center;"><strong style="font-size: 17px;"> Ya conocemos nuestras máquinas. </strong>
+<div style="margin-top: 5px;">Ahora necesitamos comprender cómo las conectará VirtualBox y qué tipo de red utilizaremos.</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</article>
+</div></main>
+<footer id="siteFooter"><div id="siteFooterContent"> <div id="packageLicense" class="cc cc-by-sa"> <p> <span class="license-label">Licencia: </span><a href="https://creativecommons.org/licenses/by-sa/4.0/" class="license">Creative Commons: Reconocimiento - compartir igual 4.0</a></p>
+</div>
+</div></footer>
+</div>
+<p id="made-with-eXe"> <a href="https://exelearning.net/" target="_blank" rel="noopener"> <span>Creado con eXeLearning <span>(Ventana nueva)</span></span></a></p>
+</body>
+</html>

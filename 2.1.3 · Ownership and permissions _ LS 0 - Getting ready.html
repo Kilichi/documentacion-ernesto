@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="es" id="exe-page-mugzfxqm-h803wrr0k">
+<head>
+<meta charset="utf-8">
+<meta name="generator" content="eXeLearning v4.0.5">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="license" type="text/html" href="https://creativecommons.org/licenses/by-sa/4.0/">
+<title>2.1.3 · Ownership and permissions | LS 0 - Getting ready</title>
+<link rel="icon" type="image/x-icon" href="../libs/favicon.ico">
+<script>document.querySelector("html").classList.add("js");</script><script src="../libs/jquery/jquery.min.js"> </script><script src="../libs/common_i18n.js"> </script><script src="../libs/common.js"> </script><script src="../libs/exe_export.js"> </script><script src="../libs/bootstrap/bootstrap.bundle.min.js"> </script><link rel="stylesheet" href="../libs/bootstrap/bootstrap.min.css">
+<script src="../idevices/text/text.js"></script><link rel="stylesheet" href="../idevices/text/text.css">
+<link rel="stylesheet" href="../content/css/base.css"><script src="../theme/style.js"> </script><link rel="stylesheet" href="../theme/style.css">
+<script src="../libs/SCORM_API_wrapper.js"></script>
+<script src="../libs/SCOFunctions.js"></script>
+</head>
+<body class="exe-export exe-scorm exe-scorm12" onload="loadPage()">
+<script>document.body.className+=" js"</script>
+<div class="exe-content exe-export pre-js siteNav-hidden"><main id="page-mugzfxqm-h803wrr0k" class="page"> 
+<header class="main-header">
+<div class="package-header"><p class="package-title">LS 0 - Getting ready</p></div>
+<div class="page-header"><h1 class="page-title">2.1.3 · Ownership and permissions</h1></div>
+</header><div id="page-content-page-mugzfxqm-h803wrr0k" class="page-content">
+<article id="block-mumj504a-3z05y5z8i" class="box no-header">
+<header class="box-head no-icon">
+<button class="box-toggle box-toggle-on" title="Toggle content">
+<span>Toggle content</span>
+</button></header>
+<div class="box-content">
+<div id="idevice-1790677482201-enhbp5f68" class="idevice_node text" data-idevice-path="../idevices/text/" data-idevice-type="text" data-idevice-component-type="json" data-idevice-json-data="{&quot;ideviceId&quot;:&quot;idevice-1790677482201-enhbp5f68&quot;}">
+<div class="exe-text-template">
+    <div style="max-width: 1050px; margin: auto; font-family: Arial,Helvetica,sans-serif; color: #243247; line-height: 1.65;"><!-- ====================================================== --> <!-- CABECERA                                               --> <!-- ====================================================== -->
+<div style="background: #17365d; color: white; padding: 18px 22px; border-radius: 10px;">
+<h2 style="color: white; margin: 0px; text-align: center;">🔐 2.1.3 · Ownership and permissions</h2>
+<p style="margin: 6px 0px 0px; text-align: center;">Recuperamos cómo Linux controla el acceso a archivos y directorios</p>
+</div>
+<!-- ====================================================== --> <!-- OBJETIVO                                               --> <!-- ====================================================== -->
+<div style="background: #eef5fb; border-left: 5px solid #2980b9; padding: 14px 18px; margin: 20px 0px; border-radius: 5px; text-align: justify;"><strong style="color: #17365d;"> 🎯 Objetivo </strong><br />Recordar cómo Linux utiliza <strong>propietarios, grupos y permisos</strong> para controlar el acceso a archivos y directorios, interpretar su representación y recuperar los comandos necesarios para modificarlos y comprobar el resultado.</div>
+<!-- ====================================================== --> <!-- INTRODUCCIÓN                                           --> <!-- ====================================================== -->
+<p style="text-align: justify;">Ya sabemos identificar usuarios y grupos y podemos desplazarnos por el sistema de archivos. Pero todavía necesitamos responder a una pregunta fundamental:</p>
+<div style="background: #f7f9fa; border: 1px solid #d5dde5; border-radius: 8px; padding: 16px; text-align: center; margin: 18px 0;"><strong style="color: #17365d; font-size: 18px;"> ¿Quién puede acceder a un recurso y qué puede hacer con él? </strong></div>
+<p style="text-align: justify;">Linux utiliza un sistema de <strong>propiedad y permisos</strong> para determinar qué usuarios pueden leer, modificar o ejecutar archivos y qué operaciones pueden realizar sobre los directorios.</p>
+<!-- ====================================================== --> <!-- CONEXIÓN CON DAW                                       --> <!-- ====================================================== -->
+<div style="background: #fff8e8; border-left: 5px solid #f0ad4e; padding: 15px 18px; margin: 20px 0; border-radius: 5px;"><strong style="color: #8a5a00;"> 🔎 ¿Por qué necesitamos recordarlo? </strong>
+<p style="margin: 7px 0 0; text-align: justify;">Durante el curso trabajaremos con archivos de configuración, directorios de aplicaciones, contenido web y recursos utilizados por diferentes servicios. Un permiso incorrecto puede impedir que un servicio acceda a los archivos que necesita o permitir un acceso que no debería existir.</p>
+</div>
+<!-- ====================================================== --> <!-- 1. LS -L                                               --> <!-- ====================================================== -->
+<h3 style="color: #17365d; margin-top: 32px;">🔎 1 · Reading permissions</h3>
+<p style="text-align: justify;">En el apartado anterior utilizamos <code>ls -l</code> para obtener información detallada sobre los archivos y directorios. Ahora vamos a interpretar parte de esa información.</p>
+<div style="background: #1f2933; color: #f5f7fa; padding: 14px 18px; border-radius: 7px; margin: 15px 0; font-family: Consolas,monospace; overflow-x: auto;">$ ls -l<br />-rw-r----- 1 student developers 1240 Sep 28 10:30 server.conf</div>
+<p>De esta línea nos interesan especialmente tres elementos:</p>
+<div style="display: flex; flex-wrap: wrap; gap: 14px; margin: 18px 0;">
+<div style="flex: 1 1 200px; background: #eef5fb; border-top: 5px solid #3498db; border-radius: 7px; padding: 15px; text-align: center;"><strong style="color: #1769aa;">🔐 Permisos</strong>
+<p style="margin: 7px 0 0;"><code>-rw-r-----</code></p>
+</div>
+<div style="flex: 1 1 200px; background: #eaf7ee; border-top: 5px solid #4f8a62; border-radius: 7px; padding: 15px; text-align: center;"><strong style="color: #315f40;">👤 Propietario</strong>
+<p style="margin: 7px 0 0;"><code>student</code></p>
+</div>
+<div style="flex: 1 1 200px; background: #fff8e8; border-top: 5px solid #f0ad4e; border-radius: 7px; padding: 15px; text-align: center;"><strong style="color: #8a5a00;">👥 Grupo</strong>
+<p style="margin: 7px 0 0;"><code>developers</code></p>
+</div>
+</div>
+<!-- ====================================================== --> <!-- 2. OWNER GROUP OTHERS                                  --> <!-- ====================================================== -->
+<h3 style="color: #17365d; margin-top: 32px;">👤 2 · Owner, group and others</h3>
+<p style="text-align: justify;">Los permisos se organizan en tres conjuntos. Cada uno corresponde a una categoría de usuarios:</p>
+<table style="width: 100%; border-collapse: collapse; margin: 16px 0;">
+<thead>
+<tr style="background: #17365d; color: white;">
+<th style="padding: 9px; border: 1px solid #ccd6df; text-align: center;">Categoría</th>
+<th style="padding: 9px; border: 1px solid #ccd6df; text-align: center;">Representación</th>
+<th style="padding: 9px; border: 1px solid #ccd6df;">¿A quién afecta?</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="padding: 9px; border: 1px solid #ccd6df; text-align: center;"><strong>Owner</strong></td>
+<td style="padding: 9px; border: 1px solid #ccd6df; text-align: center;"><code>u</code></td>
+<td style="padding: 9px; border: 1px solid #ccd6df;">Al usuario propietario del recurso.</td>
+</tr>
+<tr style="background: #f7f9fa;">
+<td style="padding: 9px; border: 1px solid #ccd6df; text-align: center;"><strong>Group</strong></td>
+<td style="padding: 9px; border: 1px solid #ccd6df; text-align: center;"><code>g</code></td>
+<td style="padding: 9px; border: 1px solid #ccd6df;">A los usuarios a los que se aplican los permisos del grupo propietario.</td>
+</tr>
+<tr>
+<td style="padding: 9px; border: 1px solid #ccd6df; text-align: center;"><strong>Others</strong></td>
+<td style="padding: 9px; border: 1px solid #ccd6df; text-align: center;"><code>o</code></td>
+<td style="padding: 9px; border: 1px solid #ccd6df;">Al resto de usuarios.</td>
+</tr>
+</tbody>
+</table>
+<!-- ====================================================== --> <!-- 3. RWX                                                 --> <!-- ====================================================== -->
+<h3 style="color: #17365d; margin-top: 32px;">🔑 3 · Read, write and execute</h3>
+<p>Para cada categoría podemos encontrar tres permisos básicos:</p>
+<table style="width: 100%; border-collapse: collapse; margin: 16px 0px; height: 235.087px;">
+<thead>
+<tr style="background: #17365d; color: white; height: 45.5812px;">
+<th style="padding: 9px; border: 1px solid #ccd6df; text-align: center; height: 45.5812px;">Permiso</th>
+<th style="padding: 9px; border: 1px solid #ccd6df; text-align: center; height: 45.5812px;">Símbolo</th>
+<th style="padding: 9px; border: 1px solid #ccd6df; height: 45.5812px;">Archivo</th>
+<th style="padding: 9px; border: 1px solid #ccd6df; height: 45.5812px;">Directorio</th>
+</tr>
+</thead>
+<tbody>
+<tr style="height: 45.5812px;">
+<td style="padding: 9px; border: 1px solid #ccd6df; text-align: center; height: 45.5812px;"><strong>Read</strong></td>
+<td style="padding: 9px; border: 1px solid #ccd6df; text-align: center; height: 45.5812px;"><code>r</code></td>
+<td style="padding: 9px; border: 1px solid #ccd6df; height: 45.5812px;">Leer su contenido.</td>
+<td style="padding: 9px; border: 1px solid #ccd6df; height: 45.5812px;">Consultar los nombres de sus entradas.</td>
+</tr>
+<tr style="background: #f7f9fa; height: 71.9625px;">
+<td style="padding: 9px; border: 1px solid #ccd6df; text-align: center; height: 71.9625px;"><strong>Write</strong></td>
+<td style="padding: 9px; border: 1px solid #ccd6df; text-align: center; height: 71.9625px;"><code>w</code></td>
+<td style="padding: 9px; border: 1px solid #ccd6df; height: 71.9625px;">Modificar su contenido.</td>
+<td style="padding: 9px; border: 1px solid #ccd6df; height: 71.9625px;">Crear, eliminar o renombrar entradas, cuando los demás permisos y condiciones lo permiten.</td>
+</tr>
+<tr style="height: 71.9625px;">
+<td style="padding: 9px; border: 1px solid #ccd6df; text-align: center; height: 71.9625px;"><strong>Execute</strong></td>
+<td style="padding: 9px; border: 1px solid #ccd6df; text-align: center; height: 71.9625px;"><code>x</code></td>
+<td style="padding: 9px; border: 1px solid #ccd6df; height: 71.9625px;">Ejecutarlo cuando se trata de un archivo ejecutable adecuado.</td>
+<td style="padding: 9px; border: 1px solid #ccd6df; height: 71.9625px;">Acceder o atravesar el directorio.</td>
+</tr>
+</tbody>
+</table>
+<!-- IMPORTANTE DIRECTORIOS -->
+<div style="background: #fff8e8; border-left: 5px solid #f0ad4e; padding: 15px 18px; margin: 20px 0; border-radius: 5px;"><strong style="color: #8a5a00;"> 💡 Archivo y directorio no significan lo mismo </strong>
+<p style="margin: 7px 0 0; text-align: justify;">Los símbolos son los mismos, pero su efecto cambia. El permiso <code>x</code>, por ejemplo, permite ejecutar un archivo, mientras que sobre un directorio permite acceder a él y recorrer su estructura.</p>
+</div>
+<!-- ====================================================== --> <!-- 4. INTERPRETING                                        --> <!-- ====================================================== -->
+<h3 style="color: #17365d; margin-top: 32px;">🧩 4 · Let's interpret permissions</h3>
+<div style="background: #1f2933; color: #f5f7fa; padding: 16px 20px; border-radius: 7px; margin: 15px 0; font-family: Consolas,monospace; text-align: center; font-size: 18px;">-   rw-   r--   ---</div>
+<table style="width: 100%; border-collapse: collapse; margin: 16px 0;">
+<thead>
+<tr style="background: #17365d; color: white;">
+<th style="padding: 9px; border: 1px solid #ccd6df; text-align: center;">Bloque</th>
+<th style="padding: 9px; border: 1px solid #ccd6df;">Significado</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="padding: 9px; border: 1px solid #ccd6df; text-align: center;"><code>-</code></td>
+<td style="padding: 9px; border: 1px solid #ccd6df;">El recurso es un archivo ordinario.</td>
+</tr>
+<tr style="background: #f7f9fa;">
+<td style="padding: 9px; border: 1px solid #ccd6df; text-align: center;"><code>rw-</code></td>
+<td style="padding: 9px; border: 1px solid #ccd6df;">El propietario puede leer y escribir.</td>
+</tr>
+<tr>
+<td style="padding: 9px; border: 1px solid #ccd6df; text-align: center;"><code>r--</code></td>
+<td style="padding: 9px; border: 1px solid #ccd6df;">El grupo puede leer.</td>
+</tr>
+<tr style="background: #f7f9fa;">
+<td style="padding: 9px; border: 1px solid #ccd6df; text-align: center;"><code>---</code></td>
+<td style="padding: 9px; border: 1px solid #ccd6df;">El resto de usuarios no dispone de ninguno de estos permisos.</td>
+</tr>
+</tbody>
+</table>
+<!-- ====================================================== --> <!-- CHECK IT                                               --> <!-- ====================================================== -->
+<div style="background: #eaf7ee; border-left: 5px solid #4f8a62; padding: 15px 18px; margin: 20px 0; border-radius: 5px;"><strong style="color: #315f40;"> 🔍 Check it </strong>
+<p style="margin: 7px 0 0;">Ejecuta <code>ls -l</code> sobre varios archivos de tu directorio personal e identifica:</p>
+<ul style="margin-bottom: 0;">
+<li>El tipo de recurso.</li>
+<li>Los permisos del propietario.</li>
+<li>Los permisos del grupo.</li>
+<li>Los permisos del resto de usuarios.</li>
+<li>El propietario y el grupo propietario.</li>
+</ul>
+</div>
+<!-- ====================================================== --> <!-- 5. CHMOD SYMBOLIC                                      --> <!-- ====================================================== -->
+<h3 style="color: #17365d; margin-top: 32px;">🛠️ 5 · Changing permissions with chmod</h3>
+<p style="text-align: justify;">El comando <code>chmod</code> permite modificar los permisos de archivos y directorios.</p>
+<p>Una forma de hacerlo es mediante la <strong>notación simbólica</strong>.</p>
+<div style="background: #eef5fb; border-radius: 7px; padding: 15px 18px; margin: 16px 0; text-align: center;"><code style="font-size: 17px;">
+      chmod [quién] [operación] [permiso] recurso
+    </code></div>
+<div style="display: flex; flex-wrap: wrap; gap: 14px; margin: 18px 0;">
+<div style="flex: 1 1 200px; background: #f7f9fa; padding: 15px; border-radius: 7px; border-top: 4px solid #17365d; text-align: center;"><strong>¿Quién?</strong><br /><code>u</code> · owner<br /><code>g</code> · group<br /><code>o</code> · others<br /><code>a</code> · all</div>
+<div style="flex: 1 1 200px; background: #f7f9fa; padding: 15px; border-radius: 7px; border-top: 4px solid #3498db; text-align: center;"><strong>¿Qué hacemos?</strong><br /><code>+</code> · añadir<br /><code>-</code> · quitar<br /><code>=</code> · establecer</div>
+<div style="flex: 1 1 200px; background: #f7f9fa; padding: 15px; border-radius: 7px; border-top: 4px solid #4f8a62; text-align: center;"><strong>¿Qué permiso?</strong><br /><code>r</code> · read<br /><code>w</code> · write<br /><code>x</code> · execute</div>
+</div>
+<div style="background: #1f2933; color: #f5f7fa; padding: 14px 18px; border-radius: 7px; margin: 15px 0; font-family: Consolas,monospace; line-height: 1.8;">$ chmod u+x script.sh<br />$ chmod g+w shared.txt<br />$ chmod o-r private.txt<br />$ chmod u=rw,g=r,o= report.txt</div>
+<!-- ====================================================== --> <!-- 6. OCTAL                                               --> <!-- ====================================================== -->
+<h3 style="color: #17365d; margin-top: 32px;">🔢 6 · Octal notation</h3>
+<p style="text-align: justify;">También podemos representar los permisos mediante valores numéricos. Cada permiso tiene asociado un valor:</p>
+<div style="display: flex; justify-content: center; gap: 20px; flex-wrap: wrap; margin: 20px 0;">
+<div style="background: #eef5fb; padding: 12px 24px; border-radius: 7px; text-align: center;"><strong style="font-size: 20px;">r = 4</strong></div>
+<div style="background: #eaf7ee; padding: 12px 24px; border-radius: 7px; text-align: center;"><strong style="font-size: 20px;">w = 2</strong></div>
+<div style="background: #fff8e8; padding: 12px 24px; border-radius: 7px; text-align: center;"><strong style="font-size: 20px;">x = 1</strong></div>
+</div>
+<p style="text-align: justify;">Sumando estos valores podemos representar cualquier combinación de permisos.</p>
+<table style="width: 100%; border-collapse: collapse; margin: 16px 0;">
+<thead>
+<tr style="background: #17365d; color: white;">
+<th style="padding: 8px; border: 1px solid #ccd6df;">Valor</th>
+<th style="padding: 8px; border: 1px solid #ccd6df;">Permisos</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="padding: 7px; border: 1px solid #ccd6df; text-align: center;">0</td>
+<td style="padding: 7px; border: 1px solid #ccd6df; text-align: center;"><code>---</code></td>
+</tr>
+<tr style="background: #f7f9fa;">
+<td style="padding: 7px; border: 1px solid #ccd6df; text-align: center;">1</td>
+<td style="padding: 7px; border: 1px solid #ccd6df; text-align: center;"><code>--x</code></td>
+</tr>
+<tr>
+<td style="padding: 7px; border: 1px solid #ccd6df; text-align: center;">2</td>
+<td style="padding: 7px; border: 1px solid #ccd6df; text-align: center;"><code>-w-</code></td>
+</tr>
+<tr style="background: #f7f9fa;">
+<td style="padding: 7px; border: 1px solid #ccd6df; text-align: center;">3</td>
+<td style="padding: 7px; border: 1px solid #ccd6df; text-align: center;"><code>-wx</code></td>
+</tr>
+<tr>
+<td style="padding: 7px; border: 1px solid #ccd6df; text-align: center;">4</td>
+<td style="padding: 7px; border: 1px solid #ccd6df; text-align: center;"><code>r--</code></td>
+</tr>
+<tr style="background: #f7f9fa;">
+<td style="padding: 7px; border: 1px solid #ccd6df; text-align: center;">5</td>
+<td style="padding: 7px; border: 1px solid #ccd6df; text-align: center;"><code>r-x</code></td>
+</tr>
+<tr>
+<td style="padding: 7px; border: 1px solid #ccd6df; text-align: center;">6</td>
+<td style="padding: 7px; border: 1px solid #ccd6df; text-align: center;"><code>rw-</code></td>
+</tr>
+<tr style="background: #f7f9fa;">
+<td style="padding: 7px; border: 1px solid #ccd6df; text-align: center;">7</td>
+<td style="padding: 7px; border: 1px solid #ccd6df; text-align: center;"><code>rwx</code></td>
+</tr>
+</tbody>
+</table>
+<div style="background: #eef5fb; border-left: 5px solid #3498db; padding: 14px 18px; margin: 18px 0; border-radius: 5px;"><strong style="color: #1769aa;"> 🧠 Ejemplo </strong>
+<p style="margin: 7px 0;">Queremos establecer:</p>
+<ul>
+<li>Propietario: <code>rw-</code> → 4 + 2 = <strong>6</strong></li>
+<li>Grupo: <code>r--</code> → <strong>4</strong></li>
+<li>Otros: <code>---</code> → <strong>0</strong></li>
+</ul>
+<div style="background: #1f2933; color: #f5f7fa; padding: 10px 14px; border-radius: 5px; font-family: Consolas,monospace;">$ chmod 640 server.conf</div>
+</div>
+<!-- ====================================================== --> <!-- 7. OWNER                                               --> <!-- ====================================================== -->
+<h3 style="color: #17365d; margin-top: 32px;">👤 7 · Changing ownership</h3>
+<p style="text-align: justify;">Los permisos no son lo único que podemos modificar. También puede ser necesario cambiar el <strong>usuario propietario</strong> o el <strong>grupo propietario</strong> de un recurso.</p>
+<div style="background: #1f2933; color: #f5f7fa; padding: 14px 18px; border-radius: 7px; margin: 15px 0; font-family: Consolas,monospace; line-height: 1.9;">$ chown USER file<br />$ chown USER:GROUP file<br />$ chgrp GROUP file</div>
+<table style="width: 100%; border-collapse: collapse; margin: 16px 0;">
+<thead>
+<tr style="background: #17365d; color: white;">
+<th style="padding: 9px; border: 1px solid #ccd6df; text-align: center;">Comando</th>
+<th style="padding: 9px; border: 1px solid #ccd6df;">Función</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="padding: 9px; border: 1px solid #ccd6df; text-align: center;"><code>chown</code></td>
+<td style="padding: 9px; border: 1px solid #ccd6df;">Cambia el propietario y, opcionalmente, el grupo propietario.</td>
+</tr>
+<tr style="background: #f7f9fa;">
+<td style="padding: 9px; border: 1px solid #ccd6df; text-align: center;"><code>chgrp</code></td>
+<td style="padding: 9px; border: 1px solid #ccd6df;">Cambia el grupo propietario.</td>
+</tr>
+</tbody>
+</table>
+<!-- ====================================================== --> <!-- 8. UMASK                                               --> <!-- ====================================================== -->
+<h3 style="color: #17365d; margin-top: 32px;">🎭 8 · Default permissions and umask</h3>
+<p style="text-align: justify;">Cuando creamos un nuevo archivo o directorio no elegimos manualmente sus permisos cada vez. El sistema parte de unos permisos base y aplica una <strong>máscara denominada <code>umask</code></strong>.</p>
+<p>Podemos consultar la máscara actual ejecutando:</p>
+<div style="background: #1f2933; color: #f5f7fa; padding: 12px 16px; border-radius: 7px; margin: 15px 0; font-family: Consolas,monospace;">$ umask</div>
+<div style="background: #eef5fb; border-left: 5px solid #3498db; padding: 15px 18px; margin: 18px 0; border-radius: 5px;"><strong style="color: #1769aa;"> 💡 ¿Cómo interpretamos <code>umask</code>? </strong>
+<p style="margin: 7px 0;">Como referencia habitual, los permisos base son:</p>
+<ul style="margin-bottom: 7px;">
+<li>Archivos: <code>666</code> → <code>rw-rw-rw-</code></li>
+<li>Directorios: <code>777</code> → <code>rwxrwxrwx</code></li>
+</ul>
+<p style="margin: 7px 0 0;">La máscara elimina permisos de esos valores base.</p>
+</div>
+<div style="background: #f7f9fa; border: 1px solid #d5dde5; padding: 15px 18px; border-radius: 7px; margin: 18px 0;"><strong>Ejemplo: <code>umask 022</code></strong>
+<p>De forma simplificada:</p>
+<div style="background: #1f2933; color: #f5f7fa; padding: 12px 16px; border-radius: 5px; font-family: Consolas,monospace; line-height: 1.8;">Archivo: 666 → 644 → rw-r--r--<br />Directorio: 777 → 755 → rwxr-xr-x</div>
+</div>
+<!-- ====================================================== --> <!-- CHECK IT                                               --> <!-- ====================================================== -->
+<div style="background: #eaf7ee; border-left: 5px solid #4f8a62; padding: 16px 18px; margin: 24px 0; border-radius: 5px;"><strong style="color: #315f40; font-size: 17px;"> 🔍 Check it </strong>
+<p style="margin: 8px 0;">Cada vez que modifiques permisos o propietarios, <strong>comprueba el resultado</strong>.</p>
+<div style="background: #1f2933; color: #f5f7fa; padding: 11px 14px; border-radius: 5px; margin-top: 10px; font-family: Consolas,monospace;">$ ls -l</div>
+<p style="margin: 10px 0 0;">No basta con ejecutar <code>chmod</code>, <code>chown</code> o <code>chgrp</code>: debes ser capaz de interpretar el resultado.</p>
+</div>
+<!-- ====================================================== --> <!-- MINI CHALLENGE                                         --> <!-- ====================================================== -->
+<div style="background: #f7f9fa; border: 2px solid #4f8a62; padding: 18px 20px; margin: 25px 0; border-radius: 8px;"><strong style="color: #315f40; font-size: 18px;"> 🧩 Mini challenge · Protect the configuration </strong> <!-- CONTINUIDAD -->
+<div style="background: #eef5fb; border-left: 5px solid #3498db; padding: 13px 16px; margin: 15px 0; border-radius: 5px;"><strong style="color: #1769aa;"> 🔗 Continuamos con el reto anterior </strong>
+<p style="margin: 7px 0 0; text-align: justify;">En <strong>2.1.2 · File system and directories</strong> preparaste tu espacio de trabajo <code>~/daw_lab</code> y creaste varios directorios y archivos.</p>
+<p style="margin: 7px 0px 0px; text-align: justify;">Ahora vamos a continuar trabajando sobre <strong>ese mismo entorno</strong>.</p>
+</div>
+<!-- ESTRUCTURA DE PARTIDA -->
+<p>Antes de continuar, comprueba que dispones de esta estructura:</p>
+<div style="background: #1f2933; color: #f5f7fa; padding: 14px 18px; border-radius: 7px; margin: 15px 0; font-family: Consolas,monospace; line-height: 1.7; overflow-x: auto;">~/daw_lab/<br />├── config/<br />│   └── server.conf<br />└── backup/<br />    └── server.conf</div>
+<!-- NUEVA SITUACIÓN -->
+<p style="margin: 16px 0 8px; text-align: justify;">Hasta ahora nos hemos preocupado de <strong>crear y organizar los recursos</strong>. Ha llegado el momento de controlar quién puede utilizarlos.</p>
+<p>Queremos proteger el archivo <code>~/daw_lab/config/server.conf</code> de forma que:</p>
+<ul>
+<li>El <strong>propietario</strong> pueda leerlo y modificarlo.</li>
+<li>El <strong>grupo</strong> pueda leerlo.</li>
+<li>El resto de usuarios <strong>no tenga acceso</strong>.</li>
+</ul>
+<!-- TAREA -->
+<p><strong>Tu tarea:</strong></p>
+<ol style="padding-left: 25px;">
+<li>Localiza <code>server.conf</code> dentro de tu espacio <code>daw_lab</code>.</li>
+<li>Comprueba sus permisos actuales.</li>
+<li>Determina qué permisos necesita cada categoría.</li>
+<li>Exprésalos mediante <strong>notación simbólica</strong>.</li>
+<li>Exprésalos mediante <strong>notación octal</strong>.</li>
+<li>Aplica los permisos necesarios.</li>
+<li>Comprueba que el resultado coincide con lo solicitado.</li>
+</ol>
+<!-- COMPROBACIÓN -->
+<div style="background: #eaf7ee; border-left: 4px solid #4f8a62; padding: 11px 14px; margin-top: 15px; border-radius: 4px;"><strong>🔍 Antes de terminar</strong>
+<p style="margin: 5px 0 0;">Debes poder justificar por qué la configuración resultante corresponde a <code>rw-r-----</code>, explicar su equivalencia numérica y <strong>demostrar que los permisos se han aplicado correctamente</strong>.</p>
+</div>
+</div>
+<!-- ====================================================== --> <!-- RECURSOS DE APOYO                                      --> <!-- ====================================================== -->
+<h3 style="color: #17365d; margin-top: 32px;">📚 Recursos de apoyo</h3>
+<!-- DOCUMENTACIÓN -->
+<div style="background: white; border: 1px solid #d5dde5; border-radius: 7px; padding: 14px 16px; margin: 15px 0;"><strong style="color: #17365d;"> 📖 Documentación </strong>
+<p style="margin: 7px 0 10px; text-align: justify;">Utiliza los materiales de Linux Professional Institute para revisar y ampliar los conceptos relacionados con usuarios, permisos y administración de sistemas Linux.</p>
+<a href="https://learning.lpi.org/es/learning-materials/010-160/" target="_blank" rel="noopener noreferrer" style="display: inline-block; background: #17365d; color: white; text-decoration: none; padding: 8px 16px; border-radius: 6px; font-weight: bold;"> 🔗 LPI · Linux Essentials </a></div>
+<!-- VÍDEO -->
+<div style="background: white; border: 1px solid #d5dde5; border-radius: 7px; padding: 14px 16px; margin: 15px 0;"><strong style="color: #17365d;"> 🎬 Recurso audiovisual </strong>
+<p style="margin: 7px 0 14px; text-align: justify;">Utiliza este vídeo como apoyo visual para reforzar los conceptos trabajados en este apartado sobre los <strong>privilegios administrativos en Linux</strong>.</p>
+<div style="position: relative; width: 100%; padding-bottom: 56.25%; height: 0; overflow: hidden; border-radius: 8px; background: #000;"><iframe width="100" height="100" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0;" src="https://www.youtube.com/embed/YoQkAoP68Ec" title="Administrative privileges in Linux" allow="accelerometer; autoplay; clipboard-write; encrypted-media;
+             gyroscope; picture-in-picture; web-share" allowfullscreen="allowfullscreen" referrerpolicy="strict-origin-when-cross-origin">
+    </iframe></div>
+<!-- ORIENTACIÓN -->
+<div style="background: #eef5fb; border-left: 5px solid #3498db; padding: 13px 16px; margin-top: 16px; border-radius: 5px;"><strong style="color: #1769aa;"> 👀 Mientras lo visualizas... </strong>
+<p style="margin: 7px 0 0;">Relaciona lo que aparece en el vídeo con las ideas que acabamos de recuperar:</p>
+<ul style="margin-bottom: 0;">
+<li>¿Qué diferencia existe entre un usuario normal y <code>root</code>?</li>
+<li>¿Cuándo necesitamos privilegios administrativos?</li>
+<li>¿Qué función cumple <code>sudo</code>?</li>
+<li>¿Por qué no debemos utilizar <code>sudo</code> automáticamente?</li>
+</ul>
+</div>
+</div>
+<!-- ====================================================== --> <!-- CIERRE                                                 --> <!-- ====================================================== -->
+<div style="background: #17365d; color: white; padding: 17px 20px; margin-top: 25px; border-radius: 8px; text-align: center;"><strong style="font-size: 18px;"> Ya sabemos quién puede acceder a nuestros recursos y qué puede hacer. </strong>
+<div style="margin-top: 7px;">El siguiente paso será recordar cuándo necesitamos privilegios especiales para administrar el sistema.</div>
+<div style="margin-top: 8px; font-weight: bold;">🛡️ 2.1.4 · Administrative privileges</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</article>
+</div></main>
+<footer id="siteFooter"><div id="siteFooterContent"> <div id="packageLicense" class="cc cc-by-sa"> <p> <span class="license-label">Licencia: </span><a href="https://creativecommons.org/licenses/by-sa/4.0/" class="license">Creative Commons: Reconocimiento - compartir igual 4.0</a></p>
+</div>
+</div></footer>
+</div>
+<p id="made-with-eXe"> <a href="https://exelearning.net/" target="_blank" rel="noopener"> <span>Creado con eXeLearning <span>(Ventana nueva)</span></span></a></p>
+</body>
+</html>

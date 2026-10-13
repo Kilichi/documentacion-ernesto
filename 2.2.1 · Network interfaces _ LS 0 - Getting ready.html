@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="es" id="exe-page-mumknhf5-ugcstk8id">
+<head>
+<meta charset="utf-8">
+<meta name="generator" content="eXeLearning v4.0.5">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="license" type="text/html" href="https://creativecommons.org/licenses/by-sa/4.0/">
+<title>2.2.1 · Network interfaces | LS 0 - Getting ready</title>
+<link rel="icon" type="image/x-icon" href="../libs/favicon.ico">
+<script>document.querySelector("html").classList.add("js");</script><script src="../libs/jquery/jquery.min.js"> </script><script src="../libs/common_i18n.js"> </script><script src="../libs/common.js"> </script><script src="../libs/exe_export.js"> </script><script src="../libs/bootstrap/bootstrap.bundle.min.js"> </script><link rel="stylesheet" href="../libs/bootstrap/bootstrap.min.css">
+<script src="../idevices/text/text.js"></script><link rel="stylesheet" href="../idevices/text/text.css">
+<link rel="stylesheet" href="../content/css/base.css"><script src="../theme/style.js"> </script><link rel="stylesheet" href="../theme/style.css">
+<script src="../libs/SCORM_API_wrapper.js"></script>
+<script src="../libs/SCOFunctions.js"></script>
+</head>
+<body class="exe-export exe-scorm exe-scorm12" onload="loadPage()">
+<script>document.body.className+=" js"</script>
+<div class="exe-content exe-export pre-js siteNav-hidden"><main id="page-mumknhf5-ugcstk8id" class="page"> 
+<header class="main-header">
+<div class="package-header"><p class="package-title">LS 0 - Getting ready</p></div>
+<div class="page-header"><h1 class="page-title">2.2.1 · Network interfaces</h1></div>
+</header><div id="page-content-page-mumknhf5-ugcstk8id" class="page-content">
+<article id="block-mumko6tf-hz4zfuteh" class="box no-header">
+<header class="box-head no-icon">
+<button class="box-toggle box-toggle-on" title="Toggle content">
+<span>Toggle content</span>
+</button></header>
+<div class="box-content">
+<div id="idevice-1790680056961-ewp60lbkk" class="idevice_node text" data-idevice-path="../idevices/text/" data-idevice-type="text" data-idevice-component-type="json" data-idevice-json-data="{&quot;ideviceId&quot;:&quot;idevice-1790680056961-ewp60lbkk&quot;}">
+<div class="exe-text-template">
+    <div style="max-width: 1050px; margin: auto; font-family: Arial,Helvetica,sans-serif; color: #243247; line-height: 1.65;"><!-- ====================================================== --> <!-- CABECERA                                               --> <!-- ====================================================== -->
+<div style="background: #17365d; color: white; padding: 18px 22px; border-radius: 10px;">
+<h2 style="color: white; margin: 0px; text-align: center;">🔌 2.2.1 · Network interfaces</h2>
+<p style="margin: 6px 0px 0px; text-align: center;">Recuperamos cómo identificar y comprobar las interfaces de red en Linux</p>
+</div>
+<!-- ====================================================== --> <!-- OBJETIVO                                               --> <!-- ====================================================== -->
+<div style="background: #eef5fb; border-left: 5px solid #2980b9; padding: 14px 18px; margin: 20px 0px; border-radius: 5px; text-align: justify;"><strong style="color: #17365d;"> 🎯 Objetivo </strong><br />Recordar qué es una <strong>interfaz de red</strong>, identificar las interfaces disponibles en un sistema Linux y utilizar las herramientas básicas para consultar e interpretar su <strong>estado y configuración actual</strong>.</div>
+<!-- ====================================================== --> <!-- INTRODUCCIÓN                                           --> <!-- ====================================================== -->
+<p style="text-align: justify;">Antes de asignar una dirección IP a una máquina necesitamos saber <strong>qué interfaces de red tiene disponibles</strong>.</p>
+<p style="text-align: justify;">Una interfaz de red es el punto mediante el que un sistema puede conectarse a una red. En nuestras máquinas virtuales, estas interfaces están asociadas a los adaptadores de red que hemos configurado previamente en VirtualBox.</p>
+<!-- ====================================================== --> <!-- CONEXIÓN CON VIRTUALBOX                                --> <!-- ====================================================== -->
+<div style="background: #eef5fb; border-left: 5px solid #3498db; padding: 15px 18px; margin: 20px 0; border-radius: 5px;"><strong style="color: #1769aa;"> 🔗 VirtualBox ↔ Linux </strong>
+<p style="margin: 7px 0 0; text-align: justify;">Cuando añadimos o habilitamos un adaptador de red en <strong>VirtualBox</strong>, el sistema operativo invitado puede detectarlo como una interfaz de red.</p>
+<p style="margin: 7px 0 0;">En nuestro escenario encontraremos nombres como <code>enp0s3</code> y <code>enp0s8</code>.</p>
+</div>
+<!-- ====================================================== --> <!-- IDEA CLAVE                                             --> <!-- ====================================================== -->
+<div style="background: #fff8e8; border-left: 5px solid #f0ad4e; padding: 15px 18px; margin: 20px 0; border-radius: 5px;"><strong style="color: #8a5a00;"> 💡 Recuerda </strong>
+<p style="margin: 7px 0 0; text-align: justify;">El nombre de una interfaz como <code>enp0s3</code> no significa que sea una interfaz de Internet, NAT o Red interna. <strong>Su función depende de cómo esté conectado el adaptador correspondiente en VirtualBox.</strong></p>
+</div>
+<!-- ====================================================== --> <!-- 1. INTERFACES                                          --> <!-- ====================================================== -->
+<h3 style="color: #17365d; margin-top: 32px;">🔌 1 · Identifying network interfaces</h3>
+<p style="text-align: justify;">Linux asigna un nombre a cada interfaz de red. En nuestros servidores podremos encontrar nombres como:</p>
+<div style="display: flex; flex-wrap: wrap; gap: 14px; margin: 18px 0;">
+<div style="flex: 1 1 220px; background: #eef5fb; border-top: 5px solid #3498db; border-radius: 7px; padding: 15px; text-align: center;"><strong style="color: #1769aa; font-size: 18px;"> enp0s3 </strong>
+<p style="margin: 7px 0 0;">Primera interfaz Ethernet de nuestras máquinas virtuales.</p>
+</div>
+<div style="flex: 1 1 220px; background: #eef5fb; border-top: 5px solid #3498db; border-radius: 7px; padding: 15px; text-align: center;"><strong style="color: #1769aa; font-size: 18px;"> enp0s8 </strong>
+<p style="margin: 7px 0 0;">Segunda interfaz Ethernet presente en DNS-LDAP.</p>
+</div>
+<div style="flex: 1 1 220px; background: #f7f9fa; border-top: 5px solid #7f8c8d; border-radius: 7px; padding: 15px; text-align: center;"><strong style="color: #566573; font-size: 18px;"> lo </strong>
+<p style="margin: 7px 0 0;">Interfaz de loopback utilizada para comunicaciones internas del propio sistema.</p>
+</div>
+</div>
+<!-- ====================================================== --> <!-- LOOPBACK                                               --> <!-- ====================================================== -->
+<h3 style="color: #17365d; margin-top: 32px;">🔄 2 · The loopback interface</h3>
+<p style="text-align: justify;">Además de las interfaces asociadas a los adaptadores de red, encontraremos normalmente una interfaz denominada <code>lo</code>.</p>
+<p style="text-align: justify;">Se trata de la interfaz de <strong>loopback</strong>. Permite que una máquina se comunique consigo misma y suele estar asociada a la dirección:</p>
+<div style="background: #1f2933; color: #f5f7fa; padding: 13px 18px; border-radius: 7px; margin: 15px 0; font-family: Consolas,monospace; text-align: center; font-size: 17px;">127.0.0.1</div>
+<div style="background: #eef5fb; border-left: 5px solid #3498db; padding: 14px 18px; margin: 18px 0; border-radius: 5px;"><strong style="color: #1769aa;"> 💡 Importante </strong>
+<p style="margin: 7px 0 0;"><code>lo</code> no corresponde a ningún adaptador de red que tengamos que añadir en VirtualBox.</p>
+</div>
+<!-- ====================================================== --> <!-- 3. IP LINK                                             --> <!-- ====================================================== -->
+<h3 style="color: #17365d; margin-top: 32px;">👀 3 · Checking our interfaces</h3>
+<p style="text-align: justify;">Podemos consultar las interfaces disponibles y su estado mediante:</p>
+<div style="background: #1f2933; color: #f5f7fa; padding: 14px 18px; border-radius: 7px; margin: 15px 0; font-family: Consolas,monospace;">$ ip link</div>
+<p>Una salida simplificada podría mostrar:</p>
+<div style="background: #1f2933; color: #f5f7fa; padding: 15px 18px; border-radius: 7px; margin: 15px 0; font-family: Consolas,monospace; line-height: 1.7; overflow-x: auto;">1: lo: &lt;LOOPBACK,UP,LOWER_UP&gt; ...<br />2: enp0s3: &lt;BROADCAST,MULTICAST,UP,LOWER_UP&gt; ...<br />   link/ether 08:00:27:ab:cd:ef ...</div>
+<p style="text-align: justify;">No necesitamos memorizar toda la salida. Lo importante es aprender a localizar la información que necesitamos.</p>
+<!-- ====================================================== --> <!-- INTERPRETACIÓN                                         --> <!-- ====================================================== -->
+<table style="width: 100%; border-collapse: collapse; margin: 18px 0;">
+<thead>
+<tr style="background: #17365d; color: white;">
+<th style="padding: 9px; border: 1px solid #ccd6df; text-align: center;">Información</th>
+<th style="padding: 9px; border: 1px solid #ccd6df;">¿Qué nos indica?</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="padding: 9px; border: 1px solid #ccd6df; text-align: center;"><code>enp0s3</code></td>
+<td style="padding: 9px; border: 1px solid #ccd6df;">Nombre de la interfaz.</td>
+</tr>
+<tr style="background: #f7f9fa;">
+<td style="padding: 9px; border: 1px solid #ccd6df; text-align: center;"><code>UP</code></td>
+<td style="padding: 9px; border: 1px solid #ccd6df;">La interfaz está habilitada administrativamente.</td>
+</tr>
+<tr>
+<td style="padding: 9px; border: 1px solid #ccd6df; text-align: center;"><code>LOWER_UP</code></td>
+<td style="padding: 9px; border: 1px solid #ccd6df;">La capa inferior de la interfaz dispone de enlace.</td>
+</tr>
+<tr style="background: #f7f9fa;">
+<td style="padding: 9px; border: 1px solid #ccd6df; text-align: center;"><code>link/ether</code></td>
+<td style="padding: 9px; border: 1px solid #ccd6df;">Muestra la dirección MAC de la interfaz Ethernet.</td>
+</tr>
+</tbody>
+</table>
+<!-- ====================================================== --> <!-- MAC                                                    --> <!-- ====================================================== -->
+<h3 style="color: #17365d; margin-top: 32px;">🏷️ 4 · MAC address</h3>
+<p style="text-align: justify;">Una interfaz Ethernet dispone de una <strong>dirección MAC</strong> que permite identificarla en la comunicación a nivel de enlace.</p>
+<p>En la salida de <code>ip link</code> podemos localizarla después de:</p>
+<div style="background: #1f2933; color: #f5f7fa; padding: 13px 18px; border-radius: 7px; margin: 15px 0; font-family: Consolas,monospace; text-align: center;">link/ether 08:00:27:ab:cd:ef</div>
+<p style="text-align: justify;">Cada interfaz de una máquina dispone de su propia dirección MAC. Por tanto, una máquina con dos interfaces de red tendrá <strong>dos interfaces y dos direcciones MAC diferentes</strong>.</p>
+<!-- ====================================================== --> <!-- 5. IP ADDR                                             --> <!-- ====================================================== -->
+<h3 style="color: #17365d; margin-top: 32px;">🌐 5 · Checking the current configuration</h3>
+<p style="text-align: justify;">Si además queremos consultar la información relacionada con las direcciones configuradas en las interfaces, podemos utilizar:</p>
+<div style="background: #1f2933; color: #f5f7fa; padding: 14px 18px; border-radius: 7px; margin: 15px 0; font-family: Consolas,monospace;">$ ip addr</div>
+<p>También podemos abreviarlo:</p>
+<div style="background: #1f2933; color: #f5f7fa; padding: 14px 18px; border-radius: 7px; margin: 15px 0; font-family: Consolas,monospace;">$ ip a</div>
+<p>O consultar únicamente una interfaz concreta:</p>
+<div style="background: #1f2933; color: #f5f7fa; padding: 14px 18px; border-radius: 7px; margin: 15px 0; font-family: Consolas,monospace;">$ ip addr show enp0s3</div>
+<!-- ====================================================== --> <!-- EJEMPLO                                                --> <!-- ====================================================== -->
+<p>Una salida simplificada podría contener:</p>
+<div style="background: #1f2933; color: #f5f7fa; padding: 15px 18px; border-radius: 7px; margin: 15px 0; font-family: Consolas,monospace; line-height: 1.7; overflow-x: auto;">2: enp0s3: &lt;BROADCAST,MULTICAST,UP,LOWER_UP&gt; ...<br />   link/ether 08:00:27:ab:cd:ef ...<br />   inet 192.168.200.104/24 ...</div>
+<p style="text-align: justify;">Ahora podemos relacionar en una misma salida el <strong>nombre de la interfaz</strong>, su <strong>dirección MAC</strong> y la <strong>dirección IPv4 configurada</strong>.</p>
+<!-- ====================================================== --> <!-- NO IPv4 TODAVÍA                                        --> <!-- ====================================================== -->
+<div style="background: #fff8e8; border-left: 5px solid #f0ad4e; padding: 15px 18px; margin: 20px 0; border-radius: 5px;"><strong style="color: #8a5a00;"> ⏳ Por ahora... </strong>
+<p style="margin: 7px 0 0; text-align: justify;">Podemos reconocer que aparece una dirección como <code>192.168.200.104/24</code>, pero todavía no vamos a analizar qué significa cada parte.</p>
+<p style="margin: 7px 0 0;">Lo recuperaremos en <strong>2.2.2 · IPv4 addressing</strong>.</p>
+</div>
+<!-- ====================================================== --> <!-- ESCENARIO                                              --> <!-- ====================================================== -->
+<h3 style="color: #17365d; margin-top: 32px;">🖥️ 6 · Interfaces in our deployment environment</h3>
+<p style="text-align: justify;">Volvamos ahora a nuestras máquinas virtuales.</p>
+<table style="width: 100%; border-collapse: collapse; margin: 18px 0;">
+<thead>
+<tr style="background: #17365d; color: white;">
+<th style="padding: 9px; border: 1px solid #ccd6df; text-align: center;">Máquina</th>
+<th style="padding: 9px; border: 1px solid #ccd6df; text-align: center;">Interfaz</th>
+<th style="padding: 9px; border: 1px solid #ccd6df; text-align: center;">Conectada a</th>
+</tr>
+</thead>
+<tbody>
+<tr style="text-align: center;">
+<td style="padding: 9px; border: 1px solid #ccd6df; text-align: center;"><strong>DNS-LDAP</strong></td>
+<td style="padding: 9px; border: 1px solid #ccd6df; text-align: center;"><code>enp0s3</code></td>
+<td style="padding: 9px; border: 1px solid #ccd6df; text-align: center;">Red NAT / NAT</td>
+</tr>
+<tr style="background: #f7f9fa; text-align: center;">
+<td style="padding: 9px; border: 1px solid #ccd6df; text-align: center;"><strong>DNS-LDAP</strong></td>
+<td style="padding: 9px; border: 1px solid #ccd6df; text-align: center;"><code>enp0s8</code></td>
+<td style="padding: 9px; border: 1px solid #ccd6df; text-align: center;">Red interna</td>
+</tr>
+<tr style="text-align: center;">
+<td style="padding: 9px; border: 1px solid #ccd6df; text-align: center;"><strong>Git</strong></td>
+<td style="padding: 9px; border: 1px solid #ccd6df; text-align: center;"><code>enp0s3</code></td>
+<td style="padding: 9px; border: 1px solid #ccd6df; text-align: center;">Red interna</td>
+</tr>
+<tr style="background: #f7f9fa; text-align: center;">
+<td style="padding: 9px; border: 1px solid #ccd6df; text-align: center;"><strong>Web</strong></td>
+<td style="padding: 9px; border: 1px solid #ccd6df; text-align: center;"><code>enp0s3</code></td>
+<td style="padding: 9px; border: 1px solid #ccd6df; text-align: center;">Red interna</td>
+</tr>
+<tr style="text-align: center;">
+<td style="padding: 9px; border: 1px solid #ccd6df; text-align: center;"><strong>FTP</strong></td>
+<td style="padding: 9px; border: 1px solid #ccd6df; text-align: center;"><code>enp0s3</code></td>
+<td style="padding: 9px; border: 1px solid #ccd6df; text-align: center;">Red interna</td>
+</tr>
+<tr style="background: #eaf7ee;">
+<td style="padding: 9px; border: 1px solid #ccd6df; text-align: center;"><strong>Linux Mint</strong></td>
+<td style="padding: 9px; border: 1px solid #ccd6df; text-align: center;"><code>enp0s3</code></td>
+<td style="padding: 9px; border: 1px solid #ccd6df; text-align: center;">Red interna</td>
+</tr>
+</tbody>
+</table>
+<!-- ====================================================== --> <!-- DOS INTERFACES                                         --> <!-- ====================================================== -->
+<div style="background: #eef5fb; border-left: 5px solid #3498db; padding: 15px 18px; margin: 20px 0; border-radius: 5px;"><strong style="color: #1769aa;"> 🧠 ¿Por qué DNS-LDAP es diferente? </strong>
+<p style="margin: 7px 0 0; text-align: justify;">Es la única máquina de nuestro escenario que participa en <strong>dos redes diferentes</strong>. Por eso necesita dos interfaces:</p>
+<ul style="margin-bottom: 0;">
+<li><code>enp0s3</code> → conectada a la <strong>Red NAT /NAT</strong>.</li>
+<li><code>enp0s8</code> → conectada a la <strong>Red interna</strong>.</li>
+</ul>
+</div>
+<!-- ====================================================== --> <!-- CHECK IT                                               --> <!-- ====================================================== -->
+<div style="background: #eaf7ee; border-left: 5px solid #4f8a62; padding: 16px 18px; margin: 24px 0; border-radius: 5px;"><strong style="color: #315f40; font-size: 17px;"> 🔍 Check it </strong>
+<p style="margin: 8px 0;">En una de tus máquinas Ubuntu Server ejecuta:</p>
+<div style="background: #1f2933; color: #f5f7fa; padding: 11px 14px; border-radius: 5px; font-family: Consolas,monospace; line-height: 1.8;">$ ip link<br />$ ip addr</div>
+<p style="margin: 10px 0 5px;">Localiza:</p>
+<ul style="margin-bottom: 0;">
+<li>la interfaz <code>lo</code>;</li>
+<li>la interfaz o interfaces Ethernet;</li>
+<li>su estado;</li>
+<li>su dirección MAC;</li>
+<li>si actualmente tienen alguna dirección IPv4.</li>
+</ul>
+</div>
+<!-- ====================================================== --> <!-- MINI CHALLENGE                                         --> <!-- ====================================================== -->
+<div style="background: #f7f9fa; border: 2px solid #4f8a62; padding: 18px 20px; margin: 25px 0; border-radius: 8px;"><strong style="color: #315f40; font-size: 18px;"> 🧩 Mini challenge · Identify your network </strong>
+<p style="margin: 10px 0; text-align: justify;">Ha llegado el momento de comprobar que las interfaces de nuestras máquinas coinciden con el diseño del entorno de despliegue.</p>
+<p><strong>Tu tarea:</strong></p>
+<ol style="padding-left: 25px;">
+<li>Inicia las máquinas <strong>DNS-LDAP</strong> y <strong>Web</strong>.</li>
+<li>Sin modificar todavía su configuración de red, identifica las interfaces disponibles en cada máquina.</li>
+<li>Determina cuál corresponde a cada adaptador configurado en VirtualBox.</li>
+<li>Localiza la dirección MAC de cada interfaz.</li>
+<li>Comprueba el estado de las interfaces.</li>
+<li>Explica por qué DNS-LDAP dispone de dos interfaces mientras que Web dispone únicamente de una.</li>
+</ol>
+<!-- COMPROBACIÓN -->
+<div style="background: #eaf7ee; border-left: 4px solid #4f8a62; padding: 12px 14px; margin-top: 16px; border-radius: 4px;"><strong> 🔍 Antes de terminar </strong>
+<p style="margin: 6px 0 0;">Debes poder identificar cada interfaz y explicar <strong>a qué red está conectada y qué función tendrá dentro de nuestro escenario</strong>.</p>
+</div>
+</div>
+<!-- ====================================================== --> <!-- RESUMEN                                                --> <!-- ====================================================== -->
+<h3 style="color: #17365d; margin-top: 32px;">🧠 What should you remember?</h3>
+<div style="background: #f7f9fa; border: 1px solid #d5dde5; border-radius: 8px; padding: 16px 18px; margin: 18px 0;">
+<ul style="margin: 0; padding-left: 24px;">
+<li>Una máquina puede disponer de una o varias interfaces de red.</li>
+<li><code>lo</code> es la interfaz de loopback.</li>
+<li><code>ip link</code> permite consultar interfaces y su estado.</li>
+<li><code>ip addr</code> permite consultar también las direcciones asociadas a las interfaces.</li>
+<li>Cada interfaz Ethernet dispone de una dirección MAC.</li>
+<li>El nombre <code>enp0s3</code> o <code>enp0s8</code> no determina por sí mismo a qué red está conectada la interfaz.</li>
+</ul>
+</div>
+<!-- ====================================================== --> <!-- CIERRE                                                 --> <!-- ====================================================== -->
+<div style="background: #17365d; color: white; padding: 17px 20px; margin-top: 27px; border-radius: 8px; text-align: center;"><strong style="font-size: 18px;"> Ya sabemos identificar nuestras interfaces. </strong>
+<div style="margin-top: 7px;">Ahora necesitamos saber qué información de red debemos asignar a cada una.</div>
+<div style="margin-top: 9px; font-weight: bold;">🌐 2.2.2 · IPv4 addressing</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</article>
+</div></main>
+<footer id="siteFooter"><div id="siteFooterContent"> <div id="packageLicense" class="cc cc-by-sa"> <p> <span class="license-label">Licencia: </span><a href="https://creativecommons.org/licenses/by-sa/4.0/" class="license">Creative Commons: Reconocimiento - compartir igual 4.0</a></p>
+</div>
+</div></footer>
+</div>
+<p id="made-with-eXe"> <a href="https://exelearning.net/" target="_blank" rel="noopener"> <span>Creado con eXeLearning <span>(Ventana nueva)</span></span></a></p>
+</body>
+</html>

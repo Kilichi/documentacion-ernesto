@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="es" id="exe-page-mugzg426-fs9lowxfz">
+<head>
+<meta charset="utf-8">
+<meta name="generator" content="eXeLearning v4.0.5">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="license" type="text/html" href="https://creativecommons.org/licenses/by-sa/4.0/">
+<title>2.1.4 · Administrative privileges | LS 0 - Getting ready</title>
+<link rel="icon" type="image/x-icon" href="../libs/favicon.ico">
+<script>document.querySelector("html").classList.add("js");</script><script src="../libs/jquery/jquery.min.js"> </script><script src="../libs/common_i18n.js"> </script><script src="../libs/common.js"> </script><script src="../libs/exe_export.js"> </script><script src="../libs/bootstrap/bootstrap.bundle.min.js"> </script><link rel="stylesheet" href="../libs/bootstrap/bootstrap.min.css">
+<script src="../idevices/text/text.js"></script><link rel="stylesheet" href="../idevices/text/text.css">
+<link rel="stylesheet" href="../content/css/base.css"><script src="../theme/style.js"> </script><link rel="stylesheet" href="../theme/style.css">
+<script src="../libs/SCORM_API_wrapper.js"></script>
+<script src="../libs/SCOFunctions.js"></script>
+</head>
+<body class="exe-export exe-scorm exe-scorm12" onload="loadPage()">
+<script>document.body.className+=" js"</script>
+<div class="exe-content exe-export pre-js siteNav-hidden"><main id="page-mugzg426-fs9lowxfz" class="page"> 
+<header class="main-header">
+<div class="package-header"><p class="package-title">LS 0 - Getting ready</p></div>
+<div class="page-header"><h1 class="page-title">2.1.4 · Administrative privileges</h1></div>
+</header><div id="page-content-page-mugzg426-fs9lowxfz" class="page-content">
+<article id="block-mumk4ge2-cegqptlfe" class="box no-header">
+<header class="box-head no-icon">
+<button class="box-toggle box-toggle-on" title="Toggle content">
+<span>Toggle content</span>
+</button></header>
+<div class="box-content">
+<div id="idevice-1790679136250-wei2fnbdj" class="idevice_node text" data-idevice-path="../idevices/text/" data-idevice-type="text" data-idevice-component-type="json" data-idevice-json-data="{&quot;ideviceId&quot;:&quot;idevice-1790679136250-wei2fnbdj&quot;}">
+<div class="exe-text-template">
+    <div style="max-width: 1050px; margin: auto; font-family: Arial,Helvetica,sans-serif; color: #243247; line-height: 1.65;"><!-- ====================================================== --> <!-- CABECERA                                               --> <!-- ====================================================== -->
+<div style="background: #17365d; color: white; padding: 18px 22px; border-radius: 10px;">
+<h2 style="color: white; margin: 0px; text-align: center;">🛡️ 2.1.4 · Administrative privileges</h2>
+<p style="margin: 6px 0px 0px; text-align: center;">Recuperamos cómo realizar tareas administrativas de forma controlada</p>
+</div>
+<!-- ====================================================== --> <!-- OBJETIVO                                               --> <!-- ====================================================== -->
+<div style="background: #eef5fb; border-left: 5px solid #2980b9; padding: 14px 18px; margin: 20px 0px; border-radius: 5px; text-align: justify;"><strong style="color: #17365d;">🎯 Objetivo</strong><br />Recordar la diferencia entre un <strong>usuario normal</strong> y <strong>root</strong>, comprender cuándo necesitamos privilegios administrativos y utilizar <code>sudo</code> de forma controlada, comprobando siempre el resultado de nuestras acciones.</div>
+<!-- ====================================================== --> <!-- INTRODUCCIÓN                                           --> <!-- ====================================================== -->
+<p style="text-align: justify;">Hasta ahora hemos trabajado con usuarios, grupos, archivos, directorios, propietarios y permisos. Sin embargo, algunas operaciones sobre el sistema no pueden ser realizadas por cualquier usuario.</p>
+<p style="text-align: justify;">Instalar software, modificar determinados archivos de configuración, gestionar usuarios o cambiar algunos propietarios son <strong>tareas administrativas</strong>. Linux restringe estas operaciones para proteger el sistema frente a modificaciones accidentales o no autorizadas.</p>
+<!-- ====================================================== --> <!-- CONEXIÓN CON ESCENARIO                                 --> <!-- ====================================================== -->
+<div style="background: #fff8e8; border-left: 5px solid #f0ad4e; padding: 15px 18px; margin: 20px 0; border-radius: 5px;"><strong style="color: #8a5a00;"> 🔎 ¿Por qué necesitamos recordarlo? </strong>
+<p style="margin: 7px 0 0; text-align: justify;">Cuando comencemos a configurar nuestros servidores <strong>DNS-LDAP, Git, Web y FTP</strong>, tendremos que realizar operaciones que afectan al sistema. Para ello necesitaremos saber <strong>cuándo son necesarios privilegios administrativos</strong> y utilizarlos únicamente cuando corresponda.</p>
+</div>
+<!-- ====================================================== --> <!-- 1. NORMAL USER                                         --> <!-- ====================================================== -->
+<h3 style="color: #17365d; margin-top: 32px;">👤 1 · A normal user</h3>
+<p style="text-align: justify;">Un usuario normal puede trabajar con los recursos para los que dispone de los permisos necesarios, pero no puede modificar libremente cualquier elemento del sistema.</p>
+<p>Podemos comprobar nuestra identidad mediante:</p>
+<div style="background: #1f2933; color: #f5f7fa; padding: 14px 18px; border-radius: 7px; margin: 15px 0; font-family: Consolas,monospace; line-height: 1.8;">$ whoami<br />$ id</div>
+<div style="background: #eef5fb; border-left: 5px solid #3498db; padding: 14px 18px; margin: 18px 0; border-radius: 5px;"><strong style="color: #1769aa;">💡 Concepto</strong>
+<p style="margin: 7px 0 0;">Trabajar habitualmente como usuario normal limita el impacto de errores y evita realizar modificaciones administrativas innecesarias.</p>
+</div>
+<!-- ====================================================== --> <!-- 2. ROOT                                                --> <!-- ====================================================== -->
+<h3 style="color: #17365d; margin-top: 32px;">👑 2 · The root user</h3>
+<p style="text-align: justify;"><code>root</code> es la cuenta administrativa principal de Linux. Su identificador es <strong>UID 0</strong> y dispone de amplias capacidades para administrar el sistema.</p>
+<div style="background: #fff8e8; border-left: 5px solid #f0ad4e; padding: 15px 18px; margin: 18px 0; border-radius: 5px;"><strong style="color: #8a5a00;"> ⚠️ Más privilegios también implican más responsabilidad </strong>
+<p style="margin: 7px 0 0; text-align: justify;">Un comando ejecutado con privilegios administrativos puede afectar a todo el sistema. Por eso debemos comprobar cuidadosamente <strong>qué comando vamos a ejecutar, sobre qué recurso y con qué opciones</strong>.</p>
+</div>
+<!-- ====================================================== --> <!-- 3. SUDO                                                --> <!-- ====================================================== -->
+<h3 style="color: #17365d; margin-top: 32px;">🛡️ 3 · Using sudo</h3>
+<p style="text-align: justify;">En Ubuntu podemos utilizar <code>sudo</code> para ejecutar una operación concreta con privilegios administrativos cuando nuestro usuario está autorizado para hacerlo.</p>
+<div style="background: #1f2933; color: #f5f7fa; padding: 14px 18px; border-radius: 7px; margin: 15px 0; font-family: Consolas,monospace;">$ sudo COMMAND</div>
+<p>Por ejemplo:</p>
+<div style="background: #1f2933; color: #f5f7fa; padding: 14px 18px; border-radius: 7px; margin: 15px 0; font-family: Consolas,monospace;">$ sudo chown root server.conf</div>
+<p style="text-align: justify;">En este caso, <code>sudo</code> no forma parte de <code>chown</code>. Estamos solicitando ejecutar ese comando concreto con privilegios administrativos.</p>
+<!-- ====================================================== --> <!-- 4. WHEN DO I NEED SUDO?                                --> <!-- ====================================================== -->
+<h3 style="color: #17365d; margin-top: 32px;">🤔 4 · Do I need sudo?</h3>
+<p style="text-align: justify;">No debemos añadir <code>sudo</code> automáticamente delante de cualquier comando. Primero debemos preguntarnos si la operación realmente necesita privilegios administrativos.</p>
+<table style="width: 100%; border-collapse: collapse; margin: 16px 0;">
+<thead>
+<tr style="background: #17365d; color: white;">
+<th style="padding: 9px; border: 1px solid #ccd6df; text-align: center;">Operación</th>
+<th style="padding: 9px; border: 1px solid #ccd6df; text-align: center;">¿Privilegios administrativos?</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="padding: 9px; border: 1px solid #ccd6df; text-align: center;">Consultar tu directorio con <code>ls</code></td>
+<td style="padding: 9px; border: 1px solid #ccd6df;">Normalmente no.</td>
+</tr>
+<tr style="background: #f7f9fa;">
+<td style="padding: 9px; border: 1px solid #ccd6df; text-align: center;">Crear un archivo dentro de tu directorio personal</td>
+<td style="padding: 9px; border: 1px solid #ccd6df;">Normalmente no.</td>
+</tr>
+<tr>
+<td style="padding: 9px; border: 1px solid #ccd6df; text-align: center;">Crear o modificar cuentas de usuario</td>
+<td style="padding: 9px; border: 1px solid #ccd6df;">Sí.</td>
+</tr>
+<tr style="background: #f7f9fa;">
+<td style="padding: 9px; border: 1px solid #ccd6df; text-align: center;">Modificar determinados archivos del sistema</td>
+<td style="padding: 9px; border: 1px solid #ccd6df;">Sí.</td>
+</tr>
+<tr>
+<td style="padding: 9px; border: 1px solid #ccd6df; text-align: center;">Instalar o eliminar software del sistema</td>
+<td style="padding: 9px; border: 1px solid #ccd6df;">Sí.</td>
+</tr>
+</tbody>
+</table>
+<!-- ====================================================== --> <!-- 5. SUDO GROUP                                          --> <!-- ====================================================== -->
+<h3 style="color: #17365d; margin-top: 32px;">👥 5 · Who can use sudo?</h3>
+<p style="text-align: justify;">En nuestro entorno Ubuntu, la pertenencia al grupo <code>sudo</code> es uno de los mecanismos utilizados para conceder a un usuario la posibilidad de ejecutar comandos administrativos mediante <code>sudo</code>.</p>
+<p>Podemos comprobar los grupos de un usuario mediante:</p>
+<div style="background: #1f2933; color: #f5f7fa; padding: 14px 18px; border-radius: 7px; margin: 15px 0; font-family: Consolas,monospace; line-height: 1.8;">$ groups admin_temp<br />$ id admin_temp</div>
+<!-- ====================================================== --> <!-- RECUPERAMOS 2.1.1                                     --> <!-- ====================================================== -->
+<div style="background: #eef5fb; border-left: 5px solid #3498db; padding: 15px 18px; margin: 20px 0; border-radius: 5px;"><strong style="color: #1769aa;"> 🔗 ¿Recuerdas 2.1.1 · Users and groups? </strong>
+<p style="margin: 7px 0;">Allí utilizamos:</p>
+<div style="background: #1f2933; color: #f5f7fa; padding: 11px 14px; border-radius: 5px; font-family: Consolas,monospace;">$ sudo usermod -aG sudo admin_temp</div>
+<p style="margin: 10px 0 0; text-align: justify;">Ahora podemos comprender mejor su finalidad: Estamos modificando la cuenta <code>admin_temp</code> para añadirla al grupo <code>sudo</code> sin eliminar sus grupos suplementarios anteriores.</p>
+</div>
+<!-- ====================================================== --> <!-- 6. CHECK SUDO                                          --> <!-- ====================================================== -->
+<h3 style="color: #17365d; margin-top: 32px;">🔍 6 · Check your privileges</h3>
+<p style="text-align: justify;">También podemos consultar qué operaciones puede ejecutar nuestro usuario mediante <code>sudo</code>.</p>
+<div style="background: #1f2933; color: #f5f7fa; padding: 14px 18px; border-radius: 7px; margin: 15px 0; font-family: Consolas,monospace;">$ sudo -l</div>
+<p style="text-align: justify;">El objetivo no es memorizar la salida, sino comprobar si el usuario dispone de autorización para ejecutar tareas administrativas.</p>
+<!-- ====================================================== --> <!-- GOOD PRACTICE                                          --> <!-- ====================================================== -->
+<h3 style="color: #17365d; margin-top: 32px;">🧠 7 · Work with the necessary privileges</h3>
+<div style="background: #f7f9fa; border: 1px solid #d5dde5; border-radius: 8px; padding: 16px 18px; margin: 18px 0;">
+<p style="margin-top: 0;">Antes de utilizar <code>sudo</code>:</p>
+<ol style="margin-bottom: 0; padding-left: 25px;">
+<li>Identifica qué quieres conseguir.</li>
+<li>Comprueba sobre qué recurso actuará el comando.</li>
+<li>Determina si realmente necesitas privilegios administrativos.</li>
+<li>Ejecuta la operación.</li>
+<li>Comprueba el resultado.</li>
+</ol>
+</div>
+<div style="background: #fff8e8; border-left: 5px solid #f0ad4e; padding: 15px 18px; margin: 20px 0; border-radius: 5px;"><strong style="color: #8a5a00;"> ⚠️ <code>sudo</code> no es la solución a cualquier error </strong>
+<p style="margin: 7px 0 0; text-align: justify;">Si un comando falla, añadir <code>sudo</code> sin analizar la causa puede ocultar un problema de permisos, una ruta incorrecta o una operación mal planteada. Primero interpreta el error.</p>
+</div>
+<!-- ====================================================== --> <!-- MINI CHALLENGE                                         --> <!-- ====================================================== -->
+<div style="background: #f7f9fa; border: 2px solid #4f8a62; padding: 18px 20px; margin: 25px 0; border-radius: 8px;"><strong style="color: #315f40; font-size: 18px;"> 🧩 Mini challenge · An administrative change </strong> <!-- CONTINUIDAD -->
+<div style="background: #eef5fb; border-left: 5px solid #3498db; padding: 13px 16px; margin: 15px 0; border-radius: 5px;"><strong style="color: #1769aa;"> 🔗 Continuamos con el reto anterior </strong>
+<p style="margin: 7px 0 0; text-align: justify;">En <strong>2.1.3 · Ownership and permissions</strong> protegiste el archivo <code>~/daw_lab/config/server.conf</code>. Vamos a continuar trabajando sobre ese mismo recurso.</p>
+</div>
+<!-- ESTADO -->
+<p>Comprueba primero que dispones del archivo:</p>
+<div style="background: #1f2933; color: #f5f7fa; padding: 12px 16px; border-radius: 7px; margin: 15px 0; font-family: Consolas,monospace;">$ ls -l ~/daw_lab/config/server.conf</div>
+<!-- SITUACIÓN -->
+<p style="text-align: justify;">Ahora necesitamos que el archivo de configuración pase a ser propiedad de <code>root</code>, simulando una situación en la que un recurso deja de pertenecer a nuestro usuario y pasa a estar administrado por el sistema.</p>
+<p><strong>Tu tarea:</strong></p>
+<ol style="padding-left: 25px;">
+<li>Comprueba el propietario actual de <code>server.conf</code>.</li>
+<li>Intenta cambiar su propietario a <code>root</code> <strong>sin utilizar inicialmente <code>sudo</code></strong>.</li>
+<li>Observa e interpreta el resultado obtenido.</li>
+<li>Determina por qué esta operación necesita privilegios administrativos.</li>
+<li>Realiza correctamente el cambio utilizando los privilegios necesarios.</li>
+<li>Comprueba nuevamente el propietario del archivo.</li>
+</ol>
+<!-- CHECK -->
+<div style="background: #eaf7ee; border-left: 4px solid #4f8a62; padding: 11px 14px; margin-top: 15px; border-radius: 4px;"><strong>🔍 Antes de terminar</strong>
+<p style="margin: 5px 0 0;">Debes poder explicar <strong>por qué la primera operación no puede realizarla tu usuario normal</strong>, por qué utilizamos <code>sudo</code> y cómo has comprobado que el cambio se realizó correctamente.</p>
+</div>
+</div>
+<!-- ====================================================== --> <!-- RECURSO                                                --> <!-- ====================================================== -->
+<h3 style="color: #17365d; margin-top: 32px;">📚 Recurso de apoyo</h3>
+<div style="background: white; border: 1px solid #d5dde5; border-radius: 7px; padding: 14px 16px; margin: 15px 0;"><strong style="color: #17365d;"> 📖 Linux Professional Institute </strong>
+<p style="margin: 7px 0 10px; text-align: justify;">Utiliza los materiales de Linux Professional Institute para revisar y ampliar los conceptos relacionados con usuarios, permisos y administración de sistemas Linux.</p>
+<a href="https://learning.lpi.org/es/learning-materials/010-160/" target="_blank" rel="noopener noreferrer" style="display: inline-block; background: #17365d; color: white; text-decoration: none; padding: 8px 16px; border-radius: 6px; font-weight: bold;"> 🔗 LPI · Linux Essentials </a></div>
+<!-- ====================================================== --> <!-- CIERRE                                                 --> <!-- ====================================================== -->
+<div style="background: #17365d; color: white; padding: 17px 20px; margin-top: 25px; border-radius: 8px; text-align: center;"><strong style="font-size: 18px;"> Ya hemos recuperado nuestras herramientas básicas de Linux. </strong>
+<div style="margin-top: 7px;">Es el momento de utilizarlas conjuntamente.</div>
+<div style="margin-top: 8px; font-weight: bold;">🧩 2.1.5 · Linux essentials challenge</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</article>
+</div></main>
+<footer id="siteFooter"><div id="siteFooterContent"> <div id="packageLicense" class="cc cc-by-sa"> <p> <span class="license-label">Licencia: </span><a href="https://creativecommons.org/licenses/by-sa/4.0/" class="license">Creative Commons: Reconocimiento - compartir igual 4.0</a></p>
+</div>
+</div></footer>
+</div>
+<p id="made-with-eXe"> <a href="https://exelearning.net/" target="_blank" rel="noopener"> <span>Creado con eXeLearning <span>(Ventana nueva)</span></span></a></p>
+</body>
+</html>

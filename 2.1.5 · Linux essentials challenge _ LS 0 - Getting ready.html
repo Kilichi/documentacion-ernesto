@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="es" id="exe-page-mugzgbnx-70cc8cdk2">
+<head>
+<meta charset="utf-8">
+<meta name="generator" content="eXeLearning v4.0.5">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="license" type="text/html" href="https://creativecommons.org/licenses/by-sa/4.0/">
+<title>2.1.5 · Linux essentials challenge | LS 0 - Getting ready</title>
+<link rel="icon" type="image/x-icon" href="../libs/favicon.ico">
+<script>document.querySelector("html").classList.add("js");</script><script src="../libs/jquery/jquery.min.js"> </script><script src="../libs/common_i18n.js"> </script><script src="../libs/common.js"> </script><script src="../libs/exe_export.js"> </script><script src="../libs/bootstrap/bootstrap.bundle.min.js"> </script><link rel="stylesheet" href="../libs/bootstrap/bootstrap.min.css">
+<script src="../idevices/text/text.js"></script><link rel="stylesheet" href="../idevices/text/text.css">
+<link rel="stylesheet" href="../content/css/base.css"><script src="../theme/style.js"> </script><link rel="stylesheet" href="../theme/style.css">
+<script src="../libs/SCORM_API_wrapper.js"></script>
+<script src="../libs/SCOFunctions.js"></script>
+</head>
+<body class="exe-export exe-scorm exe-scorm12" onload="loadPage()">
+<script>document.body.className+=" js"</script>
+<div class="exe-content exe-export pre-js siteNav-hidden"><main id="page-mugzgbnx-70cc8cdk2" class="page"> 
+<header class="main-header">
+<div class="package-header"><p class="package-title">LS 0 - Getting ready</p></div>
+<div class="page-header"><h1 class="page-title">2.1.5 · Linux essentials challenge</h1></div>
+</header><div id="page-content-page-mugzgbnx-70cc8cdk2" class="page-content">
+<article id="block-mumk9tay-4wxpwrtav" class="box no-header">
+<header class="box-head no-icon">
+<button class="box-toggle box-toggle-on" title="Toggle content">
+<span>Toggle content</span>
+</button></header>
+<div class="box-content">
+<div id="idevice-1790679386265-du3xhignz" class="idevice_node text" data-idevice-path="../idevices/text/" data-idevice-type="text" data-idevice-component-type="json" data-idevice-json-data="{&quot;ideviceId&quot;:&quot;idevice-1790679386265-du3xhignz&quot;}">
+<div class="exe-text-template">
+    <div style="max-width: 1050px; margin: auto; font-family: Arial,Helvetica,sans-serif; color: #243247; line-height: 1.65;"><!-- ====================================================== --> <!-- CABECERA                                               --> <!-- ====================================================== -->
+<div style="background: #17365d; color: white; padding: 18px 22px; border-radius: 10px;">
+<h2 style="color: white; margin: 0px; text-align: center;">🧩 2.1.5 · Linux essentials challenge</h2>
+<p style="margin: 6px 0px 0px; text-align: center;">Pon a prueba tus herramientas básicas de administración Linux</p>
+</div>
+<!-- ====================================================== --> <!-- OBJETIVO                                               --> <!-- ====================================================== -->
+<div style="background: #eef5fb; border-left: 5px solid #2980b9; padding: 14px 18px; margin: 20px 0px; border-radius: 5px; text-align: justify;"><strong style="color: #17365d;"> 🎯 Objetivo </strong><br />Aplicar de forma integrada los conocimientos recuperados sobre <strong>usuarios, grupos, sistema de archivos, propietarios, permisos y privilegios administrativos</strong> para preparar y verificar un entorno de trabajo Linux.</div>
+<!-- ====================================================== --> <!-- INTRODUCCIÓN                                           --> <!-- ====================================================== -->
+<p style="text-align: justify;">Durante los apartados anteriores has recuperado diferentes herramientas de administración Linux. Ha llegado el momento de utilizarlas conjuntamente.</p>
+<div style="display: flex; flex-wrap: wrap; gap: 12px; margin: 20px 0;">
+<div style="flex: 1 1 190px; background: #eef5fb; border-top: 4px solid #3498db; border-radius: 7px; padding: 14px; text-align: center;"><strong>👥 Users and groups</strong></div>
+<div style="flex: 1 1 190px; background: #eef5fb; border-top: 4px solid #3498db; border-radius: 7px; padding: 14px; text-align: center;"><strong>📁 File system</strong></div>
+<div style="flex: 1 1 190px; background: #eef5fb; border-top: 4px solid #3498db; border-radius: 7px; padding: 14px; text-align: center;"><strong>🔐 Permissions</strong></div>
+<div style="flex: 1 1 190px; background: #eef5fb; border-top: 4px solid #3498db; border-radius: 7px; padding: 14px; text-align: center;"><strong>🛡️ Privileges</strong></div>
+</div>
+<!-- ====================================================== --> <!-- CAMBIO DE DINÁMICA                                     --> <!-- ====================================================== -->
+<div style="background: #fff8e8; border-left: 5px solid #f0ad4e; padding: 15px 18px; margin: 22px 0; border-radius: 5px;"><strong style="color: #8a5a00;"> ⚠️ Esta vez no tendrás los comandos </strong>
+<p style="margin: 7px 0 0; text-align: justify;">En los ejercicios anteriores has practicado las herramientas necesarias. En este reto recibirás únicamente los <strong>requisitos que debe cumplir el sistema</strong>.</p>
+<p style="margin: 7px 0 0;">Tú deberás decidir <strong>qué hacer, qué comandos utilizar, en qué orden ejecutarlos y cuándo necesitas privilegios administrativos</strong>.</p>
+</div>
+<!-- ====================================================== --> <!-- SITUACIÓN                                              --> <!-- ====================================================== -->
+<h3 style="color: #17365d; margin-top: 32px;">🖥️ The situation</h3>
+<p style="text-align: justify;">Estamos preparando nuestro entorno Linux para comenzar a trabajar posteriormente con los servidores de la infraestructura.</p>
+<p style="text-align: justify;">Durante los retos anteriores comenzaste a construir el espacio <code>~/daw_lab</code>. Ahora necesitamos completar su preparación y establecer correctamente quién podrá acceder a sus recursos.</p>
+<!-- ====================================================== --> <!-- PUNTO DE PARTIDA                                       --> <!-- ====================================================== -->
+<h3 style="color: #17365d; margin-top: 30px;">📍 Starting point</h3>
+<p>Partimos del espacio de trabajo utilizado en los retos anteriores:</p>
+<div style="background: #1f2933; color: #f5f7fa; padding: 15px 20px; border-radius: 7px; margin: 15px 0; font-family: Consolas,monospace; line-height: 1.8; overflow-x: auto;">~/daw_lab/<br />├── config/<br />│   └── server.conf<br />└── backup/<br />    └── server.conf</div>
+<div style="background: #eef5fb; border-left: 5px solid #3498db; padding: 13px 16px; margin: 18px 0; border-radius: 5px;"><strong style="color: #1769aa;"> 🔗 Continuamos trabajando </strong>
+<p style="margin: 7px 0 0;">No estás creando un laboratorio nuevo. Debes <strong>continuar trabajando sobre el entorno que has ido preparando</strong> durante los apartados anteriores.</p>
+</div>
+<!-- ====================================================== --> <!-- ENCARGO                                                --> <!-- ====================================================== -->
+<h3 style="color: #17365d; margin-top: 32px;">📋 Your assignment</h3>
+<p>El entorno debe cumplir los siguientes requisitos:</p>
+<!-- REQUISITO 1 -->
+<div style="background: white; border: 1px solid #d5dde5; border-left: 5px solid #3498db; border-radius: 7px; padding: 15px 18px; margin: 14px 0;"><strong style="color: #17365d;"> 👤 Requirement 1 · Administration account </strong>
+<p style="margin: 7px 0 0; text-align: justify;">Debe existir un usuario llamado <code>daw_temp</code> que utilizaremos como cuenta temporal de administración.</p>
+<p style="margin: 7px 0 0;">Este usuario debe poder realizar tareas administrativas mediante <code>sudo</code>.</p>
+</div>
+<!-- REQUISITO 2 -->
+<div style="background: white; border: 1px solid #d5dde5; border-left: 5px solid #3498db; border-radius: 7px; padding: 15px 18px; margin: 14px 0;"><strong style="color: #17365d;"> 👥 Requirement 2 · Working group </strong>
+<p style="margin: 7px 0 0; text-align: justify;">Debe existir un grupo denominado <code>desarrollo</code>.</p>
+<p style="margin: 7px 0 0;">La cuenta <code>daw_temp</code> debe pertenecer también a este grupo.</p>
+</div>
+<!-- REQUISITO 3 -->
+<div style="background: white; border: 1px solid #d5dde5; border-left: 5px solid #3498db; border-radius: 7px; padding: 15px 18px; margin: 14px 0;"><strong style="color: #17365d;"> 📁 Requirement 3 · Workspace </strong>
+<p style="margin: 7px 0 8px;">Completa tu espacio de trabajo para que tenga esta estructura:</p>
+<div style="background: #1f2933; color: #f5f7fa; padding: 13px 16px; border-radius: 6px; font-family: Consolas,monospace; line-height: 1.8; overflow-x: auto;">~/daw_lab/<br />├── config/<br />│   └── server.conf<br />├── backup/<br />│   └── server.conf<br />└── shared/</div>
+</div>
+<!-- REQUISITO 4 -->
+<div style="background: white; border: 1px solid #d5dde5; border-left: 5px solid #3498db; border-radius: 7px; padding: 15px 18px; margin: 14px 0;"><strong style="color: #17365d;"> 🔐 Requirement 4 · Protect the configuration </strong>
+<p style="margin: 7px 0 0; text-align: justify;">El archivo <code>config/server.conf</code> debe estar protegido.</p>
+<ul style="margin-bottom: 0;">
+<li>El propietario debe poder <strong>leerlo y modificarlo</strong>.</li>
+<li>El grupo propietario debe poder <strong>leerlo</strong>.</li>
+<li>El resto de usuarios <strong>no debe tener ningún permiso</strong>.</li>
+</ul>
+</div>
+<!-- REQUISITO 5 -->
+<div style="background: white; border: 1px solid #d5dde5; border-left: 5px solid #3498db; border-radius: 7px; padding: 15px 18px; margin: 14px 0;"><strong style="color: #17365d;"> 🤝 Requirement 5 · Shared resources </strong>
+<p style="margin: 7px 0 0; text-align: justify;">El directorio <code>shared</code> debe estar asociado al grupo <code>desarrollo</code>.</p>
+<p style="margin: 7px 0 0;">El propietario y los miembros del grupo deben poder <strong>acceder, crear y modificar recursos</strong> en él, mientras que el resto de usuarios no debe disponer de permisos.</p>
+</div>
+<!-- ====================================================== --> <!-- PLAN                                                   --> <!-- ====================================================== -->
+<h3 style="color: #17365d; margin-top: 32px;">🧠 Before touching the system</h3>
+<p>No empieces ejecutando comandos inmediatamente.</p>
+<div style="background: #f7f9fa; border: 1px solid #d5dde5; border-radius: 8px; padding: 16px 18px; margin: 18px 0;"><strong style="color: #17365d;"> Prepara tu estrategia </strong>
+<ol style="padding-left: 25px; margin-bottom: 0;">
+<li>Analiza todos los requisitos.</li>
+<li>Comprueba el estado actual del sistema.</li>
+<li>Decide qué cambios son necesarios.</li>
+<li>Identifica qué operaciones requieren privilegios administrativos.</li>
+<li>Realiza los cambios.</li>
+<li>Comprueba cada resultado.</li>
+</ol>
+</div>
+<!-- ====================================================== --> <!-- METODO                                                 --> <!-- ====================================================== -->
+<div style="display: flex; align-items: center; justify-content: center; flex-wrap: wrap; gap: 8px; margin: 25px 0; text-align: center;">
+<div style="background: #eef5fb; padding: 10px 14px; border-radius: 6px;">🧠 <strong>Interpret</strong></div>
+<strong>→</strong>
+<div style="background: #eef5fb; padding: 10px 14px; border-radius: 6px;">📝 <strong>Plan</strong></div>
+<strong>→</strong>
+<div style="background: #eef5fb; padding: 10px 14px; border-radius: 6px;">⌨️ <strong>Execute</strong></div>
+<strong>→</strong>
+<div style="background: #eaf7ee; padding: 10px 14px; border-radius: 6px;">🔍 <strong>Verify</strong></div>
+<strong>→</strong>
+<div style="background: #fff8e8; padding: 10px 14px; border-radius: 6px;">🛠️ <strong>Correct</strong></div>
+</div>
+<!-- ====================================================== --> <!-- VERIFICACIÓN                                           --> <!-- ====================================================== -->
+<h3 style="color: #17365d; margin-top: 32px;">🔍 Prove that it works</h3>
+<p style="text-align: justify;">Terminar los comandos no significa haber terminado el reto. Debes <strong>demostrar que el sistema cumple los requisitos</strong>.</p>
+<table style="width: 100%; border-collapse: collapse; margin: 16px 0;">
+<thead>
+<tr style="background: #17365d; color: white;">
+<th style="padding: 9px; border: 1px solid #ccd6df; text-align: center;">Debes comprobar</th>
+<th style="padding: 9px; border: 1px solid #ccd6df;">¿Qué debes demostrar?</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="padding: 9px; border: 1px solid #ccd6df; text-align: center;">👤 Usuario</td>
+<td style="padding: 9px; border: 1px solid #ccd6df;">Que <code>daw_temp</code> existe.</td>
+</tr>
+<tr style="background: #f7f9fa;">
+<td style="padding: 9px; border: 1px solid #ccd6df; text-align: center;">👥 Grupos</td>
+<td style="padding: 9px; border: 1px solid #ccd6df;">Que pertenece a los grupos requeridos.</td>
+</tr>
+<tr>
+<td style="padding: 9px; border: 1px solid #ccd6df; text-align: center;">🛡️ Administración</td>
+<td style="padding: 9px; border: 1px solid #ccd6df;">Que puede realizar las tareas administrativas previstas.</td>
+</tr>
+<tr style="background: #f7f9fa;">
+<td style="padding: 9px; border: 1px solid #ccd6df; text-align: center;">📁 Estructura</td>
+<td style="padding: 9px; border: 1px solid #ccd6df;">Que los directorios y archivos solicitados existen.</td>
+</tr>
+<tr>
+<td style="padding: 9px; border: 1px solid #ccd6df; text-align: center;">👤 Propiedad</td>
+<td style="padding: 9px; border: 1px solid #ccd6df;">Que los recursos tienen el propietario y grupo adecuados.</td>
+</tr>
+<tr style="background: #f7f9fa;">
+<td style="padding: 9px; border: 1px solid #ccd6df; text-align: center;">🔐 Permisos</td>
+<td style="padding: 9px; border: 1px solid #ccd6df;">Que los permisos coinciden con los requisitos.</td>
+</tr>
+</tbody>
+</table>
+<!-- ====================================================== --> <!-- IMPORTANTE                                             --> <!-- ====================================================== -->
+<div style="background: #fff8e8; border-left: 5px solid #f0ad4e; padding: 15px 18px; margin: 22px 0; border-radius: 5px;"><strong style="color: #8a5a00;"> ⚠️ Un resultado correcto no es suficiente </strong>
+<p style="margin: 7px 0 0; text-align: justify;">Debes ser capaz de explicar <strong>qué has hecho y por qué</strong>. Si utilizas un comando, debes comprender qué modificación produce sobre el sistema.</p>
+</div>
+<!-- ====================================================== --> <!-- SI ALGO FALLA                                          --> <!-- ====================================================== -->
+<div style="background: #eef5fb; border-left: 5px solid #3498db; padding: 15px 18px; margin: 22px 0; border-radius: 5px;"><strong style="color: #1769aa;"> 🩺 If something goes wrong... </strong>
+<p style="margin: 7px 0 0; text-align: justify;">No reinicies el reto inmediatamente. Lee el mensaje que devuelve el sistema, comprueba tu situación actual y trata de determinar <strong>qué requisito no se está cumpliendo y por qué</strong>.</p>
+</div>
+<!-- ====================================================== --> <!-- FINAL                                                  --> <!-- ====================================================== -->
+<div style="background: #17365d; color: white; padding: 18px 20px; margin-top: 28px; border-radius: 8px; text-align: center;"><strong style="font-size: 19px;"> 🏁 Challenge completed? </strong>
+<div style="margin-top: 8px;">No terminas cuando has ejecutado el último comando.</div>
+<div style="margin-top: 5px; font-weight: bold;">Terminas cuando puedes demostrar que tu sistema cumple todos los requisitos.</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</article>
+</div></main>
+<footer id="siteFooter"><div id="siteFooterContent"> <div id="packageLicense" class="cc cc-by-sa"> <p> <span class="license-label">Licencia: </span><a href="https://creativecommons.org/licenses/by-sa/4.0/" class="license">Creative Commons: Reconocimiento - compartir igual 4.0</a></p>
+</div>
+</div></footer>
+</div>
+<p id="made-with-eXe"> <a href="https://exelearning.net/" target="_blank" rel="noopener"> <span>Creado con eXeLearning <span>(Ventana nueva)</span></span></a></p>
+</body>
+</html>

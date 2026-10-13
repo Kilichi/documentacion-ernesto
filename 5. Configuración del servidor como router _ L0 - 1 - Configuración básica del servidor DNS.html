@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="es" id="exe-page-muwoa0lz-9my49jhuq">
+<head>
+<meta charset="utf-8">
+<meta name="generator" content="eXeLearning v4.0.5">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="license" type="text/html" href="https://creativecommons.org/licenses/by-sa/4.0/">
+<title>5. Configuración del servidor como router | L0 - 1 - Configuración básica del servidor DNS</title>
+<link rel="icon" type="image/x-icon" href="../libs/favicon.ico">
+<script>document.querySelector("html").classList.add("js");</script><script src="../libs/jquery/jquery.min.js"> </script><script src="../libs/common_i18n.js"> </script><script src="../libs/common.js"> </script><script src="../libs/exe_export.js"> </script><script src="../libs/bootstrap/bootstrap.bundle.min.js"> </script><link rel="stylesheet" href="../libs/bootstrap/bootstrap.min.css">
+<script src="../idevices/text/text.js"></script><link rel="stylesheet" href="../idevices/text/text.css">
+<link rel="stylesheet" href="../content/css/base.css"><script src="../theme/style.js"> </script><link rel="stylesheet" href="../theme/style.css">
+<script src="../libs/SCORM_API_wrapper.js"></script>
+<script src="../libs/SCOFunctions.js"></script>
+</head>
+<body class="exe-export exe-scorm exe-scorm12" onload="loadPage()">
+<script>document.body.className+=" js"</script>
+<div class="exe-content exe-export pre-js siteNav-hidden"><main id="page-muwoa0lz-9my49jhuq" class="page"> 
+<header class="main-header">
+<div class="package-header"><p class="package-title">L0 - 1 - Configuración básica del servidor DNS</p></div>
+<div class="page-header"><h1 class="page-title">5. Configuración del servidor como router</h1></div>
+</header><div id="page-content-page-muwoa0lz-9my49jhuq" class="page-content">
+<article id="block-muwoa2lf-lukhxd8n4" class="box no-header">
+<header class="box-head no-icon">
+<button class="box-toggle box-toggle-on" title="Toggle content">
+<span>Toggle content</span>
+</button></header>
+<div class="box-content">
+<div id="idevice-1791290778530-iih2d1q8c" class="idevice_node text" data-idevice-path="../idevices/text/" data-idevice-type="text" data-idevice-component-type="json" data-idevice-json-data="{&quot;ideviceId&quot;:&quot;idevice-1791290778530-iih2d1q8c&quot;}">
+<div class="exe-text-template">
+    <!-- ====================================================== -->
+<div style="max-width: 1000px; margin: auto; font-family: Arial, Helvetica, sans-serif; color: #243247; line-height: 1.65;">
+<div style="background: #17365d; color: white; padding: 22px; border-radius: 12px; margin-bottom: 24px;">
+<p style="margin: 0px 0px 5px; font-size: 14px; letter-spacing: 0.5px; text-align: center;">CONFIGURACIÓN BÁSICA DEL SERVIDOR DNS</p>
+<h1 style="color: white; margin: 0px; font-size: 28px; text-align: center;">🔀 5. Configuración del servidor como router</h1>
+<p style="margin: 8px 0px 0px; text-align: center;">Permitiremos que los equipos de nuestra Red Interna puedan acceder al exterior a través del servidor DNS-LDAP.</p>
+</div>
+<!-- OBJETIVO -->
+<section style="background: #eef5fb; border-left: 5px solid #2f75b5; padding: 20px; border-radius: 10px; margin-bottom: 28px;">
+<h2 style="color: #17365d; margin-top: 0;">🎯 Objetivo</h2>
+<p style="margin-bottom: 0px; text-align: justify;">Configurar el servidor <strong>DNS-LDAP</strong> para que actúe como <strong>router y puerta de enlace</strong> de nuestra Red Interna, reenviando hacia el exterior el tráfico generado por sus equipos.</p>
+</section>
+<!-- ====================================================== --> <!-- 5.1 POR QUÉ NECESITAMOS ENRUTAMIENTO                  --> <!-- ====================================================== -->
+<h2 style="color: #17365d;">5.1. ¿Por qué necesitamos enrutamiento?</h2>
+<p style="text-align: justify;">Los equipos de nuestra <strong>Red Interna de VirtualBox</strong> pueden comunicarse entre sí, pero esta red está aislada y no dispone directamente de acceso a Internet.</p>
+<p style="text-align: justify;">El servidor <strong>DNS-LDAP</strong>, en cambio, dispone de dos interfaces: una conectada a la Red Interna y otra con acceso al exterior. Por ello puede actuar como punto de unión entre ambas redes.</p>
+<!-- ESQUEMA -->
+<div style="background: #f7f9fb; border: 1px solid #d9e2ec; border-radius: 12px; padding: 22px; margin: 22px 0 28px; text-align: center; overflow-x: auto;">
+<div style="display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 12px;">
+<div style="background: white; border: 1px solid #ccd6df; border-radius: 8px; padding: 12px 18px;">💻 Cliente<br /><small>Red Interna</small></div>
+<div style="font-size: 24px;">→</div>
+<div style="background: #eef5fb; border: 2px solid #2f75b5; border-radius: 10px; padding: 14px 22px;"><strong>DNS-LDAP</strong><br /><small>Router</small></div>
+<div style="font-size: 24px;">→</div>
+<div style="background: #edf7ed; border: 1px solid #a8c79c; border-radius: 8px; padding: 12px 18px;">🌍 Internet</div>
+</div>
+</div>
+<div style="background: #fff8e6; border-left: 5px solid #d6a800; border-radius: 10px; padding: 17px 20px; margin: 20px 0 30px;"><strong style="color: #7f6000;">📌 Importante</strong>
+<p style="margin-bottom: 0px; text-align: justify;">Configurar una puerta de enlace en los clientes no es suficiente. El servidor DNS-LDAP debe estar preparado para <strong>reenviar paquetes entre sus interfaces</strong>.</p>
+</div>
+<!-- ====================================================== --> <!-- 5.2 IP FORWARDING                                     --> <!-- ====================================================== -->
+<h2 style="color: #17365d;">5.2. Activar IP forwarding</h2>
+<p>De forma predeterminada, nuestro servidor no debe actuar como router entre sus interfaces. Para permitir el reenvío de paquetes IPv4, debemos activar <strong>IP forwarding</strong>.</p>
+<p>Edita el fichero:</p>
+<div style="display: flex; flex-wrap: wrap; gap: 12px; margin: 18px 0;">
+<div style="flex: 1 1 300px;"><strong>Con vim</strong>
+<pre style="background: #1e293b; color: #f8fafc; padding: 14px 16px; border-radius: 8px; overflow-x: auto;"><code>sudo vim /etc/sysctl.conf</code></pre>
+</div>
+<div style="flex: 1 1 300px;"><strong>Con nano</strong>
+<pre style="background: #1e293b; color: #f8fafc; padding: 14px 16px; border-radius: 8px; overflow-x: auto;"><code>sudo nano /etc/sysctl.conf</code></pre>
+</div>
+</div>
+<p>Localiza la siguiente configuración y asegúrate de que queda activa:</p>
+<pre style="background: #1e293b; color: #f8fafc; padding: 14px 16px; border-radius: 8px; overflow-x: auto;"><code>net.ipv4.ip_forward=1</code></pre>
+<p>Guarda los cambios y aplícalos:</p>
+<pre style="background: #1e293b; color: #f8fafc; padding: 14px 16px; border-radius: 8px; overflow-x: auto;"><code>sudo sysctl -p</code></pre>
+<p>Comprueba que el reenvío IPv4 está activo:</p>
+<pre style="background: #1e293b; color: #f8fafc; padding: 14px 16px; border-radius: 8px; overflow-x: auto;"><code>sysctl net.ipv4.ip_forward</code></pre>
+<div style="background: #edf7ed; border-left: 5px solid #548235; border-radius: 10px; padding: 16px 20px; margin: 18px 0 30px;"><strong style="color: #385723;">✅ Resultado esperado</strong>
+<pre style="background: #1e293b; color: #f8fafc; padding: 12px 16px; border-radius: 8px; overflow-x: auto; margin-bottom: 0;"><code>net.ipv4.ip_forward = 1</code></pre>
+</div>
+<!-- ====================================================== --> <!-- 5.3 NAT / MASQUERADE                                  --> <!-- ====================================================== -->
+<h2 style="color: #17365d;">5.3. Configurar NAT/MASQUERADE</h2>
+<p>Los equipos de la Red Interna utilizan direcciones privadas <code>192.168.x.0/24</code>. Para que su tráfico pueda salir al exterior utilizaremos <strong>NAT</strong>.</p>
+<p>Antes de crear la regla, identifica el nombre de la interfaz del servidor que tiene acceso al exterior:</p>
+<pre style="background: #1e293b; color: #f8fafc; padding: 14px 16px; border-radius: 8px; overflow-x: auto;"><code>ip a</code></pre>
+<p>En nuestro escenario, si la interfaz hacia el exterior es <code>enp0s3</code>, añade la siguiente regla:</p>
+<pre style="background: #1e293b; color: #f8fafc; padding: 14px 16px; border-radius: 8px; overflow-x: auto;"><code>sudo iptables -t nat -A POSTROUTING -o enp0s3 -j MASQUERADE</code></pre>
+<div style="background: #f4f8fc; border-left: 5px solid #2f75b5; border-radius: 10px; padding: 17px 20px; margin: 18px 0 30px;"><strong style="color: #17365d;">💡 ¿Qué hace MASQUERADE?</strong>
+<p style="margin-bottom: 0px; text-align: justify;">Permite que el tráfico procedente de la Red Interna salga utilizando la dirección IP de la interfaz exterior del servidor DNS-LDAP.</p>
+</div>
+<!-- ====================================================== --> <!-- 5.4 FORWARD                                           --> <!-- ====================================================== -->
+<h2 style="color: #17365d;">5.4. Permitir el tráfico entre interfaces</h2>
+<p style="text-align: justify;">Además de activar el reenvío IP y configurar NAT, debemos permitir que <code>iptables</code> reenvíe el tráfico entre las dos interfaces del servidor.</p>
+<p>En nuestro escenario:</p>
+<div style="background: #f7f9fb; border: 1px solid #d9e2ec; border-radius: 10px; padding: 16px 20px; margin: 18px 0;">
+<p style="margin-top: 0;">🌍 <code>enp0s3</code> → interfaz hacia el exterior.</p>
+<p style="margin-bottom: 0;">🖧 <code>enp0s8</code> → interfaz hacia la Red Interna.</p>
+</div>
+<p>Permite que el tráfico iniciado desde la Red Interna salga hacia el exterior:</p>
+<pre style="background: #1e293b; color: #f8fafc; padding: 14px 16px; border-radius: 8px; overflow-x: auto;"><code>sudo iptables -A FORWARD -i enp0s8 -o enp0s3 -j ACCEPT</code></pre>
+<p>A continuación, permite el tráfico de respuesta correspondiente a conexiones ya establecidas:</p>
+<pre style="background: #1e293b; color: #f8fafc; padding: 14px 16px; border-radius: 8px; overflow-x: auto;"><code>sudo iptables -A FORWARD -i enp0s3 -o enp0s8 -m state --state RELATED,ESTABLISHED -j ACCEPT</code></pre>
+<div style="background: #fff8e6; border-left: 5px solid #d6a800; border-radius: 10px; padding: 17px 20px; margin: 20px 0 30px;"><strong style="color: #7f6000;">⚠️ Comprueba tus interfaces</strong>
+<p style="margin-bottom: 0;">Los nombres <code>enp0s3</code> y <code>enp0s8</code> deben corresponder realmente a las interfaces de tu servidor. <strong>No copies las reglas sin comprobarlo previamente con <code>ip a</code>.</strong></p>
+</div>
+<!-- ====================================================== --> <!-- 5.5 COMPROBAR REGLAS                                  --> <!-- ====================================================== -->
+<h2 style="color: #17365d;">5.5. Comprobar las reglas</h2>
+<p>Antes de hacer persistente la configuración, comprueba las reglas que acabas de añadir.</p>
+<p>Reglas de reenvío:</p>
+<pre style="background: #1e293b; color: #f8fafc; padding: 14px 16px; border-radius: 8px; overflow-x: auto;"><code>sudo iptables -L FORWARD -n -v</code></pre>
+<p>Reglas de NAT:</p>
+<pre style="background: #1e293b; color: #f8fafc; padding: 14px 16px; border-radius: 8px; overflow-x: auto;"><code>sudo iptables -t nat -L POSTROUTING -n -v</code></pre>
+<!-- ====================================================== --> <!-- 5.6 PERSISTENCIA                                      --> <!-- ====================================================== -->
+<h2 style="color: #17365d;">5.6. Hacer persistente la configuración</h2>
+<p>Las reglas añadidas con <code>iptables</code> no deben perderse cuando reiniciemos el servidor.</p>
+<p>Instala el paquete que permite conservarlas:</p>
+<pre style="background: #1e293b; color: #f8fafc; padding: 14px 16px; border-radius: 8px; overflow-x: auto;"><code>sudo apt install iptables-persistent</code></pre>
+<p>Durante la instalación, acepta guardar las reglas actuales cuando el sistema lo solicite.</p>
+<p>También puedes guardar posteriormente la configuración actual mediante:</p>
+<pre style="background: #1e293b; color: #f8fafc; padding: 14px 16px; border-radius: 8px; overflow-x: auto;"><code>sudo netfilter-persistent save</code></pre>
+<div style="background: #f4f8fc; border-left: 5px solid #2f75b5; border-radius: 10px; padding: 17px 20px; margin: 18px 0 30px;"><strong style="color: #17365d;">💡 ¿Por qué necesitamos persistencia?</strong>
+<p style="margin-bottom: 0px; text-align: justify;">Una infraestructura debe seguir funcionando después de reiniciar. Guardar las reglas evita tener que introducir manualmente la configuración de enrutamiento cada vez que arranque el servidor.</p>
+</div>
+<!-- ====================================================== --> <!-- COMPROBACIÓN DEL ENRUTAMIENTO                          --> <!-- ====================================================== -->
+<section style="background: #edf7ed; border-left: 5px solid #548235; padding: 20px; border-radius: 10px; margin-top: 30px;">
+<h2 style="color: #385723; margin-top: 0;">✅ Comprobación del enrutamiento</h2>
+<p style="text-align: justify;">Antes de comprobar la resolución DNS, vamos a verificar que el <strong>enrutamiento funciona independientemente del servicio DNS</strong>.</p>
+<h3 style="color: #385723;">1. Comprueba la puerta de enlace del cliente</h3>
+<pre style="background: #1e293b; color: #f8fafc; padding: 14px 16px; border-radius: 8px; overflow-x: auto;"><code>ip route</code></pre>
+<p>Debe existir una ruta por defecto que utilice el servidor DNS-LDAP:</p>
+<pre style="background: #1e293b; color: #f8fafc; padding: 14px 16px; border-radius: 8px; overflow-x: auto;"><code>default via 192.168.x.253</code></pre>
+<h3 style="color: #385723;">2. Comprueba la comunicación con DNS-LDAP</h3>
+<pre style="background: #1e293b; color: #f8fafc; padding: 14px 16px; border-radius: 8px; overflow-x: auto;"><code>ping -c 4 192.168.x.253</code></pre>
+<h3 style="color: #385723;">3. Comprueba el acceso al exterior mediante una IP</h3>
+<pre style="background: #1e293b; color: #f8fafc; padding: 14px 16px; border-radius: 8px; overflow-x: auto;"><code>ping -c 4 8.8.8.8</code></pre>
+<div style="background: white; border: 1px solid #cfe0c9; border-radius: 8px; padding: 16px 20px; margin-top: 18px;">
+<p style="margin-top: 0;">☐ <code>net.ipv4.ip_forward</code> tiene valor <code>1</code>.</p>
+<p>☐ Existe una regla <code>MASQUERADE</code> para la interfaz exterior.</p>
+<p>☐ Las reglas <code>FORWARD</code> permiten el tráfico entre las interfaces.</p>
+<p>☐ El cliente utiliza <code>192.168.x.253</code> como puerta de enlace.</p>
+<p>☐ El cliente alcanza <code>192.168.x.253</code>.</p>
+<p>☐ El cliente puede alcanzar una dirección IP externa.</p>
+<p style="margin-bottom: 0;">☐ Las reglas se han guardado para que sean persistentes.</p>
+</div>
+</section>
+<!-- DISTINCIÓN DNS / ENRUTAMIENTO -->
+<div style="background: #fff8e6; border-left: 5px solid #d6a800; border-radius: 10px; padding: 18px 20px; margin-top: 24px;"><strong style="color: #7f6000;">🧠 Conectividad ≠ resolución DNS</strong>
+<p style="margin-bottom: 0px; text-align: justify;">Si el cliente puede alcanzar una <strong>dirección IP externa</strong>, hemos demostrado que el enrutamiento funciona. Esto no demuestra todavía que pueda resolver nombres como <code>google.es</code>. Esa comprobación se realizará en el siguiente apartado.</p>
+</div>
+<!-- PORTFOLIO -->
+<section style="background: #f4f8fc; border: 1px solid #d4e2ef; border-radius: 10px; padding: 18px 20px; margin-top: 24px;">
+<h3 style="color: #17365d; margin-top: 0;">📁 Portfolio</h3>
+<p style="margin-bottom: 0px; text-align: justify;">Documenta la configuración realizada y conserva evidencias que permitan demostrar que <strong>IP forwarding está activo</strong>, que existen las reglas de <strong>NAT y FORWARD</strong> necesarias y que un equipo de la Red Interna puede alcanzar una <strong>dirección IP externa</strong>.</p>
+</section>
+<!-- CIERRE -->
+<div style="background: #17365d; color: white; border-radius: 12px; padding: 20px; margin-top: 28px;">
+<h3 style="color: #a7f3d0; margin-top: 0;">➡️ Siguiente paso</h3>
+<p style="margin-bottom: 0px; text-align: justify;">Nuestra Red Interna ya dispone de una salida hacia el exterior. Ahora configuraremos los equipos para utilizar correctamente <strong>DNS-LDAP como puerta de enlace y servidor DNS</strong> y comprobaremos el funcionamiento completo de la infraestructura.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</article>
+</div></main>
+<footer id="siteFooter"><div id="siteFooterContent"> <div id="packageLicense" class="cc cc-by-sa"> <p> <span class="license-label">Licencia: </span><a href="https://creativecommons.org/licenses/by-sa/4.0/" class="license">Creative Commons: Reconocimiento - compartir igual 4.0</a></p>
+</div>
+</div></footer>
+</div>
+<p id="made-with-eXe"> <a href="https://exelearning.net/" target="_blank" rel="noopener"> <span>Creado con eXeLearning <span>(Ventana nueva)</span></span></a></p>
+</body>
+</html>

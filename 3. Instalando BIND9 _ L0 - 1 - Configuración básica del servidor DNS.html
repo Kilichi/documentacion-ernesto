@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="es" id="exe-page-muwnsd00-0npmh8lqa">
+<head>
+<meta charset="utf-8">
+<meta name="generator" content="eXeLearning v4.0.5">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="license" type="text/html" href="https://creativecommons.org/licenses/by-sa/4.0/">
+<title>3. Instalando BIND9 | L0 - 1 - Configuración básica del servidor DNS</title>
+<link rel="icon" type="image/x-icon" href="../libs/favicon.ico">
+<script>document.querySelector("html").classList.add("js");</script><script src="../libs/jquery/jquery.min.js"> </script><script src="../libs/common_i18n.js"> </script><script src="../libs/common.js"> </script><script src="../libs/exe_export.js"> </script><script src="../libs/bootstrap/bootstrap.bundle.min.js"> </script><link rel="stylesheet" href="../libs/bootstrap/bootstrap.min.css">
+<script src="../idevices/text/text.js"></script><link rel="stylesheet" href="../idevices/text/text.css">
+<link rel="stylesheet" href="../content/css/base.css"><script src="../theme/style.js"> </script><link rel="stylesheet" href="../theme/style.css">
+<script src="../libs/SCORM_API_wrapper.js"></script>
+<script src="../libs/SCOFunctions.js"></script>
+</head>
+<body class="exe-export exe-scorm exe-scorm12" onload="loadPage()">
+<script>document.body.className+=" js"</script>
+<div class="exe-content exe-export pre-js siteNav-hidden"><main id="page-muwnsd00-0npmh8lqa" class="page"> 
+<header class="main-header">
+<div class="package-header"><p class="package-title">L0 - 1 - Configuración básica del servidor DNS</p></div>
+<div class="page-header"><h1 class="page-title">3. Instalando BIND9</h1></div>
+</header><div id="page-content-page-muwnsd00-0npmh8lqa" class="page-content">
+<article id="block-muwo1sug-1vbeis34f" class="box no-header">
+<header class="box-head no-icon">
+<button class="box-toggle box-toggle-on" title="Toggle content">
+<span>Toggle content</span>
+</button></header>
+<div class="box-content">
+<div id="idevice-1791290392647-ypvhjedo2" class="idevice_node text" data-idevice-path="../idevices/text/" data-idevice-type="text" data-idevice-component-type="json" data-idevice-json-data="{&quot;ideviceId&quot;:&quot;idevice-1791290392647-ypvhjedo2&quot;}">
+<div class="exe-text-template">
+    <!-- ====================================================== -->
+<div style="max-width: 1000px; margin: auto; font-family: Arial, Helvetica, sans-serif; color: #243247; line-height: 1.65;">
+<div style="background: #17365d; color: white; padding: 22px; border-radius: 12px; margin-bottom: 24px;">
+<p style="margin: 0px 0px 5px; font-size: 14px; letter-spacing: 0.5px; text-align: center;">CONFIGURACIÓN BÁSICA DEL SERVIDOR DNS</p>
+<h1 style="color: white; margin: 0px; font-size: 28px; text-align: center;">📦 3. Instalación de BIND9</h1>
+<p style="margin: 8px 0px 0px; text-align: center;">Instalaremos el servicio DNS y comprobaremos que se encuentra correctamente disponible en nuestro servidor.</p>
+</div>
+<!-- OBJETIVO -->
+<section style="background: #eef5fb; border-left: 5px solid #2f75b5; padding: 20px; border-radius: 10px; margin-bottom: 28px;">
+<h2 style="color: #17365d; margin-top: 0;">🎯 Objetivo</h2>
+<p style="margin-bottom: 0px; text-align: justify;">Instalar <strong>BIND9</strong> y sus herramientas de administración en el servidor DNS-LDAP, comprobar la configuración del firewall y verificar que el servicio DNS se encuentra activo.</p>
+</section>
+<!-- ====================================================== --> <!-- 3.1 ACTUALIZAR REPOSITORIOS                            --> <!-- ====================================================== -->
+<h2 style="color: #17365d;">3.1. Actualizar los repositorios</h2>
+<p style="text-align: justify;">Antes de instalar un nuevo paquete, actualiza la información disponible sobre los paquetes y versiones de los repositorios configurados en Ubuntu Server.</p>
+<pre style="background: #1e293b; color: #f8fafc; padding: 14px 16px; border-radius: 8px; overflow-x: auto;"><code>sudo apt update</code></pre>
+<div style="background: #f7f9fb; border-left: 4px solid #6c8eaa; border-radius: 8px; padding: 14px 18px; margin: 16px 0 28px;"><strong>💡 ¿Qué estamos haciendo?</strong>
+<p style="margin-bottom: 0;">Este comando actualiza el índice local de paquetes. <strong>No instala BIND9 todavía.</strong></p>
+</div>
+<!-- ====================================================== --> <!-- 3.2 INSTALAR BIND9                                    --> <!-- ====================================================== -->
+<h2 style="color: #17365d;">3.2. Instalar BIND9</h2>
+<p style="text-align: justify;">Instalaremos el servidor DNS <strong>BIND9</strong> junto con el paquete <strong>bind9-utils</strong>, que incorpora herramientas que utilizaremos posteriormente para trabajar y realizar comprobaciones sobre el servicio.</p>
+<pre style="background: #1e293b; color: #f8fafc; padding: 14px 16px; border-radius: 8px; overflow-x: auto;"><code>sudo apt install bind9 bind9-utils</code></pre>
+<p>Confirma la instalación cuando el sistema lo solicite y espera hasta que finalice el proceso.</p>
+<div style="background: #f4f8fc; border: 1px solid #d4e2ef; border-radius: 10px; padding: 18px; margin: 20px 0 28px;">
+<h3 style="color: #17365d; margin-top: 0;">📦 ¿Qué estamos instalando?</h3>
+<p><strong>bind9</strong> proporciona el servicio DNS que se ejecutará en nuestro servidor.</p>
+<p style="margin-bottom: 0;"><strong>bind9-utils</strong> proporciona herramientas auxiliares para administrar y comprobar la configuración de BIND9.</p>
+</div>
+<!-- ====================================================== --> <!-- 3.3 FIREWALL                                           --> <!-- ====================================================== -->
+<h2 style="color: #17365d;">3.3. Comprobar el firewall</h2>
+<p style="text-align: justify;">Antes de continuar, comprueba si el firewall <strong>UFW</strong> está activo en el servidor.</p>
+<pre style="background: #1e293b; color: #f8fafc; padding: 14px 16px; border-radius: 8px; overflow-x: auto;"><code>sudo ufw status</code></pre>
+<p>Observa el resultado obtenido.</p>
+<!-- FIREWALL ACTIVO -->
+<div style="background: #fff8e6; border-left: 5px solid #d6a800; border-radius: 10px; padding: 18px 20px; margin: 20px 0;">
+<h3 style="color: #7f6000; margin-top: 0;">🔐 Si UFW está activo</h3>
+<p>Debemos permitir el tráfico correspondiente al servicio BIND9.</p>
+<pre style="background: #1e293b; color: #f8fafc; padding: 14px 16px; border-radius: 8px; overflow-x: auto; margin-bottom: 0;"><code>sudo ufw allow bind9</code></pre>
+</div>
+<!-- FIREWALL INACTIVO -->
+<div style="background: #f7f9fb; border-left: 5px solid #6c8eaa; border-radius: 10px; padding: 18px 20px; margin: 20px 0 30px;">
+<h3 style="color: #445b70; margin-top: 0;">ℹ️ Si UFW está inactivo</h3>
+<p style="margin-bottom: 0;">No es necesario añadir esta regla en este momento. Continúa con la comprobación del servicio.</p>
+</div>
+<!-- ====================================================== --> <!-- 3.4 COMPROBAR SERVICIO                                --> <!-- ====================================================== -->
+<h2 style="color: #17365d;">3.4. Comprobar el servicio BIND9</h2>
+<p>Una vez finalizada la instalación, comprueba el estado del servicio:</p>
+<pre style="background: #1e293b; color: #f8fafc; padding: 14px 16px; border-radius: 8px; overflow-x: auto;"><code>sudo systemctl status bind9</code></pre>
+<p>Examina la información mostrada por <code>systemctl</code> y localiza el estado del servicio.</p>
+<div style="background: #edf7ed; border-left: 5px solid #548235; border-radius: 10px; padding: 18px 20px; margin: 20px 0;">
+<h3 style="color: #385723; margin-top: 0;">✅ ¿Qué deberías encontrar?</h3>
+<p style="margin-bottom: 0;">Si la instalación se ha realizado correctamente, el servicio BIND9 deberá aparecer como <strong>activo</strong>.</p>
+</div>
+<div style="background: #fff8e6; border-left: 5px solid #d6a800; border-radius: 10px; padding: 16px 20px; margin: 20px 0 30px;"><strong style="color: #7f6000;">📌 Recuerda</strong>
+<p style="margin-bottom: 0px; text-align: justify;">Que BIND9 esté activo significa que el servicio se está ejecutando. <strong>Todavía no hemos realizado la configuración necesaria para nuestra Red Interna.</strong></p>
+</div>
+<!-- ====================================================== --> <!-- COMPROBACIÓN FINAL                                     --> <!-- ====================================================== -->
+<section style="background: #edf7ed; border-left: 5px solid #548235; padding: 20px; border-radius: 10px; margin-top: 30px;">
+<h2 style="color: #385723; margin-top: 0;">✅ Comprobación de la instalación</h2>
+<p>Antes de continuar, verifica que puedes responder afirmativamente a las siguientes comprobaciones:</p>
+<div style="background: white; border: 1px solid #cfe0c9; border-radius: 8px; padding: 16px 20px;">
+<p style="margin-top: 0;">☐ Los repositorios se han actualizado correctamente.</p>
+<p>☐ <code>bind9</code> y <code>bind9-utils</code> están instalados.</p>
+<p>☐ Se ha comprobado el estado de UFW.</p>
+<p>☐ Si UFW está activo, se ha permitido el tráfico de BIND9.</p>
+<p style="margin-bottom: 0;">☐ <code>systemctl status bind9</code> muestra que el servicio está activo.</p>
+</div>
+</section>
+<!-- ====================================================== --> <!-- PORTFOLIO                                              --> <!-- ====================================================== -->
+<section style="background: #f4f8fc; border: 1px solid #d4e2ef; border-radius: 10px; padding: 18px 20px; margin-top: 24px;">
+<h3 style="color: #17365d; margin-top: 0;">📁 Portfolio</h3>
+<p style="margin-bottom: 0px; text-align: justify;">Documenta la instalación realizada y conserva una evidencia que permita comprobar que <strong>BIND9 está instalado y el servicio se encuentra activo</strong>.</p>
+</section>
+<!-- ====================================================== --> <!-- CIERRE                                                 --> <!-- ====================================================== -->
+<div style="background: #17365d; color: white; border-radius: 12px; padding: 20px; margin-top: 28px;">
+<h3 style="color: #a7f3d0; margin-top: 0;">➡️ Siguiente paso</h3>
+<p style="margin-bottom: 0px; text-align: justify;">BIND9 ya está instalado y en ejecución. Ahora debemos <strong>configurarlo para que atienda las consultas de nuestra Red Interna y pueda resolver nombres externos</strong>.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</article>
+</div></main>
+<footer id="siteFooter"><div id="siteFooterContent"> <div id="packageLicense" class="cc cc-by-sa"> <p> <span class="license-label">Licencia: </span><a href="https://creativecommons.org/licenses/by-sa/4.0/" class="license">Creative Commons: Reconocimiento - compartir igual 4.0</a></p>
+</div>
+</div></footer>
+</div>
+<p id="made-with-eXe"> <a href="https://exelearning.net/" target="_blank" rel="noopener"> <span>Creado con eXeLearning <span>(Ventana nueva)</span></span></a></p>
+</body>
+</html>

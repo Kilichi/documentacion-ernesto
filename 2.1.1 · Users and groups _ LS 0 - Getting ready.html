@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="es" id="exe-page-mumibyyq-qjau70gyv">
+<head>
+<meta charset="utf-8">
+<meta name="generator" content="eXeLearning v4.0.5">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="license" type="text/html" href="https://creativecommons.org/licenses/by-sa/4.0/">
+<title>2.1.1 · Users and groups | LS 0 - Getting ready</title>
+<link rel="icon" type="image/x-icon" href="../libs/favicon.ico">
+<script>document.querySelector("html").classList.add("js");</script><script src="../libs/jquery/jquery.min.js"> </script><script src="../libs/common_i18n.js"> </script><script src="../libs/common.js"> </script><script src="../libs/exe_export.js"> </script><script src="../libs/bootstrap/bootstrap.bundle.min.js"> </script><link rel="stylesheet" href="../libs/bootstrap/bootstrap.min.css">
+<script src="../idevices/text/text.js"></script><link rel="stylesheet" href="../idevices/text/text.css">
+<link rel="stylesheet" href="../content/css/base.css"><script src="../theme/style.js"> </script><link rel="stylesheet" href="../theme/style.css">
+<script src="../libs/SCORM_API_wrapper.js"></script>
+<script src="../libs/SCOFunctions.js"></script>
+</head>
+<body class="exe-export exe-scorm exe-scorm12" onload="loadPage()">
+<script>document.body.className+=" js"</script>
+<div class="exe-content exe-export pre-js siteNav-hidden"><main id="page-mumibyyq-qjau70gyv" class="page"> 
+<header class="main-header">
+<div class="package-header"><p class="package-title">LS 0 - Getting ready</p></div>
+<div class="page-header"><h1 class="page-title">2.1.1 · Users and groups</h1></div>
+</header><div id="page-content-page-mumibyyq-qjau70gyv" class="page-content">
+<article id="block-mumijx2t-pozgip761" class="box no-header">
+<header class="box-head no-icon">
+<button class="box-toggle box-toggle-on" title="Toggle content">
+<span>Toggle content</span>
+</button></header>
+<div class="box-content">
+<div id="idevice-1790676498483-75hcktm2y" class="idevice_node text" data-idevice-path="../idevices/text/" data-idevice-type="text" data-idevice-component-type="json" data-idevice-json-data="{&quot;ideviceId&quot;:&quot;idevice-1790676498483-75hcktm2y&quot;}">
+<div class="exe-text-template">
+    <div style="max-width: 1050px; margin: auto; font-family: Arial,Helvetica,sans-serif; color: #243247; line-height: 1.65;"><!-- ====================================================== --> <!-- CABECERA                                               --> <!-- ====================================================== -->
+<div style="background: #17365d; color: white; padding: 18px 22px; border-radius: 10px;">
+<h2 style="color: white; margin: 0px; text-align: center;">👥 2.1.1 · Users and groups</h2>
+<p style="margin: 6px 0px 0px; text-align: center;">Recuperamos la gestión de usuarios y grupos en Linux</p>
+</div>
+<!-- ====================================================== --> <!-- OBJETIVO                                               --> <!-- ====================================================== -->
+<div style="background: #eef5fb; border-left: 5px solid #2980b9; padding: 14px 18px; margin: 20px 0px; border-radius: 5px; text-align: justify;"><strong style="color: #17365d;"> 🎯 Objetivo </strong><br />Recordar cómo Linux identifica y organiza a sus <strong>usuarios y grupos</strong>, interpretar la información básica asociada a ellos y recuperar los comandos necesarios para crearlos, modificarlos y comprobar su configuración.</div>
+<!-- ====================================================== --> <!-- INTRODUCCIÓN                                           --> <!-- ====================================================== -->
+<p style="text-align: justify;">En Linux, cada usuario dispone de una identidad propia dentro del sistema. Esta identidad permite diferenciar quién está trabajando, qué recursos utiliza y, como veremos posteriormente, qué acciones puede realizar sobre ellos.</p>
+<p style="text-align: justify;">Los <strong>grupos</strong> permiten organizar varios usuarios bajo una misma identidad colectiva. Más adelante podremos utilizar esta organización para controlar el acceso a ficheros, directorios y otros recursos del sistema.</p>
+<!-- ====================================================== --> <!-- CONEXIÓN CON DAW                                       --> <!-- ====================================================== -->
+<div style="background: #fff8e8; border-left: 5px solid #f0ad4e; padding: 15px 18px; margin: 20px 0; border-radius: 5px;"><strong style="color: #8a5a00;"> 🔎 ¿Por qué necesitamos recordarlo? </strong>
+<p style="margin: 7px 0 0; text-align: justify;">Cuando administremos nuestros servidores DNS-LDAP, Git, Web o FTP tendremos que trabajar con diferentes usuarios y grupos. Además, algunos de los servicios que instalaremos podrán disponer de <strong>sus propios usuarios del sistema</strong>.</p>
+<p style="margin: 7px 0 0;">Antes de llegar a ese punto necesitamos recordar cómo identifica Linux a cada usuario y cómo podemos organizarlos mediante grupos.</p>
+</div>
+<!-- ====================================================== --> <!-- 1. USUARIOS                                            --> <!-- ====================================================== -->
+<h3 style="color: #17365d; margin-top: 32px;">👤 1 · Users</h3>
+<p style="text-align: justify;">Un <strong>usuario</strong> representa una identidad dentro del sistema Linux. Cada usuario dispone de un identificador numérico denominado <strong>UID</strong> (<em>User Identifier</em>).</p>
+<p style="text-align: justify;">No todos los usuarios tienen que representar necesariamente a una persona. Linux también puede utilizar cuentas asociadas a <strong>servicios y procesos</strong> para limitar los recursos a los que estos pueden acceder.</p>
+<!-- IDEA CLAVE -->
+<div style="background: #eef5fb; border-left: 5px solid #3498db; padding: 14px 18px; margin: 18px 0; border-radius: 5px;"><strong style="color: #1769aa;"> 💡 Idea principal</strong>
+<p style="margin: 7px 0 0;">En Linux, el nombre de usuario nos resulta cómodo a las personas, pero internamente la identidad del usuario está asociada a su <strong>UID</strong>.</p>
+<p style="margin: 7px 0 0;">El usuario <code>root</code>, por ejemplo, tiene <strong>UID 0</strong>.</p>
+</div>
+<!-- ====================================================== --> <!-- WHO AM I                                               --> <!-- ====================================================== -->
+<h3 style="color: #17365d; margin-top: 30px;">🔎 Who am I?</h3>
+<p style="text-align: justify;">Antes de administrar otros usuarios, podemos comenzar identificando nuestra propia cuenta.</p>
+<div style="background: #1f2933; color: #f5f7fa; padding: 14px 18px; border-radius: 7px; margin: 15px 0; font-family: Consolas,monospace;">
+<div>$ whoami</div>
+<div>$ id</div>
+<div>$ groups</div>
+</div>
+<table style="width: 100%; border-collapse: collapse; margin: 16px 0;">
+<thead>
+<tr style="background: #17365d; color: white;">
+<th style="padding: 9px; border: 1px solid #ccd6df; text-align: center;">Comando</th>
+<th style="padding: 9px; border: 1px solid #ccd6df; text-align: center;">¿Qué nos permite comprobar?</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="padding: 9px; border: 1px solid #ccd6df; text-align: center;"><code>whoami</code></td>
+<td style="padding: 9px; border: 1px solid #ccd6df; text-align: center;">El usuario con el que estamos trabajando.</td>
+</tr>
+<tr style="background: #f7f9fa;">
+<td style="padding: 9px; border: 1px solid #ccd6df; text-align: center;"><code>id</code></td>
+<td style="padding: 9px; border: 1px solid #ccd6df; text-align: center;">UID, grupo principal y grupos a los que pertenece el usuario.</td>
+</tr>
+<tr>
+<td style="padding: 9px; border: 1px solid #ccd6df; text-align: center;"><code>groups</code></td>
+<td style="padding: 9px; border: 1px solid #ccd6df; text-align: center;">Los grupos a los que pertenece el usuario.</td>
+</tr>
+</tbody>
+</table>
+<!-- CHECK IT -->
+<div style="background: #eaf7ee; border-left: 5px solid #4f8a62; padding: 14px 18px; margin: 18px 0; border-radius: 5px;"><strong style="color: #315f40;"> 🔍 Check it </strong>
+<p style="margin: 7px 0 0;">Ejecuta los tres comandos en tu sistema. ¿Puedes identificar tu <strong>nombre de usuario</strong>, tu <strong>UID</strong>, tu <strong>GID</strong> y los <strong>grupos</strong> a los que perteneces?</p>
+</div>
+<!-- ====================================================== --> <!-- ETC PASSWD                                             --> <!-- ====================================================== -->
+<h3 style="color: #17365d; margin-top: 32px;">📄 2 · Where are users stored?</h3>
+<p style="text-align: justify;">Linux mantiene información sobre las cuentas de usuario en el fichero:</p>
+<div style="text-align: center; margin: 15px 0;"><span style="display: inline-block; background: #eef5fb; border: 2px solid #3498db; border-radius: 6px; padding: 8px 22px;"> <code style="font-size: 18px; font-weight: bold;">
+        /etc/passwd
+      </code> </span></div>
+<p style="text-align: justify;">Cada línea representa una cuenta y contiene diferentes campos separados mediante <code>:</code>.</p>
+<div style="background: #1f2933; color: #f5f7fa; padding: 14px 18px; border-radius: 7px; margin: 15px 0; font-family: Consolas,monospace; overflow-x: auto;">usuario:x:1000:1000:usuario:/home/usuario:/bin/bash</div>
+<table style="width: 100%; border-collapse: collapse; margin: 16px 0;">
+<thead>
+<tr style="background: #17365d; color: white;">
+<th style="padding: 9px; border: 1px solid #ccd6df; text-align: center;">Campo</th>
+<th style="padding: 9px; border: 1px solid #ccd6df; text-align: center;">Significado</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="padding: 9px; border: 1px solid #ccd6df; text-align: center;"><strong>Login</strong></td>
+<td style="padding: 9px; border: 1px solid #ccd6df; text-align: left;">Nombre utilizado para identificar al usuario.</td>
+</tr>
+<tr style="background: #f7f9fa;">
+<td style="padding: 9px; border: 1px solid #ccd6df; text-align: center;"><strong>Password</strong></td>
+<td style="padding: 9px; border: 1px solid #ccd6df; text-align: left;">Normalmente aparece <code>x</code>; la información de contraseña se gestiona mediante <code>/etc/shadow</code>.</td>
+</tr>
+<tr>
+<td style="padding: 9px; border: 1px solid #ccd6df; text-align: center;"><strong>UID</strong></td>
+<td style="padding: 9px; border: 1px solid #ccd6df; text-align: left;">Identificador numérico del usuario.</td>
+</tr>
+<tr style="background: #f7f9fa;">
+<td style="padding: 9px; border: 1px solid #ccd6df; text-align: center;"><strong>GID</strong></td>
+<td style="padding: 9px; border: 1px solid #ccd6df; text-align: left;">Identificador de su grupo principal.</td>
+</tr>
+<tr>
+<td style="padding: 9px; border: 1px solid #ccd6df; text-align: center;"><strong>GECOS</strong></td>
+<td style="padding: 9px; border: 1px solid #ccd6df; text-align: left;">Información adicional sobre el usuario.</td>
+</tr>
+<tr style="background: #f7f9fa;">
+<td style="padding: 9px; border: 1px solid #ccd6df; text-align: center;"><strong>Home</strong></td>
+<td style="padding: 9px; border: 1px solid #ccd6df; text-align: left;">Directorio personal del usuario.</td>
+</tr>
+<tr>
+<td style="padding: 9px; border: 1px solid #ccd6df; text-align: center;"><strong>Shell</strong></td>
+<td style="padding: 9px; border: 1px solid #ccd6df; text-align: left;">Shell utilizada por defecto al iniciar una sesión.</td>
+</tr>
+</tbody>
+</table>
+<!-- ====================================================== --> <!-- SHADOW                                                 --> <!-- ====================================================== -->
+<h3 style="color: #17365d; margin-top: 30px;">🔐 3 · What about passwords?</h3>
+<p style="text-align: justify;">Las contraseñas no se almacenan directamente en <code>/etc/passwd</code>. Linux utiliza otro fichero:</p>
+<div style="text-align: center; margin: 15px 0;"><span style="display: inline-block; background: #fff8e8; border: 2px solid #f0ad4e; border-radius: 6px; padding: 8px 22px;"> <code style="font-size: 18px; font-weight: bold;">
+        /etc/shadow
+      </code> </span></div>
+<p style="text-align: justify;">Este fichero contiene información relacionada con las <strong>contraseñas y su caducidad</strong>. El valor de la contraseña se almacena mediante un <strong>hash</strong>, no como una contraseña legible.</p>
+<div style="background: #fff8e8; border-left: 5px solid #f0ad4e; padding: 14px 18px; margin: 18px 0; border-radius: 5px;"><strong style="color: #8a5a00;"> 🔒 Importante </strong>
+<p style="margin: 7px 0 0;">No debemos editar manualmente <code>/etc/passwd</code> o <code>/etc/shadow</code> para crear o modificar usuarios. Linux dispone de comandos específicos para realizar estas operaciones de forma controlada.</p>
+</div>
+<!-- ====================================================== --> <!-- MANAGING USERS                                         --> <!-- ====================================================== -->
+<h3 style="color: #17365d; margin-top: 32px;">⌨️ 4 · Managing users</h3>
+<p style="text-align: justify;">Podemos crear, modificar y eliminar cuentas utilizando herramientas específicas del sistema.</p>
+<table style="width: 100%; border-collapse: collapse; margin: 16px 0;">
+<thead>
+<tr style="background: #17365d; color: white;">
+<th style="padding: 9px; border: 1px solid #ccd6df; text-align: center;">Comando</th>
+<th style="padding: 9px; border: 1px solid #ccd6df; text-align: center;">Función</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="padding: 9px; border: 1px solid #ccd6df; text-align: center;"><code>adduser</code></td>
+<td style="padding: 9px; border: 1px solid #ccd6df;">Crea una nueva cuenta de usuario de forma interactiva.</td>
+</tr>
+<tr style="background: #f7f9fa;">
+<td style="padding: 9px; border: 1px solid #ccd6df; text-align: center;"><code>useradd</code></td>
+<td style="padding: 9px; border: 1px solid #ccd6df;">Crea una nueva cuenta utilizando las opciones indicadas.</td>
+</tr>
+<tr>
+<td style="padding: 9px; border: 1px solid #ccd6df; text-align: center;"><code>usermod</code></td>
+<td style="padding: 9px; border: 1px solid #ccd6df;">Modifica una cuenta existente.</td>
+</tr>
+<tr style="background: #f7f9fa;">
+<td style="padding: 9px; border: 1px solid #ccd6df; text-align: center;"><code>passwd</code></td>
+<td style="padding: 9px; border: 1px solid #ccd6df;">Establece o modifica la contraseña de un usuario.</td>
+</tr>
+<tr>
+<td style="padding: 9px; border: 1px solid #ccd6df; text-align: center;"><code>userdel</code> / <code>deluser</code></td>
+<td style="padding: 9px; border: 1px solid #ccd6df;">Elimina una cuenta de usuario.</td>
+</tr>
+</tbody>
+</table>
+<!-- MAN -->
+<div style="background: #eef5fb; border-left: 5px solid #3498db; padding: 14px 18px; margin: 18px 0; border-radius: 5px;"><strong style="color: #1769aa;"> 📖 No memorices todas las opciones </strong>
+<p style="margin: 7px 0 0;">Utiliza <code>man</code>, <code>-h</code> o <code>--help</code> cuando necesites consultar las opciones disponibles.</p>
+<div style="background: #1f2933; color: #f5f7fa; padding: 10px 14px; border-radius: 5px; margin-top: 10px; font-family: Consolas,monospace;">$ man usermod<br />$ usermod --help</div>
+</div>
+<!-- ====================================================== --> <!-- GROUPS                                                 --> <!-- ====================================================== -->
+<h3 style="color: #17365d; margin-top: 34px;">👥 5 · Groups</h3>
+<p style="text-align: justify;">Los <strong>grupos</strong> permiten organizar usuarios para poder gestionar conjuntamente su acceso a determinados recursos.</p>
+<p style="text-align: justify;">Un usuario dispone de un <strong>grupo primario</strong> y puede pertenecer además a diferentes <strong>grupos suplementarios</strong>.</p>
+<div style="display: flex; flex-wrap: wrap; gap: 14px; margin: 18px 0;">
+<div style="flex: 1 1 300px; background: #eef5fb; border-top: 5px solid #3498db; border-radius: 7px; padding: 15px; text-align: center;"><strong style="color: #1769aa;"> 👤 Grupo primario </strong>
+<p style="margin: 7px 0px 0px; text-align: justify;">Es el grupo identificado mediante el <strong>GID principal</strong> asociado al usuario.</p>
+</div>
+<div style="flex: 1 1 300px; background: #eaf7ee; border-top: 5px solid #4f8a62; border-radius: 7px; padding: 15px; text-align: center;"><strong style="color: #315f40;"> 👥 Grupos suplementarios </strong>
+<p style="margin: 7px 0px 0px; text-align: justify;">Son otros grupos a los que puede pertenecer el usuario además de su grupo principal.</p>
+</div>
+</div>
+<!-- ====================================================== --> <!-- ETC GROUP                                              --> <!-- ====================================================== -->
+<h3 style="color: #17365d; margin-top: 30px;">📄 6 · Where are groups stored?</h3>
+<p style="text-align: justify;">La información sobre los grupos del sistema se encuentra principalmente en:</p>
+<div style="text-align: center; margin: 15px 0;"><span style="display: inline-block; background: #eef5fb; border: 2px solid #3498db; border-radius: 6px; padding: 8px 22px;"> <code style="font-size: 18px; font-weight: bold;">
+        /etc/group
+      </code> </span></div>
+<p style="text-align: justify;">Cada línea contiene el nombre del grupo, información relacionada con su contraseña, su <strong>GID</strong> y la lista de usuarios que aparecen como miembros.</p>
+<div style="background: #1f2933; color: #f5f7fa; padding: 14px 18px; border-radius: 7px; margin: 15px 0; font-family: Consolas,monospace;">developers:x:1002:ana,pablo</div>
+<!-- ====================================================== --> <!-- MANAGING GROUPS                                        --> <!-- ====================================================== -->
+<h3 style="color: #17365d; margin-top: 32px;">⌨️ 7 · Managing groups</h3>
+<table style="width: 100%; border-collapse: collapse; margin: 16px 0;">
+<thead>
+<tr style="background: #17365d; color: white;">
+<th style="padding: 9px; border: 1px solid #ccd6df; text-align: center;">Comando</th>
+<th style="padding: 9px; border: 1px solid #ccd6df; text-align: center;">Función</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="padding: 9px; border: 1px solid #ccd6df; text-align: center;"><code>groupadd</code></td>
+<td style="padding: 9px; border: 1px solid #ccd6df; text-align: center;">Crea un grupo.</td>
+</tr>
+<tr style="background: #f7f9fa;">
+<td style="padding: 9px; border: 1px solid #ccd6df; text-align: center;"><code>groupmod</code></td>
+<td style="padding: 9px; border: 1px solid #ccd6df; text-align: center;">Modifica un grupo.</td>
+</tr>
+<tr>
+<td style="padding: 9px; border: 1px solid #ccd6df; text-align: center;"><code>groupdel</code></td>
+<td style="padding: 9px; border: 1px solid #ccd6df; text-align: center;">Elimina un grupo.</td>
+</tr>
+</tbody>
+</table>
+<!-- ====================================================== --> <!-- USERMOD -g -G -aG                                     --> <!-- ====================================================== -->
+<h3 style="color: #17365d; margin-top: 32px;">🔗 8 · Adding users to groups</h3>
+<p style="text-align: justify;">El comando <code>usermod</code> también nos permite modificar los grupos a los que pertenece un usuario.</p>
+<div style="background: #f7f9fa; border: 1px solid #d5dde5; border-radius: 7px; padding: 16px 18px; margin: 16px 0;">
+<p style="margin: 0 0 10px;"><strong>Cambiar el grupo primario:</strong></p>
+<div style="background: #1f2933; color: #f5f7fa; padding: 10px 14px; border-radius: 5px; font-family: Consolas,monospace;">$ usermod -g GROUP USER</div>
+<p style="margin: 18px 0 10px;"><strong>Establecer los grupos suplementarios:</strong></p>
+<div style="background: #1f2933; color: #f5f7fa; padding: 10px 14px; border-radius: 5px; font-family: Consolas,monospace;">$ usermod -G GROUPS USER</div>
+<p style="margin: 18px 0 10px;"><strong>Añadir un nuevo grupo suplementario:</strong></p>
+<div style="background: #1f2933; color: #f5f7fa; padding: 10px 14px; border-radius: 5px; font-family: Consolas,monospace;">$ usermod -aG GROUP USER</div>
+</div>
+<!-- WARNING -->
+<div style="background: #fff8e8; border-left: 5px solid #f0ad4e; padding: 15px 18px; margin: 18px 0; border-radius: 5px;"><strong style="color: #8a5a00;"> ⚠️ Atención con <code>-G</code> </strong>
+<p style="margin: 7px 0 0; text-align: justify;">La opción <code>-G</code> establece la lista de grupos suplementarios. Si queremos <strong>añadir</strong> un grupo conservando los grupos suplementarios que el usuario ya tenía, debemos utilizar también <code>-a</code> (<em>append</em>).</p>
+</div>
+<!-- ====================================================== --> <!-- EXAMPLE ADMIN_TEMP                                     --> <!-- ====================================================== -->
+<h3 style="color: #17365d; margin-top: 32px;">🧪 9 · Let's interpret a command</h3>
+<p style="text-align: justify;">Observa el siguiente comando:</p>
+<div style="background: #1f2933; color: #f5f7fa; padding: 14px 18px; border-radius: 7px; margin: 15px 0; font-family: Consolas,monospace; font-size: 16px;">$ usermod -aG sudo admin_temp</div>
+<table style="width: 100%; border-collapse: collapse; margin: 16px 0;">
+<thead>
+<tr style="background: #17365d; color: white;">
+<th style="padding: 9px; border: 1px solid #ccd6df; text-align: center;">Elemento</th>
+<th style="padding: 9px; border: 1px solid #ccd6df; text-align: center;">Significado</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="padding: 9px; border: 1px solid #ccd6df; text-align: center;"><code>usermod</code></td>
+<td style="padding: 9px; border: 1px solid #ccd6df; text-align: left;">Modifica una cuenta de usuario existente.</td>
+</tr>
+<tr style="background: #f7f9fa;">
+<td style="padding: 9px; border: 1px solid #ccd6df; text-align: center;"><code>-a</code></td>
+<td style="padding: 9px; border: 1px solid #ccd6df; text-align: left;">Añade la nueva pertenencia sin eliminar las anteriores.</td>
+</tr>
+<tr>
+<td style="padding: 9px; border: 1px solid #ccd6df; text-align: center;"><code>-G sudo</code></td>
+<td style="padding: 9px; border: 1px solid #ccd6df; text-align: left;">Indica que <code>sudo</code> será un grupo suplementario.</td>
+</tr>
+<tr style="background: #f7f9fa;">
+<td style="padding: 9px; border: 1px solid #ccd6df; text-align: center;"><code>admin_temp</code></td>
+<td style="padding: 9px; border: 1px solid #ccd6df; text-align: left;">Es el usuario que estamos modificando.</td>
+</tr>
+</tbody>
+</table>
+<!-- ====================================================== --> <!-- CHECK IT                                               --> <!-- ====================================================== -->
+<div style="background: #eaf7ee; border-left: 5px solid #4f8a62; padding: 16px 18px; margin: 24px 0; border-radius: 5px;"><strong style="color: #315f40; font-size: 17px;"> 🔍 Check it </strong>
+<p style="margin: 8px 0;">Después de realizar una modificación, <strong>no debemos asumir que todo está correcto</strong>. Comprobamos el resultado.</p>
+<div style="background: #1f2933; color: #f5f7fa; padding: 11px 14px; border-radius: 5px; margin-top: 10px; font-family: Consolas,monospace;">$ id admin_temp<br />$ groups admin_temp</div>
+</div>
+<!-- ====================================================== --> <!-- MINI CHALLENGE                                         --> <!-- ====================================================== -->
+<div style="background: #f7f9fa; border: 2px solid #4f8a62; padding: 18px 20px; margin: 25px 0; border-radius: 8px;"><strong style="color: #315f40; font-size: 18px;"> 🧩 Mini challenge · Prepare a technical user </strong>
+<p style="margin: 10px 0; text-align: justify;">Necesitamos preparar una cuenta temporal para realizar tareas de administración en uno de nuestros servidores.</p>
+<p style="margin: 8px 0;"><strong>Tu objetivo:</strong></p>
+<ol style="margin: 8px 0; padding-left: 25px;">
+<li>Crea un usuario llamado <code>admin_temp</code>.</li>
+<li>Establece una contraseña para el usuario.</li>
+<li>Comprueba su UID, GID y grupos.</li>
+<li>Añade <code>admin_temp</code> al grupo <code>sudo</code>.</li>
+<li>Comprueba que conserva sus pertenencias anteriores.</li>
+</ol>
+<div style="background: #eaf7ee; border-left: 4px solid #4f8a62; padding: 11px 14px; margin-top: 15px; border-radius: 4px;"><strong>🔍 Antes de terminar</strong>
+<p style="margin: 5px 0 0;">No basta con ejecutar los comandos. <strong>Demuestra que el resultado es el esperado.</strong></p>
+</div>
+</div>
+<!-- ====================================================== --> <!-- RECURSOS DE APOYO                                      --> <!-- ====================================================== -->
+<h3 style="color: #17365d; margin-top: 32px;">📚 Recursos de apoyo</h3>
+<!-- DOCUMENTACIÓN -->
+<div style="background: white; border: 1px solid #d5dde5; border-radius: 7px; padding: 14px 16px; margin: 15px 0;"><strong style="color: #17365d;"> 📖 Documentación de referencia </strong>
+<p style="margin: 7px 0 10px; text-align: justify;">Consulta el material de Linux Professional Institute (LPI) dedicado a la administración de cuentas de usuario y de grupo para ampliar o revisar los contenidos trabajados.</p>
+<a href="https://learning.lpi.org/es/learning-materials/102-500/107/107.1/107.1_01/" target="_blank" rel="noopener noreferrer" style="display: inline-block; background: #17365d; color: white; text-decoration: none; padding: 8px 16px; border-radius: 6px; font-weight: bold;"> 🔗 LPI · Administrar cuentas de usuario y de grupo </a></div>
+<!-- VÍDEO -->
+<div style="background: white; border: 1px solid #d5dde5; border-radius: 7px; padding: 14px 16px; margin: 15px 0;"><strong style="color: #17365d;"> 🎬 Recurso audiovisual </strong>
+<p style="margin: 7px 0 14px;">Utiliza este vídeo como recurso de apoyo para reforzar el repaso de la gestión de usuarios y grupos en Linux.</p>
+<div style="position: relative; width: 100%; padding-top: 56.25%; overflow: hidden; border-radius: 7px; background: #000;"><iframe width="100" height="100" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0;" src="https://www.youtube.com/embed/6rrWRe_7Y-A?start=345" title="Vídeo de apoyo sobre usuarios y grupos en Linux" allow="accelerometer; autoplay; clipboard-write; encrypted-media;
+               gyroscope; picture-in-picture; web-share" allowfullscreen="allowfullscreen" referrerpolicy="strict-origin-when-cross-origin">
+      </iframe></div>
+</div>
+<!-- ====================================================== --> <!-- CIERRE                                                 --> <!-- ====================================================== -->
+<div style="background: #17365d; color: white; padding: 17px 20px; margin-top: 25px; border-radius: 8px; text-align: center;"><strong style="font-size: 18px;"> Ya sabemos quién trabaja en nuestro sistema. </strong>
+<div style="margin-top: 7px;">El siguiente paso será recordar dónde se organizan sus ficheros y directorios.</div>
+<div style="margin-top: 8px; font-weight: bold;">📁 2.1.2 · File system and directories</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</article>
+</div></main>
+<footer id="siteFooter"><div id="siteFooterContent"> <div id="packageLicense" class="cc cc-by-sa"> <p> <span class="license-label">Licencia: </span><a href="https://creativecommons.org/licenses/by-sa/4.0/" class="license">Creative Commons: Reconocimiento - compartir igual 4.0</a></p>
+</div>
+</div></footer>
+</div>
+<p id="made-with-eXe"> <a href="https://exelearning.net/" target="_blank" rel="noopener"> <span>Creado con eXeLearning <span>(Ventana nueva)</span></span></a></p>
+</body>
+</html>
